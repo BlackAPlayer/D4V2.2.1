@@ -1,0 +1,74 @@
+{
+  "frame_0_0.png": {
+    "row": 0,
+    "col": 0,
+    "width": 100,
+    "height": 100
+  },
+  "frame_0_1.png": {
+    "row": 0,
+    "col": 1,
+    "width": 100,
+    "height": 100
+  },
+  "frame_0_2.png": {
+    "row": 0,
+    "col": 2,
+    "width": 100,
+    "height": 100
+  },
+  "frame_0_3.png": {
+    "row": 0,
+    "col": 3,
+    "width": 100,
+    "height": 100
+  },
+  "frame_0_4.png": {
+    "row": 0,
+    "col": 4,
+    "width": 100,
+    "height": 100
+  },
+  "frame_0_5.png": {
+    "row": 0,
+    "col": 5,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_0.png": {
+    "row": 1,
+    "col": 0,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_1.png": {
+    "row": 1,
+    "col": 1,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_2.png": {
+    "row": 1,
+    "col": 2,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_3.png": {
+    "row": 1,
+    "col": 3,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_4.png": {
+    "row": 1,
+    "col": 4,
+    "width": 100,
+    "height": 100
+  },
+  "frame_1_5.png": {
+    "row": 1,
+    "col": 5,
+    "width": 100,
+    "height": 100
+  }
+}

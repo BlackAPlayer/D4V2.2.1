@@ -1,0 +1,3082 @@
+{
+  "row00_col00.png": {
+    "row": 0,
+    "col": 0,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 0.0,
+    "y_percent": 0.0
+  },
+  "row00_col01.png": {
+    "row": 0,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 0.0
+  },
+  "row00_col02.png": {
+    "row": 0,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 0.0
+  },
+  "row00_col03.png": {
+    "row": 0,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 0.0
+  },
+  "row00_col04.png": {
+    "row": 0,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 0.0
+  },
+  "row00_col05.png": {
+    "row": 0,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 0.0
+  },
+  "row00_col06.png": {
+    "row": 0,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 0.0
+  },
+  "row00_col07.png": {
+    "row": 0,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 0.0
+  },
+  "row00_col08.png": {
+    "row": 0,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 0.0
+  },
+  "row00_col09.png": {
+    "row": 0,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 0.0
+  },
+  "row00_col10.png": {
+    "row": 0,
+    "col": 10,
+    "skill_id": "sorcerer_ball_lightning",
+    "x_percent": 45.4545,
+    "y_percent": 0.0
+  },
+  "row00_col11.png": {
+    "row": 0,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 0.0
+  },
+  "row00_col12.png": {
+    "row": 0,
+    "col": 12,
+    "skill_id": "sorcerer_arc_lash",
+    "x_percent": 54.5455,
+    "y_percent": 0.0
+  },
+  "row00_col13.png": {
+    "row": 0,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 0.0
+  },
+  "row00_col14.png": {
+    "row": 0,
+    "col": 14,
+    "skill_id": "sorcerer_teleport",
+    "x_percent": 63.6364,
+    "y_percent": 0.0
+  },
+  "row00_col15.png": {
+    "row": 0,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 0.0
+  },
+  "row00_col16.png": {
+    "row": 0,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 0.0
+  },
+  "row00_col17.png": {
+    "row": 0,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 0.0
+  },
+  "row00_col18.png": {
+    "row": 0,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 0.0
+  },
+  "row00_col19.png": {
+    "row": 0,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 0.0
+  },
+  "row00_col20.png": {
+    "row": 0,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 0.0
+  },
+  "row00_col21.png": {
+    "row": 0,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 0.0
+  },
+  "row01_col00.png": {
+    "row": 1,
+    "col": 0,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 0.0,
+    "y_percent": 5.0
+  },
+  "row01_col01.png": {
+    "row": 1,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 5.0
+  },
+  "row01_col02.png": {
+    "row": 1,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 5.0
+  },
+  "row01_col03.png": {
+    "row": 1,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 5.0
+  },
+  "row01_col04.png": {
+    "row": 1,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 5.0
+  },
+  "row01_col05.png": {
+    "row": 1,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 5.0
+  },
+  "row01_col06.png": {
+    "row": 1,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 5.0
+  },
+  "row01_col07.png": {
+    "row": 1,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 5.0
+  },
+  "row01_col08.png": {
+    "row": 1,
+    "col": 8,
+    "skill_id": "sorcerer_blizzard",
+    "x_percent": 36.3636,
+    "y_percent": 5.0
+  },
+  "row01_col09.png": {
+    "row": 1,
+    "col": 9,
+    "skill_id": "sorcerer_ice_blades",
+    "x_percent": 40.9091,
+    "y_percent": 5.0
+  },
+  "row01_col10.png": {
+    "row": 1,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 5.0
+  },
+  "row01_col11.png": {
+    "row": 1,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 5.0
+  },
+  "row01_col12.png": {
+    "row": 1,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 5.0
+  },
+  "row01_col13.png": {
+    "row": 1,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 5.0
+  },
+  "row01_col14.png": {
+    "row": 1,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 5.0
+  },
+  "row01_col15.png": {
+    "row": 1,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 5.0
+  },
+  "row01_col16.png": {
+    "row": 1,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 5.0
+  },
+  "row01_col17.png": {
+    "row": 1,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 5.0
+  },
+  "row01_col18.png": {
+    "row": 1,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 5.0
+  },
+  "row01_col19.png": {
+    "row": 1,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 5.0
+  },
+  "row01_col20.png": {
+    "row": 1,
+    "col": 20,
+    "skill_id": "sorcerer_frozen_orb",
+    "x_percent": 90.9091,
+    "y_percent": 5.0
+  },
+  "row01_col21.png": {
+    "row": 1,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 5.0
+  },
+  "row02_col00.png": {
+    "row": 2,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 10.0
+  },
+  "row02_col01.png": {
+    "row": 2,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 10.0
+  },
+  "row02_col02.png": {
+    "row": 2,
+    "col": 2,
+    "skill_id": "sorcerer_meteor",
+    "x_percent": 9.0909,
+    "y_percent": 10.0
+  },
+  "row02_col03.png": {
+    "row": 2,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 10.0
+  },
+  "row02_col04.png": {
+    "row": 2,
+    "col": 4,
+    "skill_id": "sorcerer_meteor",
+    "x_percent": 18.1818,
+    "y_percent": 10.0
+  },
+  "row02_col05.png": {
+    "row": 2,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 10.0
+  },
+  "row02_col06.png": {
+    "row": 2,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 10.0
+  },
+  "row02_col07.png": {
+    "row": 2,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 10.0
+  },
+  "row02_col08.png": {
+    "row": 2,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 10.0
+  },
+  "row02_col09.png": {
+    "row": 2,
+    "col": 9,
+    "skill_id": "sorcerer_frost_bolt",
+    "x_percent": 40.9091,
+    "y_percent": 10.0
+  },
+  "row02_col10.png": {
+    "row": 2,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 10.0
+  },
+  "row02_col11.png": {
+    "row": 2,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 10.0
+  },
+  "row02_col12.png": {
+    "row": 2,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 10.0
+  },
+  "row02_col13.png": {
+    "row": 2,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 10.0
+  },
+  "row02_col14.png": {
+    "row": 2,
+    "col": 14,
+    "skill_id": "sorcerer_unstable_currents",
+    "x_percent": 63.6364,
+    "y_percent": 10.0
+  },
+  "row02_col15.png": {
+    "row": 2,
+    "col": 15,
+    "skill_id": "sorcerer_ice_shards",
+    "x_percent": 68.1818,
+    "y_percent": 10.0
+  },
+  "row02_col16.png": {
+    "row": 2,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 10.0
+  },
+  "row02_col17.png": {
+    "row": 2,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 10.0
+  },
+  "row02_col18.png": {
+    "row": 2,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 10.0
+  },
+  "row02_col19.png": {
+    "row": 2,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 10.0
+  },
+  "row02_col20.png": {
+    "row": 2,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 10.0
+  },
+  "row02_col21.png": {
+    "row": 2,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 10.0
+  },
+  "row03_col00.png": {
+    "row": 3,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 15.0
+  },
+  "row03_col01.png": {
+    "row": 3,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 15.0
+  },
+  "row03_col02.png": {
+    "row": 3,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 15.0
+  },
+  "row03_col03.png": {
+    "row": 3,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 15.0
+  },
+  "row03_col04.png": {
+    "row": 3,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 15.0
+  },
+  "row03_col05.png": {
+    "row": 3,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 15.0
+  },
+  "row03_col06.png": {
+    "row": 3,
+    "col": 6,
+    "skill_id": "sorcerer_frost_bolt",
+    "x_percent": 27.2727,
+    "y_percent": 15.0
+  },
+  "row03_col07.png": {
+    "row": 3,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 15.0
+  },
+  "row03_col08.png": {
+    "row": 3,
+    "col": 8,
+    "skill_id": "sorcerer_ice_armor",
+    "x_percent": 36.3636,
+    "y_percent": 15.0
+  },
+  "row03_col09.png": {
+    "row": 3,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 15.0
+  },
+  "row03_col10.png": {
+    "row": 3,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 15.0
+  },
+  "row03_col11.png": {
+    "row": 3,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 15.0
+  },
+  "row03_col12.png": {
+    "row": 3,
+    "col": 12,
+    "skill_id": "sorcerer_deep_freeze",
+    "x_percent": 54.5455,
+    "y_percent": 15.0
+  },
+  "row03_col13.png": {
+    "row": 3,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 15.0
+  },
+  "row03_col14.png": {
+    "row": 3,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 15.0
+  },
+  "row03_col15.png": {
+    "row": 3,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 15.0
+  },
+  "row03_col16.png": {
+    "row": 3,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 15.0
+  },
+  "row03_col17.png": {
+    "row": 3,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 15.0
+  },
+  "row03_col18.png": {
+    "row": 3,
+    "col": 18,
+    "skill_id": "sorcerer_inferno",
+    "x_percent": 81.8182,
+    "y_percent": 15.0
+  },
+  "row03_col19.png": {
+    "row": 3,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 15.0
+  },
+  "row03_col20.png": {
+    "row": 3,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 15.0
+  },
+  "row03_col21.png": {
+    "row": 3,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 15.0
+  },
+  "row04_col00.png": {
+    "row": 4,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 20.0
+  },
+  "row04_col01.png": {
+    "row": 4,
+    "col": 1,
+    "skill_id": "sorcerer_ice_blades",
+    "x_percent": 4.5455,
+    "y_percent": 20.0
+  },
+  "row04_col02.png": {
+    "row": 4,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 20.0
+  },
+  "row04_col03.png": {
+    "row": 4,
+    "col": 3,
+    "skill_id": "sorcerer_deep_freeze",
+    "x_percent": 13.6364,
+    "y_percent": 20.0
+  },
+  "row04_col04.png": {
+    "row": 4,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 20.0
+  },
+  "row04_col05.png": {
+    "row": 4,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 20.0
+  },
+  "row04_col06.png": {
+    "row": 4,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 20.0
+  },
+  "row04_col07.png": {
+    "row": 4,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 20.0
+  },
+  "row04_col08.png": {
+    "row": 4,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 20.0
+  },
+  "row04_col09.png": {
+    "row": 4,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 20.0
+  },
+  "row04_col10.png": {
+    "row": 4,
+    "col": 10,
+    "skill_id": "sorcerer_hydra",
+    "x_percent": 45.4545,
+    "y_percent": 20.0
+  },
+  "row04_col11.png": {
+    "row": 4,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 20.0
+  },
+  "row04_col12.png": {
+    "row": 4,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 20.0
+  },
+  "row04_col13.png": {
+    "row": 4,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 20.0
+  },
+  "row04_col14.png": {
+    "row": 4,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 20.0
+  },
+  "row04_col15.png": {
+    "row": 4,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 20.0
+  },
+  "row04_col16.png": {
+    "row": 4,
+    "col": 16,
+    "skill_id": "sorcerer_chain_lightning",
+    "x_percent": 72.7273,
+    "y_percent": 20.0
+  },
+  "row04_col17.png": {
+    "row": 4,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 20.0
+  },
+  "row04_col18.png": {
+    "row": 4,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 20.0
+  },
+  "row04_col19.png": {
+    "row": 4,
+    "col": 19,
+    "skill_id": "sorcerer_frozen_orb",
+    "x_percent": 86.3636,
+    "y_percent": 20.0
+  },
+  "row04_col20.png": {
+    "row": 4,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 20.0
+  },
+  "row04_col21.png": {
+    "row": 4,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 20.0
+  },
+  "row05_col00.png": {
+    "row": 5,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 25.0
+  },
+  "row05_col01.png": {
+    "row": 5,
+    "col": 1,
+    "skill_id": "sorcerer_ball_lightning",
+    "x_percent": 4.5455,
+    "y_percent": 25.0
+  },
+  "row05_col02.png": {
+    "row": 5,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 25.0
+  },
+  "row05_col03.png": {
+    "row": 5,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 25.0
+  },
+  "row05_col04.png": {
+    "row": 5,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 25.0
+  },
+  "row05_col05.png": {
+    "row": 5,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 25.0
+  },
+  "row05_col06.png": {
+    "row": 5,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 25.0
+  },
+  "row05_col07.png": {
+    "row": 5,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 25.0
+  },
+  "row05_col08.png": {
+    "row": 5,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 25.0
+  },
+  "row05_col09.png": {
+    "row": 5,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 25.0
+  },
+  "row05_col10.png": {
+    "row": 5,
+    "col": 10,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 45.4545,
+    "y_percent": 25.0
+  },
+  "row05_col11.png": {
+    "row": 5,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 25.0
+  },
+  "row05_col12.png": {
+    "row": 5,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 25.0
+  },
+  "row05_col13.png": {
+    "row": 5,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 25.0
+  },
+  "row05_col14.png": {
+    "row": 5,
+    "col": 14,
+    "skill_id": "sorcerer_lightning_spear",
+    "x_percent": 63.6364,
+    "y_percent": 25.0
+  },
+  "row05_col15.png": {
+    "row": 5,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 25.0
+  },
+  "row05_col16.png": {
+    "row": 5,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 25.0
+  },
+  "row05_col17.png": {
+    "row": 5,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 25.0
+  },
+  "row05_col18.png": {
+    "row": 5,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 25.0
+  },
+  "row05_col19.png": {
+    "row": 5,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 25.0
+  },
+  "row05_col20.png": {
+    "row": 5,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 25.0
+  },
+  "row05_col21.png": {
+    "row": 5,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 25.0
+  },
+  "row06_col00.png": {
+    "row": 6,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 30.0
+  },
+  "row06_col01.png": {
+    "row": 6,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 30.0
+  },
+  "row06_col02.png": {
+    "row": 6,
+    "col": 2,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 9.0909,
+    "y_percent": 30.0
+  },
+  "row06_col03.png": {
+    "row": 6,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 30.0
+  },
+  "row06_col04.png": {
+    "row": 6,
+    "col": 4,
+    "skill_id": "sorcerer_spark",
+    "x_percent": 18.1818,
+    "y_percent": 30.0
+  },
+  "row06_col05.png": {
+    "row": 6,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 30.0
+  },
+  "row06_col06.png": {
+    "row": 6,
+    "col": 6,
+    "skill_id": "sorcerer_flame_shield",
+    "x_percent": 27.2727,
+    "y_percent": 30.0
+  },
+  "row06_col07.png": {
+    "row": 6,
+    "col": 7,
+    "skill_id": "sorcerer_familiar",
+    "x_percent": 31.8182,
+    "y_percent": 30.0
+  },
+  "row06_col08.png": {
+    "row": 6,
+    "col": 8,
+    "skill_id": "sorcerer_incinerate",
+    "x_percent": 36.3636,
+    "y_percent": 30.0
+  },
+  "row06_col09.png": {
+    "row": 6,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 30.0
+  },
+  "row06_col10.png": {
+    "row": 6,
+    "col": 10,
+    "skill_id": "sorcerer_ice_shards",
+    "x_percent": 45.4545,
+    "y_percent": 30.0
+  },
+  "row06_col11.png": {
+    "row": 6,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 30.0
+  },
+  "row06_col12.png": {
+    "row": 6,
+    "col": 12,
+    "skill_id": "sorcerer_lightning_spear",
+    "x_percent": 54.5455,
+    "y_percent": 30.0
+  },
+  "row06_col13.png": {
+    "row": 6,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 30.0
+  },
+  "row06_col14.png": {
+    "row": 6,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 30.0
+  },
+  "row06_col15.png": {
+    "row": 6,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 30.0
+  },
+  "row06_col16.png": {
+    "row": 6,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 30.0
+  },
+  "row06_col17.png": {
+    "row": 6,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 30.0
+  },
+  "row06_col18.png": {
+    "row": 6,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 30.0
+  },
+  "row06_col19.png": {
+    "row": 6,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 30.0
+  },
+  "row06_col20.png": {
+    "row": 6,
+    "col": 20,
+    "skill_id": "sorcerer_fire_bolt",
+    "x_percent": 90.9091,
+    "y_percent": 30.0
+  },
+  "row06_col21.png": {
+    "row": 6,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 30.0
+  },
+  "row07_col00.png": {
+    "row": 7,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 35.0
+  },
+  "row07_col01.png": {
+    "row": 7,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 35.0
+  },
+  "row07_col02.png": {
+    "row": 7,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 35.0
+  },
+  "row07_col03.png": {
+    "row": 7,
+    "col": 3,
+    "skill_id": "sorcerer_incinerate",
+    "x_percent": 13.6364,
+    "y_percent": 35.0
+  },
+  "row07_col04.png": {
+    "row": 7,
+    "col": 4,
+    "skill_id": "sorcerer_teleport",
+    "x_percent": 18.1818,
+    "y_percent": 35.0
+  },
+  "row07_col05.png": {
+    "row": 7,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 35.0
+  },
+  "row07_col06.png": {
+    "row": 7,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 35.0
+  },
+  "row07_col07.png": {
+    "row": 7,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 35.0
+  },
+  "row07_col08.png": {
+    "row": 7,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 35.0
+  },
+  "row07_col09.png": {
+    "row": 7,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 35.0
+  },
+  "row07_col10.png": {
+    "row": 7,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 35.0
+  },
+  "row07_col11.png": {
+    "row": 7,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 35.0
+  },
+  "row07_col12.png": {
+    "row": 7,
+    "col": 12,
+    "skill_id": "sorcerer_ball_lightning",
+    "x_percent": 54.5455,
+    "y_percent": 35.0
+  },
+  "row07_col13.png": {
+    "row": 7,
+    "col": 13,
+    "skill_id": "sorcerer_incinerate",
+    "x_percent": 59.0909,
+    "y_percent": 35.0
+  },
+  "row07_col14.png": {
+    "row": 7,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 35.0
+  },
+  "row07_col15.png": {
+    "row": 7,
+    "col": 15,
+    "skill_id": "sorcerer_unstable_currents",
+    "x_percent": 68.1818,
+    "y_percent": 35.0
+  },
+  "row07_col16.png": {
+    "row": 7,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 35.0
+  },
+  "row07_col17.png": {
+    "row": 7,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 35.0
+  },
+  "row07_col18.png": {
+    "row": 7,
+    "col": 18,
+    "skill_id": "sorcerer_unstable_currents",
+    "x_percent": 81.8182,
+    "y_percent": 35.0
+  },
+  "row07_col19.png": {
+    "row": 7,
+    "col": 19,
+    "skill_id": "sorcerer_spark",
+    "x_percent": 86.3636,
+    "y_percent": 35.0
+  },
+  "row07_col20.png": {
+    "row": 7,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 35.0
+  },
+  "row07_col21.png": {
+    "row": 7,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 35.0
+  },
+  "row08_col00.png": {
+    "row": 8,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 40.0
+  },
+  "row08_col01.png": {
+    "row": 8,
+    "col": 1,
+    "skill_id": "sorcerer_deep_freeze",
+    "x_percent": 4.5455,
+    "y_percent": 40.0
+  },
+  "row08_col02.png": {
+    "row": 8,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 40.0
+  },
+  "row08_col03.png": {
+    "row": 8,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 40.0
+  },
+  "row08_col04.png": {
+    "row": 8,
+    "col": 4,
+    "skill_id": "sorcerer_frost_nova",
+    "x_percent": 18.1818,
+    "y_percent": 40.0
+  },
+  "row08_col05.png": {
+    "row": 8,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 40.0
+  },
+  "row08_col06.png": {
+    "row": 8,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 40.0
+  },
+  "row08_col07.png": {
+    "row": 8,
+    "col": 7,
+    "skill_id": "sorcerer_fire_bolt",
+    "x_percent": 31.8182,
+    "y_percent": 40.0
+  },
+  "row08_col08.png": {
+    "row": 8,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 40.0
+  },
+  "row08_col09.png": {
+    "row": 8,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 40.0
+  },
+  "row08_col10.png": {
+    "row": 8,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 40.0
+  },
+  "row08_col11.png": {
+    "row": 8,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 40.0
+  },
+  "row08_col12.png": {
+    "row": 8,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 40.0
+  },
+  "row08_col13.png": {
+    "row": 8,
+    "col": 13,
+    "skill_id": "sorcerer_hydra",
+    "x_percent": 59.0909,
+    "y_percent": 40.0
+  },
+  "row08_col14.png": {
+    "row": 8,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 40.0
+  },
+  "row08_col15.png": {
+    "row": 8,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 40.0
+  },
+  "row08_col16.png": {
+    "row": 8,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 40.0
+  },
+  "row08_col17.png": {
+    "row": 8,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 40.0
+  },
+  "row08_col18.png": {
+    "row": 8,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 40.0
+  },
+  "row08_col19.png": {
+    "row": 8,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 40.0
+  },
+  "row08_col20.png": {
+    "row": 8,
+    "col": 20,
+    "skill_id": "sorcerer_flame_shield",
+    "x_percent": 90.9091,
+    "y_percent": 40.0
+  },
+  "row08_col21.png": {
+    "row": 8,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 40.0
+  },
+  "row09_col00.png": {
+    "row": 9,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 45.0
+  },
+  "row09_col01.png": {
+    "row": 9,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 45.0
+  },
+  "row09_col02.png": {
+    "row": 9,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 45.0
+  },
+  "row09_col03.png": {
+    "row": 9,
+    "col": 3,
+    "skill_id": "sorcerer_charged_bolts",
+    "x_percent": 13.6364,
+    "y_percent": 45.0
+  },
+  "row09_col04.png": {
+    "row": 9,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 45.0
+  },
+  "row09_col05.png": {
+    "row": 9,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 45.0
+  },
+  "row09_col06.png": {
+    "row": 9,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 45.0
+  },
+  "row09_col07.png": {
+    "row": 9,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 45.0
+  },
+  "row09_col08.png": {
+    "row": 9,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 45.0
+  },
+  "row09_col09.png": {
+    "row": 9,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 45.0
+  },
+  "row09_col10.png": {
+    "row": 9,
+    "col": 10,
+    "skill_id": "sorcerer_familiar",
+    "x_percent": 45.4545,
+    "y_percent": 45.0
+  },
+  "row09_col11.png": {
+    "row": 9,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 45.0
+  },
+  "row09_col12.png": {
+    "row": 9,
+    "col": 12,
+    "skill_id": "sorcerer_inferno",
+    "x_percent": 54.5455,
+    "y_percent": 45.0
+  },
+  "row09_col13.png": {
+    "row": 9,
+    "col": 13,
+    "skill_id": "sorcerer_unstable_currents",
+    "x_percent": 59.0909,
+    "y_percent": 45.0
+  },
+  "row09_col14.png": {
+    "row": 9,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 45.0
+  },
+  "row09_col15.png": {
+    "row": 9,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 45.0
+  },
+  "row09_col16.png": {
+    "row": 9,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 45.0
+  },
+  "row09_col17.png": {
+    "row": 9,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 45.0
+  },
+  "row09_col18.png": {
+    "row": 9,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 45.0
+  },
+  "row09_col19.png": {
+    "row": 9,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 45.0
+  },
+  "row09_col20.png": {
+    "row": 9,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 45.0
+  },
+  "row09_col21.png": {
+    "row": 9,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 45.0
+  },
+  "row10_col00.png": {
+    "row": 10,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 50.0
+  },
+  "row10_col01.png": {
+    "row": 10,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 50.0
+  },
+  "row10_col02.png": {
+    "row": 10,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 50.0
+  },
+  "row10_col03.png": {
+    "row": 10,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 50.0
+  },
+  "row10_col04.png": {
+    "row": 10,
+    "col": 4,
+    "skill_id": "sorcerer_flame_shield",
+    "x_percent": 18.1818,
+    "y_percent": 50.0
+  },
+  "row10_col05.png": {
+    "row": 10,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 50.0
+  },
+  "row10_col06.png": {
+    "row": 10,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 50.0
+  },
+  "row10_col07.png": {
+    "row": 10,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 50.0
+  },
+  "row10_col08.png": {
+    "row": 10,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 50.0
+  },
+  "row10_col09.png": {
+    "row": 10,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 50.0
+  },
+  "row10_col10.png": {
+    "row": 10,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 50.0
+  },
+  "row10_col11.png": {
+    "row": 10,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 50.0
+  },
+  "row10_col12.png": {
+    "row": 10,
+    "col": 12,
+    "skill_id": "sorcerer_familiar",
+    "x_percent": 54.5455,
+    "y_percent": 50.0
+  },
+  "row10_col13.png": {
+    "row": 10,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 50.0
+  },
+  "row10_col14.png": {
+    "row": 10,
+    "col": 14,
+    "skill_id": "sorcerer_fireball",
+    "x_percent": 63.6364,
+    "y_percent": 50.0
+  },
+  "row10_col15.png": {
+    "row": 10,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 50.0
+  },
+  "row10_col16.png": {
+    "row": 10,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 50.0
+  },
+  "row10_col17.png": {
+    "row": 10,
+    "col": 17,
+    "skill_id": "sorcerer_ice_blades",
+    "x_percent": 77.2727,
+    "y_percent": 50.0
+  },
+  "row10_col18.png": {
+    "row": 10,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 50.0
+  },
+  "row10_col19.png": {
+    "row": 10,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 50.0
+  },
+  "row10_col20.png": {
+    "row": 10,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 50.0
+  },
+  "row10_col21.png": {
+    "row": 10,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 50.0
+  },
+  "row11_col00.png": {
+    "row": 11,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 55.0
+  },
+  "row11_col01.png": {
+    "row": 11,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 55.0
+  },
+  "row11_col02.png": {
+    "row": 11,
+    "col": 2,
+    "skill_id": "sorcerer_fireball",
+    "x_percent": 9.0909,
+    "y_percent": 55.0
+  },
+  "row11_col03.png": {
+    "row": 11,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 55.0
+  },
+  "row11_col04.png": {
+    "row": 11,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 55.0
+  },
+  "row11_col05.png": {
+    "row": 11,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 55.0
+  },
+  "row11_col06.png": {
+    "row": 11,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 55.0
+  },
+  "row11_col07.png": {
+    "row": 11,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 55.0
+  },
+  "row11_col08.png": {
+    "row": 11,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 55.0
+  },
+  "row11_col09.png": {
+    "row": 11,
+    "col": 9,
+    "skill_id": "sorcerer_inferno",
+    "x_percent": 40.9091,
+    "y_percent": 55.0
+  },
+  "row11_col10.png": {
+    "row": 11,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 55.0
+  },
+  "row11_col11.png": {
+    "row": 11,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 55.0
+  },
+  "row11_col12.png": {
+    "row": 11,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 55.0
+  },
+  "row11_col13.png": {
+    "row": 11,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 55.0
+  },
+  "row11_col14.png": {
+    "row": 11,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 55.0
+  },
+  "row11_col15.png": {
+    "row": 11,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 55.0
+  },
+  "row11_col16.png": {
+    "row": 11,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 55.0
+  },
+  "row11_col17.png": {
+    "row": 11,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 55.0
+  },
+  "row11_col18.png": {
+    "row": 11,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 55.0
+  },
+  "row11_col19.png": {
+    "row": 11,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 55.0
+  },
+  "row11_col20.png": {
+    "row": 11,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 55.0
+  },
+  "row11_col21.png": {
+    "row": 11,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 55.0
+  },
+  "row12_col00.png": {
+    "row": 12,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 60.0
+  },
+  "row12_col01.png": {
+    "row": 12,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 60.0
+  },
+  "row12_col02.png": {
+    "row": 12,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 60.0
+  },
+  "row12_col03.png": {
+    "row": 12,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 60.0
+  },
+  "row12_col04.png": {
+    "row": 12,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 60.0
+  },
+  "row12_col05.png": {
+    "row": 12,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 60.0
+  },
+  "row12_col06.png": {
+    "row": 12,
+    "col": 6,
+    "skill_id": "sorcerer_fireball",
+    "x_percent": 27.2727,
+    "y_percent": 60.0
+  },
+  "row12_col07.png": {
+    "row": 12,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 60.0
+  },
+  "row12_col08.png": {
+    "row": 12,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 60.0
+  },
+  "row12_col09.png": {
+    "row": 12,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 60.0
+  },
+  "row12_col10.png": {
+    "row": 12,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 60.0
+  },
+  "row12_col11.png": {
+    "row": 12,
+    "col": 11,
+    "skill_id": "sorcerer_hydra",
+    "x_percent": 50.0,
+    "y_percent": 60.0
+  },
+  "row12_col12.png": {
+    "row": 12,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 60.0
+  },
+  "row12_col13.png": {
+    "row": 12,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 60.0
+  },
+  "row12_col14.png": {
+    "row": 12,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 60.0
+  },
+  "row12_col15.png": {
+    "row": 12,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 60.0
+  },
+  "row12_col16.png": {
+    "row": 12,
+    "col": 16,
+    "skill_id": "sorcerer_teleport",
+    "x_percent": 72.7273,
+    "y_percent": 60.0
+  },
+  "row12_col17.png": {
+    "row": 12,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 60.0
+  },
+  "row12_col18.png": {
+    "row": 12,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 60.0
+  },
+  "row12_col19.png": {
+    "row": 12,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 60.0
+  },
+  "row12_col20.png": {
+    "row": 12,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 60.0
+  },
+  "row12_col21.png": {
+    "row": 12,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 60.0
+  },
+  "row13_col00.png": {
+    "row": 13,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 65.0
+  },
+  "row13_col01.png": {
+    "row": 13,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 65.0
+  },
+  "row13_col02.png": {
+    "row": 13,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 65.0
+  },
+  "row13_col03.png": {
+    "row": 13,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 65.0
+  },
+  "row13_col04.png": {
+    "row": 13,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 65.0
+  },
+  "row13_col05.png": {
+    "row": 13,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 65.0
+  },
+  "row13_col06.png": {
+    "row": 13,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 65.0
+  },
+  "row13_col07.png": {
+    "row": 13,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 65.0
+  },
+  "row13_col08.png": {
+    "row": 13,
+    "col": 8,
+    "skill_id": "sorcerer_ice_shards",
+    "x_percent": 36.3636,
+    "y_percent": 65.0
+  },
+  "row13_col09.png": {
+    "row": 13,
+    "col": 9,
+    "skill_id": "sorcerer_inferno",
+    "x_percent": 40.9091,
+    "y_percent": 65.0
+  },
+  "row13_col10.png": {
+    "row": 13,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 65.0
+  },
+  "row13_col11.png": {
+    "row": 13,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 65.0
+  },
+  "row13_col12.png": {
+    "row": 13,
+    "col": 12,
+    "skill_id": "sorcerer_deep_freeze",
+    "x_percent": 54.5455,
+    "y_percent": 65.0
+  },
+  "row13_col13.png": {
+    "row": 13,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 65.0
+  },
+  "row13_col14.png": {
+    "row": 13,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 65.0
+  },
+  "row13_col15.png": {
+    "row": 13,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 65.0
+  },
+  "row13_col16.png": {
+    "row": 13,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 65.0
+  },
+  "row13_col17.png": {
+    "row": 13,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 65.0
+  },
+  "row13_col18.png": {
+    "row": 13,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 65.0
+  },
+  "row13_col19.png": {
+    "row": 13,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 65.0
+  },
+  "row13_col20.png": {
+    "row": 13,
+    "col": 20,
+    "skill_id": "sorcerer_fire_bolt",
+    "x_percent": 90.9091,
+    "y_percent": 65.0
+  },
+  "row13_col21.png": {
+    "row": 13,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 65.0
+  },
+  "row14_col00.png": {
+    "row": 14,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 70.0
+  },
+  "row14_col01.png": {
+    "row": 14,
+    "col": 1,
+    "skill_id": "sorcerer_incinerate",
+    "x_percent": 4.5455,
+    "y_percent": 70.0
+  },
+  "row14_col02.png": {
+    "row": 14,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 70.0
+  },
+  "row14_col03.png": {
+    "row": 14,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 70.0
+  },
+  "row14_col04.png": {
+    "row": 14,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 70.0
+  },
+  "row14_col05.png": {
+    "row": 14,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 70.0
+  },
+  "row14_col06.png": {
+    "row": 14,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 70.0
+  },
+  "row14_col07.png": {
+    "row": 14,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 70.0
+  },
+  "row14_col08.png": {
+    "row": 14,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 70.0
+  },
+  "row14_col09.png": {
+    "row": 14,
+    "col": 9,
+    "skill_id": "sorcerer_unstable_currents",
+    "x_percent": 40.9091,
+    "y_percent": 70.0
+  },
+  "row14_col10.png": {
+    "row": 14,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 70.0
+  },
+  "row14_col11.png": {
+    "row": 14,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 70.0
+  },
+  "row14_col12.png": {
+    "row": 14,
+    "col": 12,
+    "skill_id": "sorcerer_teleport",
+    "x_percent": 54.5455,
+    "y_percent": 70.0
+  },
+  "row14_col13.png": {
+    "row": 14,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 70.0
+  },
+  "row14_col14.png": {
+    "row": 14,
+    "col": 14,
+    "skill_id": "sorcerer_ball_lightning",
+    "x_percent": 63.6364,
+    "y_percent": 70.0
+  },
+  "row14_col15.png": {
+    "row": 14,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 70.0
+  },
+  "row14_col16.png": {
+    "row": 14,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 70.0
+  },
+  "row14_col17.png": {
+    "row": 14,
+    "col": 17,
+    "skill_id": "sorcerer_ice_shards",
+    "x_percent": 77.2727,
+    "y_percent": 70.0
+  },
+  "row14_col18.png": {
+    "row": 14,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 70.0
+  },
+  "row14_col19.png": {
+    "row": 14,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 70.0
+  },
+  "row14_col20.png": {
+    "row": 14,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 70.0
+  },
+  "row14_col21.png": {
+    "row": 14,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 70.0
+  },
+  "row15_col00.png": {
+    "row": 15,
+    "col": 0,
+    "skill_id": "sorcerer_hydra",
+    "x_percent": 0.0,
+    "y_percent": 75.0
+  },
+  "row15_col01.png": {
+    "row": 15,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 75.0
+  },
+  "row15_col02.png": {
+    "row": 15,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 75.0
+  },
+  "row15_col03.png": {
+    "row": 15,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 75.0
+  },
+  "row15_col04.png": {
+    "row": 15,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 75.0
+  },
+  "row15_col05.png": {
+    "row": 15,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 75.0
+  },
+  "row15_col06.png": {
+    "row": 15,
+    "col": 6,
+    "skill_id": "sorcerer_arc_lash",
+    "x_percent": 27.2727,
+    "y_percent": 75.0
+  },
+  "row15_col07.png": {
+    "row": 15,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 75.0
+  },
+  "row15_col08.png": {
+    "row": 15,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 75.0
+  },
+  "row15_col09.png": {
+    "row": 15,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 75.0
+  },
+  "row15_col10.png": {
+    "row": 15,
+    "col": 10,
+    "skill_id": "sorcerer_meteor",
+    "x_percent": 45.4545,
+    "y_percent": 75.0
+  },
+  "row15_col11.png": {
+    "row": 15,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 75.0
+  },
+  "row15_col12.png": {
+    "row": 15,
+    "col": 12,
+    "skill_id": "sorcerer_frost_bolt",
+    "x_percent": 54.5455,
+    "y_percent": 75.0
+  },
+  "row15_col13.png": {
+    "row": 15,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 75.0
+  },
+  "row15_col14.png": {
+    "row": 15,
+    "col": 14,
+    "skill_id": "sorcerer_lightning_spear",
+    "x_percent": 63.6364,
+    "y_percent": 75.0
+  },
+  "row15_col15.png": {
+    "row": 15,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 75.0
+  },
+  "row15_col16.png": {
+    "row": 15,
+    "col": 16,
+    "skill_id": "sorcerer_charged_bolts",
+    "x_percent": 72.7273,
+    "y_percent": 75.0
+  },
+  "row15_col17.png": {
+    "row": 15,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 75.0
+  },
+  "row15_col18.png": {
+    "row": 15,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 75.0
+  },
+  "row15_col19.png": {
+    "row": 15,
+    "col": 19,
+    "skill_id": "sorcerer_chain_lightning",
+    "x_percent": 86.3636,
+    "y_percent": 75.0
+  },
+  "row15_col20.png": {
+    "row": 15,
+    "col": 20,
+    "skill_id": "sorcerer_lightning_spear",
+    "x_percent": 90.9091,
+    "y_percent": 75.0
+  },
+  "row15_col21.png": {
+    "row": 15,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 75.0
+  },
+  "row16_col00.png": {
+    "row": 16,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 80.0
+  },
+  "row16_col01.png": {
+    "row": 16,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 80.0
+  },
+  "row16_col02.png": {
+    "row": 16,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 80.0
+  },
+  "row16_col03.png": {
+    "row": 16,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 80.0
+  },
+  "row16_col04.png": {
+    "row": 16,
+    "col": 4,
+    "skill_id": "sorcerer_ice_armor",
+    "x_percent": 18.1818,
+    "y_percent": 80.0
+  },
+  "row16_col05.png": {
+    "row": 16,
+    "col": 5,
+    "skill_id": "sorcerer_blizzard",
+    "x_percent": 22.7273,
+    "y_percent": 80.0
+  },
+  "row16_col06.png": {
+    "row": 16,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 80.0
+  },
+  "row16_col07.png": {
+    "row": 16,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 80.0
+  },
+  "row16_col08.png": {
+    "row": 16,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 80.0
+  },
+  "row16_col09.png": {
+    "row": 16,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 80.0
+  },
+  "row16_col10.png": {
+    "row": 16,
+    "col": 10,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 45.4545,
+    "y_percent": 80.0
+  },
+  "row16_col11.png": {
+    "row": 16,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 80.0
+  },
+  "row16_col12.png": {
+    "row": 16,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 80.0
+  },
+  "row16_col13.png": {
+    "row": 16,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 80.0
+  },
+  "row16_col14.png": {
+    "row": 16,
+    "col": 14,
+    "skill_id": "sorcerer_charged_bolts",
+    "x_percent": 63.6364,
+    "y_percent": 80.0
+  },
+  "row16_col15.png": {
+    "row": 16,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 80.0
+  },
+  "row16_col16.png": {
+    "row": 16,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 80.0
+  },
+  "row16_col17.png": {
+    "row": 16,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 80.0
+  },
+  "row16_col18.png": {
+    "row": 16,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 80.0
+  },
+  "row16_col19.png": {
+    "row": 16,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 80.0
+  },
+  "row16_col20.png": {
+    "row": 16,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 80.0
+  },
+  "row16_col21.png": {
+    "row": 16,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 80.0
+  },
+  "row17_col00.png": {
+    "row": 17,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 85.0
+  },
+  "row17_col01.png": {
+    "row": 17,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 85.0
+  },
+  "row17_col02.png": {
+    "row": 17,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 85.0
+  },
+  "row17_col03.png": {
+    "row": 17,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 85.0
+  },
+  "row17_col04.png": {
+    "row": 17,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 85.0
+  },
+  "row17_col05.png": {
+    "row": 17,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 85.0
+  },
+  "row17_col06.png": {
+    "row": 17,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 85.0
+  },
+  "row17_col07.png": {
+    "row": 17,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 85.0
+  },
+  "row17_col08.png": {
+    "row": 17,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 85.0
+  },
+  "row17_col09.png": {
+    "row": 17,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 85.0
+  },
+  "row17_col10.png": {
+    "row": 17,
+    "col": 10,
+    "skill_id": "sorcerer_deep_freeze",
+    "x_percent": 45.4545,
+    "y_percent": 85.0
+  },
+  "row17_col11.png": {
+    "row": 17,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 85.0
+  },
+  "row17_col12.png": {
+    "row": 17,
+    "col": 12,
+    "skill_id": "sorcerer_hydra",
+    "x_percent": 54.5455,
+    "y_percent": 85.0
+  },
+  "row17_col13.png": {
+    "row": 17,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 85.0
+  },
+  "row17_col14.png": {
+    "row": 17,
+    "col": 14,
+    "skill_id": "sorcerer_firewall",
+    "x_percent": 63.6364,
+    "y_percent": 85.0
+  },
+  "row17_col15.png": {
+    "row": 17,
+    "col": 15,
+    "skill_id": "sorcerer_meteor",
+    "x_percent": 68.1818,
+    "y_percent": 85.0
+  },
+  "row17_col16.png": {
+    "row": 17,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 85.0
+  },
+  "row17_col17.png": {
+    "row": 17,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 85.0
+  },
+  "row17_col18.png": {
+    "row": 17,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 85.0
+  },
+  "row17_col19.png": {
+    "row": 17,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 85.0
+  },
+  "row17_col20.png": {
+    "row": 17,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 85.0
+  },
+  "row17_col21.png": {
+    "row": 17,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 85.0
+  },
+  "row18_col00.png": {
+    "row": 18,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 90.0
+  },
+  "row18_col01.png": {
+    "row": 18,
+    "col": 1,
+    "skill_id": "sorcerer_ball_lightning",
+    "x_percent": 4.5455,
+    "y_percent": 90.0
+  },
+  "row18_col02.png": {
+    "row": 18,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 90.0
+  },
+  "row18_col03.png": {
+    "row": 18,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 90.0
+  },
+  "row18_col04.png": {
+    "row": 18,
+    "col": 4,
+    "skill_id": null,
+    "x_percent": 18.1818,
+    "y_percent": 90.0
+  },
+  "row18_col05.png": {
+    "row": 18,
+    "col": 5,
+    "skill_id": "sorcerer_familiar",
+    "x_percent": 22.7273,
+    "y_percent": 90.0
+  },
+  "row18_col06.png": {
+    "row": 18,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 90.0
+  },
+  "row18_col07.png": {
+    "row": 18,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 90.0
+  },
+  "row18_col08.png": {
+    "row": 18,
+    "col": 8,
+    "skill_id": null,
+    "x_percent": 36.3636,
+    "y_percent": 90.0
+  },
+  "row18_col09.png": {
+    "row": 18,
+    "col": 9,
+    "skill_id": "sorcerer_ice_blades",
+    "x_percent": 40.9091,
+    "y_percent": 90.0
+  },
+  "row18_col10.png": {
+    "row": 18,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 90.0
+  },
+  "row18_col11.png": {
+    "row": 18,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 90.0
+  },
+  "row18_col12.png": {
+    "row": 18,
+    "col": 12,
+    "skill_id": "sorcerer_chain_lightning",
+    "x_percent": 54.5455,
+    "y_percent": 90.0
+  },
+  "row18_col13.png": {
+    "row": 18,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 90.0
+  },
+  "row18_col14.png": {
+    "row": 18,
+    "col": 14,
+    "skill_id": "sorcerer_blizzard",
+    "x_percent": 63.6364,
+    "y_percent": 90.0
+  },
+  "row18_col15.png": {
+    "row": 18,
+    "col": 15,
+    "skill_id": "sorcerer_ice_armor",
+    "x_percent": 68.1818,
+    "y_percent": 90.0
+  },
+  "row18_col16.png": {
+    "row": 18,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 90.0
+  },
+  "row18_col17.png": {
+    "row": 18,
+    "col": 17,
+    "skill_id": "sorcerer_familiar",
+    "x_percent": 77.2727,
+    "y_percent": 90.0
+  },
+  "row18_col18.png": {
+    "row": 18,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 90.0
+  },
+  "row18_col19.png": {
+    "row": 18,
+    "col": 19,
+    "skill_id": "sorcerer_chain_lightning",
+    "x_percent": 86.3636,
+    "y_percent": 90.0
+  },
+  "row18_col20.png": {
+    "row": 18,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 90.0
+  },
+  "row18_col21.png": {
+    "row": 18,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 90.0
+  },
+  "row19_col00.png": {
+    "row": 19,
+    "col": 0,
+    "skill_id": null,
+    "x_percent": 0.0,
+    "y_percent": 95.0
+  },
+  "row19_col01.png": {
+    "row": 19,
+    "col": 1,
+    "skill_id": null,
+    "x_percent": 4.5455,
+    "y_percent": 95.0
+  },
+  "row19_col02.png": {
+    "row": 19,
+    "col": 2,
+    "skill_id": null,
+    "x_percent": 9.0909,
+    "y_percent": 95.0
+  },
+  "row19_col03.png": {
+    "row": 19,
+    "col": 3,
+    "skill_id": null,
+    "x_percent": 13.6364,
+    "y_percent": 95.0
+  },
+  "row19_col04.png": {
+    "row": 19,
+    "col": 4,
+    "skill_id": "sorcerer_fire_bolt",
+    "x_percent": 18.1818,
+    "y_percent": 95.0
+  },
+  "row19_col05.png": {
+    "row": 19,
+    "col": 5,
+    "skill_id": null,
+    "x_percent": 22.7273,
+    "y_percent": 95.0
+  },
+  "row19_col06.png": {
+    "row": 19,
+    "col": 6,
+    "skill_id": null,
+    "x_percent": 27.2727,
+    "y_percent": 95.0
+  },
+  "row19_col07.png": {
+    "row": 19,
+    "col": 7,
+    "skill_id": null,
+    "x_percent": 31.8182,
+    "y_percent": 95.0
+  },
+  "row19_col08.png": {
+    "row": 19,
+    "col": 8,
+    "skill_id": "sorcerer_frost_bolt",
+    "x_percent": 36.3636,
+    "y_percent": 95.0
+  },
+  "row19_col09.png": {
+    "row": 19,
+    "col": 9,
+    "skill_id": null,
+    "x_percent": 40.9091,
+    "y_percent": 95.0
+  },
+  "row19_col10.png": {
+    "row": 19,
+    "col": 10,
+    "skill_id": null,
+    "x_percent": 45.4545,
+    "y_percent": 95.0
+  },
+  "row19_col11.png": {
+    "row": 19,
+    "col": 11,
+    "skill_id": null,
+    "x_percent": 50.0,
+    "y_percent": 95.0
+  },
+  "row19_col12.png": {
+    "row": 19,
+    "col": 12,
+    "skill_id": null,
+    "x_percent": 54.5455,
+    "y_percent": 95.0
+  },
+  "row19_col13.png": {
+    "row": 19,
+    "col": 13,
+    "skill_id": null,
+    "x_percent": 59.0909,
+    "y_percent": 95.0
+  },
+  "row19_col14.png": {
+    "row": 19,
+    "col": 14,
+    "skill_id": null,
+    "x_percent": 63.6364,
+    "y_percent": 95.0
+  },
+  "row19_col15.png": {
+    "row": 19,
+    "col": 15,
+    "skill_id": null,
+    "x_percent": 68.1818,
+    "y_percent": 95.0
+  },
+  "row19_col16.png": {
+    "row": 19,
+    "col": 16,
+    "skill_id": null,
+    "x_percent": 72.7273,
+    "y_percent": 95.0
+  },
+  "row19_col17.png": {
+    "row": 19,
+    "col": 17,
+    "skill_id": null,
+    "x_percent": 77.2727,
+    "y_percent": 95.0
+  },
+  "row19_col18.png": {
+    "row": 19,
+    "col": 18,
+    "skill_id": null,
+    "x_percent": 81.8182,
+    "y_percent": 95.0
+  },
+  "row19_col19.png": {
+    "row": 19,
+    "col": 19,
+    "skill_id": null,
+    "x_percent": 86.3636,
+    "y_percent": 95.0
+  },
+  "row19_col20.png": {
+    "row": 19,
+    "col": 20,
+    "skill_id": null,
+    "x_percent": 90.9091,
+    "y_percent": 95.0
+  },
+  "row19_col21.png": {
+    "row": 19,
+    "col": 21,
+    "skill_id": null,
+    "x_percent": 95.4545,
+    "y_percent": 95.0
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "巫师": [
+    {
+      "id": "arc_lash",
+      "name": "电弧鞭笞",
+      "type": "基础",
+      "max_level": 15,
+      "description": "释放一道弧光闪电，对你面前的敌人造成伤害。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    },
+    {
+      "id": "charged_bolts",
+      "name": "电荷弹",
+      "type": "基础",
+      "max_level": 15,
+      "description": "在地面上施放3枚穿透目标的闪电弹，每枚造成伤害。",
+      "per_level_bonus": { "技能伤害": 0.04 }
+    },
+    {
+      "id": "fire_bolt",
+      "name": "火焰弹",
+      "type": "基础",
+      "max_level": 15,
+      "description": "投掷一枚火焰弹，造成伤害并在6秒内额外造成燃烧伤害。",
+      "per_level_bonus": { "技能伤害": 0.08, "燃烧伤害": 0.08 }
+    },
+    {
+      "id": "frost_bolt",
+      "name": "寒霜弹",
+      "type": "基础",
+      "max_level": 15,
+      "description": "向敌人投掷冰霜弹，造成伤害并使其冻伤35%。",
+      "per_level_bonus": { "技能伤害": 0.08, "冻伤强度": 0.05 }
+    },
+    {
+      "id": "spark",
+      "name": "电花",
+      "type": "基础",
+      "max_level": 15,
+      "description": "发射一道闪电，震击一名敌人3次，每次震击造成伤害。",
+      "per_level_bonus": { "技能伤害": 0.06 }
+    },
+    {
+      "id": "fireball",
+      "name": "火球",
+      "type": "核心",
+      "max_level": 15,
+      "description": "投掷一颗火球，爆炸并对周围敌人造成伤害。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    },
+    {
+      "id": "ice_armor",
+      "name": "寒冰甲",
+      "type": "防御",
+      "max_level": 15,
+      "description": "用寒冰包裹自己，获得屏障。",
+      "per_level_bonus": { "屏障强度": 0.05 }
+    },
+    {
+      "id": "firewall",
+      "name": "火墙",
+      "type": "掌控",
+      "max_level": 15,
+      "description": "创造一道火墙，持续造成燃烧伤害。",
+      "per_level_bonus": { "燃烧伤害": 0.07 }
+    },
+    {
+      "id": "meteor",
+      "name": "陨石术",
+      "type": "掌控",
+      "max_level": 15,
+      "description": "召唤一颗陨石，造成范围火焰伤害。",
+      "per_level_bonus": { "技能伤害": 0.06 }
+    },
+    {
+      "id": "teleport",
+      "name": "传送术",
+      "type": "机动",
+      "max_level": 15,
+      "description": "传送至目标位置。",
+      "per_level_bonus": { "冷却缩减": 0.01 }
+    },
+    {
+      "id": "blizzard",
+      "name": "暴风雪",
+      "type": "掌控",
+      "max_level": 15,
+      "description": "召唤暴风雪，持续造成冰霜伤害并冻伤敌人。",
+      "per_level_bonus": { "技能伤害": 0.04 }
+    },
+    {
+      "id": "chain_lightning",
+      "name": "连锁闪电",
+      "type": "核心",
+      "max_level": 15,
+      "description": "施放一道闪电，在敌人间弹跳。",
+      "per_level_bonus": { "技能伤害": 0.04 }
+    },
+    {
+      "id": "frost_nova",
+      "name": "寒霜新星",
+      "type": "防御",
+      "max_level": 15,
+      "description": "释放冰霜新星，冻结周围敌人。",
+      "per_level_bonus": { "冷却缩减": 0.02 }
+    },
+    {
+      "id": "deep_freeze",
+      "name": "深度冻结",
+      "type": "终极",
+      "max_level": 15,
+      "description": "使自己免疫并获得大量屏障，结束时爆炸。",
+      "per_level_bonus": { "技能伤害": 0.07 }
+    },
+    {
+      "id": "hydra",
+      "name": "多头蛇",
+      "type": "召唤",
+      "max_level": 15,
+      "description": "召唤多头蛇攻击敌人。",
+      "per_level_bonus": { "召唤物伤害": 0.05 }
+    },
+    {
+      "id": "lightning_spear",
+      "name": "闪电矛",
+      "type": "召唤",
+      "max_level": 15,
+      "description": "召唤闪电矛攻击敌人。",
+      "per_level_bonus": { "召唤物伤害": 0.05 }
+    },
+    {
+      "id": "familiar",
+      "name": "魔宠",
+      "type": "召唤",
+      "max_level": 15,
+      "description": "召唤魔宠协助战斗。",
+      "per_level_bonus": { "召唤物伤害": 0.05 }
+    },
+    {
+      "id": "flame_shield",
+      "name": "火盾",
+      "type": "防御",
+      "max_level": 15,
+      "description": "用火焰包裹自己，免疫伤害并对周围敌人造成燃烧伤害。",
+      "per_level_bonus": { "燃烧伤害": 0.05 }
+    },
+    {
+      "id": "frozen_orb",
+      "name": "冰霜球",
+      "type": "核心",
+      "max_level": 15,
+      "description": "投射一个旋转的冰霜球，爆炸造成冰霜伤害。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    },
+    {
+      "id": "incinerate",
+      "name": "焚烧",
+      "type": "核心",
+      "max_level": 15,
+      "description": "引导一道火焰射线，持续造成燃烧伤害。",
+      "per_level_bonus": { "燃烧伤害": 0.06 }
+    },
+    {
+      "id": "ice_blades",
+      "name": "冰刃",
+      "type": "召唤",
+      "max_level": 15,
+      "description": "召唤冰刃攻击敌人。",
+      "per_level_bonus": { "召唤物伤害": 0.05 }
+    },
+    {
+      "id": "ball_lightning",
+      "name": "球状闪电",
+      "type": "核心",
+      "max_level": 15,
+      "description": "施放一个缓慢移动的球状闪电，持续造成闪电伤害。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    },
+    {
+      "id": "unstable_currents",
+      "name": "不稳电流",
+      "type": "终极",
+      "max_level": 15,
+      "description": "短时间内随机释放闪电技能。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    },
+    {
+      "id": "inferno",
+      "name": "炼狱烈焰",
+      "type": "终极",
+      "max_level": 15,
+      "description": "引导一道烈焰射线，对敌人造成火焰伤害。",
+      "per_level_bonus": { "技能伤害": 0.05 }
+    }
+  ]
+}
