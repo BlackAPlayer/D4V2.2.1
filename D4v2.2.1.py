@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-D4计算器 V2.2.1 (技能树增强版 - 无分支面板 + 滚轮缩放 + 分支节点支持)
+D4计算器 V2.2.1 (技能树增强版 - 完整整合)
 - 技能树系统重构：支持分支、外部加成、动态描述、局部刷新
-- 移除右侧分支面板，画布占满整个标签页
-- 支持滚轮缩放（0.2 ~ 3.0倍）
-- 布局文件中支持 branch_skill / branch_id 分支节点
+- 图标加载兼容 key 和数字 icon 两种命名方式
+- 技能树背景图 skill_bg.png
+- 悬浮窗边框 tooltip-frame.png，背景图 tooltip-base.png
+- 移除顶部冗余状态标签
 - 保留原装备、宝石、符文等功能
 """
 import tkinter as tk
@@ -541,7 +542,7 @@ class RuneTwoStepDialog:
     def show(self):
         return self.show_ritual_selection()
 
-# ==================== 装备编辑弹窗（完整） ====================
+# ==================== 装备编辑弹窗（完整保留） ====================
 class EquipDetailDialog:
     def __init__(self, parent, position, equip_data, current_profession, get_powers_func, current_db, selected_powers):
         self.parent = parent
@@ -1230,7 +1231,7 @@ class EquipDetailDialog:
             self.parent.wait_window(self.dialog)
         return self.result
 
-# ==================== 新版技能树系统（支持分支节点） ====================
+# ==================== 新版技能树系统 ====================
 class SkillTreeSystem:
     def __init__(self, profession, data_path='skill.json'):
         self.profession = profession
@@ -1528,7 +1529,7 @@ class SkillTreeSystem:
         self.listeners.append(callback)
 
 
-# ==================== 技能树UI（无分支面板 + 滚轮缩放 + 分支节点支持） ====================
+# ==================== 技能树UI（完整增强版） ====================
 class SkillTreeUI:
     def __init__(self, parent, skill_system, layout_file='skilltree_data.json'):
         self.skill_system = skill_system
@@ -1566,6 +1567,9 @@ class SkillTreeUI:
         self.v_scroll.pack(side=tk.RIGHT, fill=tk.Y)
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
+        # 加载技能树背景图
+        self._load_background_image()
+
         self.canvas.bind('<MouseWheel>', self._on_mousewheel)
         self.canvas.bind('<Button-4>', self._on_mousewheel)
         self.canvas.bind('<Button-5>', self._on_mousewheel)
@@ -1580,6 +1584,44 @@ class SkillTreeUI:
         self.skill_system.add_listener(self.refresh)
         self.refresh()
 
+    def _load_background_image(self):
+        """加载技能树背景图 skill_bg.png"""
+        bg_path = resource_path('images/skill_bg.png')
+        if os.path.exists(bg_path):
+            try:
+                self.bg_image = Image.open(bg_path)
+            except:
+                self.bg_image = None
+        else:
+            self.bg_image = None
+
+    def _draw_background(self):
+        """在画布上绘制背景图（缩放以适应节点区域）"""
+        if not self.bg_image:
+            return
+        if not self.nodes:
+            return
+        xs = [n['x'] for n in self.nodes]
+        ys = [n['y'] for n in self.nodes]
+        min_x, max_x = min(xs), max(xs)
+        min_y, max_y = min(ys), max(ys)
+        width = max_x - min_x
+        height = max_y - min_y
+        if width <= 0 or height <= 0:
+            width = 800
+            height = 600
+        margin = 200
+        bg_w = width + margin * 2
+        bg_h = height + margin * 2
+        try:
+            scaled_bg = self.bg_image.resize((int(bg_w), int(bg_h)), Image.LANCZOS)
+            self.bg_photo = ImageTk.PhotoImage(scaled_bg)
+            self.canvas.create_image(min_x - margin, min_y - margin, image=self.bg_photo,
+                                     anchor='nw', tags='bg')
+        except:
+            pass
+
+    # ==================== 修改点：过滤非当前职业节点 ====================
     def _load_layout(self, layout_file):
         full_path = resource_path(layout_file)
         if not os.path.exists(full_path):
@@ -1590,25 +1632,63 @@ class SkillTreeUI:
             data = json.load(f)
         nodes_data = data.get('nodes', [])
         self.nodes = []
+        unmatched = []
+        current_prefix = self.skill_system.profession.lower() + "_"
+        
         for nd in nodes_data:
             skill_id = nd.get('skill_id')
+            original_id = skill_id
             skill = None
-            if skill_id and skill_id in self.skill_system.skill_data:
+            
+            # 分支节点（skill_id为None）保留
+            if skill_id is None:
+                x = nd.get('left')
+                y = nd.get('top')
+                if x is None or y is None:
+                    continue
+                node = {
+                    'skill_key': None,
+                    'skill': None,
+                    'x': x,
+                    'y': y,
+                    'type': nd.get('type', 'skill'),
+                    'internal_id': f"branch_{x}_{y}",
+                    'branch_skill': nd.get('branch_skill'),
+                    'branch_id': nd.get('branch_id'),
+                }
+                self.nodes.append(node)
+                continue
+            
+            # 只处理当前职业的技能节点
+            if not skill_id.startswith(current_prefix):
+                continue  # 跳过其他职业节点
+            
+            # 尝试匹配技能
+            if skill_id in self.skill_system.skill_data:
                 skill = self.skill_system.skill_data[skill_id]
-            # 读取分支字段
-            branch_skill = nd.get('branch_skill')
-            branch_id = nd.get('branch_id')
+            else:
+                unmatched.append(original_id)
+                # 如果没有匹配，仍然创建节点，但skill为None（会显示??）
+                # 若想避免??，可跳过该节点，但可能导致布局缺失
+                # 此处保留节点以便调试
+            x = nd.get('left')
+            y = nd.get('top')
+            if x is None or y is None:
+                continue
             node = {
                 'skill_key': skill_id if skill else None,
                 'skill': skill,
-                'x': nd.get('left', 0),
-                'y': nd.get('top', 0),
+                'x': x,
+                'y': y,
                 'type': nd.get('type', 'skill'),
-                'internal_id': skill_id if skill_id else f"token_{nd.get('left',0)}_{nd.get('top',0)}",
-                'branch_skill': branch_skill,
-                'branch_id': branch_id,
+                'internal_id': skill_id if skill_id else f"token_{x}_{y}",
+                'branch_skill': nd.get('branch_skill'),
+                'branch_id': nd.get('branch_id'),
             }
             self.nodes.append(node)
+        
+        if unmatched:
+            logging.warning("未匹配 %d 个巫师技能节点，示例：%s", len(unmatched), unmatched[:10])
         if self.nodes:
             xs = [n['x'] for n in self.nodes]
             ys = [n['y'] for n in self.nodes]
@@ -1616,7 +1696,10 @@ class SkillTreeUI:
             min_y, max_y = min(ys), max(ys)
             margin = 150
             self.canvas.config(scrollregion=(min_x-margin, min_y-margin, max_x+margin, max_y+margin))
+            # 绘制背景图
+            self._draw_background()
         self._draw_all_nodes()
+    # ==================== 修改结束 ====================
 
     def _auto_layout(self):
         type_order = ['基础', '核心', '防御', '咒唤', '掌控', '终极', '关键被动']
@@ -1670,10 +1753,24 @@ class SkillTreeUI:
             min_y, max_y = min(ys), max(ys)
             margin = 150
             self.canvas.config(scrollregion=(min_x-margin, min_y-margin, max_x+margin, max_y+margin))
+            self._draw_background()
         self._draw_all_nodes()
+
+    def _get_icon_path(self, skill_key, skill):
+        """获取技能图标路径，优先用 key，其次用数字 icon"""
+        key_path = resource_path(f'images/icons/{skill_key}.png')
+        if os.path.exists(key_path):
+            return key_path
+        if skill and skill.get('icon'):
+            icon_path = resource_path(f'images/icons/{skill["icon"]}.png')
+            if os.path.exists(icon_path):
+                return icon_path
+        return None
 
     def _draw_all_nodes(self):
         self.canvas.delete('all')
+        if self.bg_image and hasattr(self, 'bg_photo'):
+            self.canvas.create_image(0, 0, image=self.bg_photo, anchor='nw', tags='bg')
         self.node_refs.clear()
         NODE_RADIUS = 32
         ICON_SIZE = 28
@@ -1683,7 +1780,6 @@ class SkillTreeUI:
             internal_id = node['internal_id']
             is_branch = node.get('branch_skill') is not None and node.get('branch_id') is not None
 
-            # 背景圆形
             if is_branch:
                 fill_color = '#1a3a5a'
                 outline = '#66CCFF'
@@ -1694,23 +1790,20 @@ class SkillTreeUI:
                                            fill=fill_color, outline=outline, width=2,
                                            tags=(internal_id, 'node'))
 
-            # 图标或分支标识
             icon_id = None
             if is_branch:
-                # 分支节点显示分支名称缩写
                 branches = self.skill_system.get_branches(node['branch_skill'])
                 branch = branches.get(node['branch_id'])
                 display_text = branch['name'][:2] if branch else 'BR'
                 icon_id = self.canvas.create_text(x, y, text=display_text, fill='#88CCFF',
                                                   font=('微软雅黑', 12, 'bold'), tags=(internal_id, 'text'))
-                # 显示激活状态
                 is_active = self.skill_system.branch_levels.get(node['branch_skill'], {}).get(node['branch_id'], 0) > 0
                 self.canvas.create_text(x, y+NODE_RADIUS+6, text='✓' if is_active else '',
                                         fill='#88FF88', font=('微软雅黑', 10, 'bold'),
                                         tags=(internal_id, 'branch_status'))
-            elif skill and skill.get('icon'):
-                icon_path = resource_path(f'images/icons/{skill["icon"]}.png')
-                if os.path.exists(icon_path):
+            elif skill:
+                icon_path = self._get_icon_path(node['skill_key'], skill)
+                if icon_path:
                     photo = load_photo_image(icon_path, size=(ICON_SIZE, ICON_SIZE))
                     if photo:
                         icon_id = self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'icon'))
@@ -1719,7 +1812,6 @@ class SkillTreeUI:
                 self.canvas.create_text(x, y, text=text, fill='white',
                                         font=('微软雅黑', 12, 'bold'), tags=(internal_id, 'text'))
 
-            # 等级背景和文本（仅主动技能，非分支）
             lv_bg = None
             lv_text = None
             if skill and skill.get('type') == 'active' and not is_branch:
@@ -1729,11 +1821,9 @@ class SkillTreeUI:
                                                   font=('微软雅黑',8,'bold'), anchor='se',
                                                   tags=(internal_id, 'lv_text'))
 
-            # 命中区域
             hitbox = self.canvas.create_rectangle(x-NODE_RADIUS, y-NODE_RADIUS, x+NODE_RADIUS, y+NODE_RADIUS,
                                                   fill='', outline='', tags=(internal_id, 'hitbox'))
             if is_branch:
-                # 分支节点绑定事件
                 self.canvas.tag_bind(hitbox, '<Button-1>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self._on_branch_click(sk, bid))
                 self.canvas.tag_bind(hitbox, '<Button-3>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self._on_branch_right_click(sk, bid))
                 self.canvas.tag_bind(hitbox, '<Enter>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self._show_branch_tooltip(e, sk, bid))
@@ -1813,7 +1903,7 @@ class SkillTreeUI:
                          font=('微软雅黑',9), bg='#2a2a2a', fg='#FFFFFF', wraplength=200, justify='left')
         label.pack(padx=5, pady=5)
 
-    # ---------- 悬浮窗 ----------
+    # ---------- 悬浮窗（技能详情，带边框和背景图） ----------
     def _show_tooltip(self, event, skill_key):
         if not skill_key:
             return
@@ -1821,32 +1911,57 @@ class SkillTreeUI:
         info = self.skill_system.get_skill_display_info(skill_key)
         if not info:
             return
+
         self.tooltip = tk.Toplevel(self.parent)
         self.tooltip.wm_overrideredirect(True)
         self.tooltip.wm_attributes('-topmost', True)
-        self.tooltip.configure(bg='#1e1e1e', bd=1, relief='solid')
-        frame = tk.Frame(self.tooltip, bg='#2a2a2a')
-        frame.pack(padx=8, pady=6)
-        icon_path = resource_path(f'images/icons/{info["icon"]}.png') if info.get('icon') else None
-        if icon_path and os.path.exists(icon_path):
+        self.tooltip.configure(bg='#1e1e1e', bd=0, relief='solid')
+
+        frame_img = None
+        base_img = None
+        frame_path = resource_path('images/tooltip-frame.png')
+        base_path = resource_path('images/tooltip-base.png')
+        if os.path.exists(frame_path):
+            frame_img = load_photo_image(frame_path)
+        if os.path.exists(base_path):
+            base_img = load_photo_image(base_path)
+
+        main_frame = tk.Frame(self.tooltip, bg='#2a2a2a')
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
+
+        if base_img:
+            bg_label = tk.Label(main_frame, image=base_img, bg='#2a2a2a')
+            bg_label.place(relwidth=1, relheight=1)
+            content_frame = tk.Frame(main_frame, bg='#2a2a2a')
+            content_frame.place(relx=0.05, rely=0.05, relwidth=0.9, relheight=0.9)
+        else:
+            content_frame = tk.Frame(main_frame, bg='#2a2a2a')
+
+        icon_path = self._get_icon_path(skill_key, self.skill_system.skill_data.get(skill_key))
+        if icon_path:
             img = load_photo_image(icon_path, size=(32,32))
             if img:
-                tk.Label(frame, image=img, bg='#2a2a2a').grid(row=0, column=0, rowspan=2, padx=5)
-        tk.Label(frame, text=info['name'], font=('微软雅黑', 12, 'bold'),
+                tk.Label(content_frame, image=img, bg='#2a2a2a').grid(row=0, column=0, rowspan=2, padx=5)
+        tk.Label(content_frame, text=info['name'], font=('微软雅黑', 12, 'bold'),
                  fg='#FFD700', bg='#2a2a2a').grid(row=0, column=1, sticky='w')
         skill = self.skill_system.skill_data.get(skill_key, {})
         max_lv = skill.get('base_max_level', 15)
         level_text = f"等级 {info['base_level']}/{max_lv}"
         if info['extra_level'] > 0:
             level_text += f" (+{info['extra_level']} 来自装备)"
-        tk.Label(frame, text=level_text, font=('微软雅黑', 9),
+        tk.Label(content_frame, text=level_text, font=('微软雅黑', 9),
                  fg='#88FF88', bg='#2a2a2a').grid(row=1, column=1, sticky='w')
         tags_text = ' | '.join(info['tags'])
-        tk.Label(frame, text=tags_text, font=('微软雅黑', 9),
+        tk.Label(content_frame, text=tags_text, font=('微软雅黑', 9),
                  fg='#AAAAAA', bg='#2a2a2a').grid(row=2, column=0, columnspan=2, sticky='w', pady=(5,0))
-        desc_label = tk.Label(frame, text=info['description'], font=('微软雅黑', 9),
+        desc_label = tk.Label(content_frame, text=info['description'], font=('微软雅黑', 9),
                               fg='#FFFFFF', bg='#2a2a2a', wraplength=350, justify='left')
         desc_label.grid(row=3, column=0, columnspan=2, pady=(8,0), sticky='w')
+
+        if frame_img:
+            frame_label = tk.Label(main_frame, image=frame_img, bg='#2a2a2a')
+            frame_label.place(relwidth=1, relheight=1)
+
         self.tooltip.update_idletasks()
         x = event.x_root + 15
         y = event.y_root + 15
@@ -1900,7 +2015,6 @@ class SkillTreeUI:
         for ref in self.node_refs.values():
             node = ref['node']
             if ref.get('is_branch'):
-                # 更新分支状态
                 skill_key = ref['branch_skill']
                 branch_id = ref['branch_id']
                 is_active = self.skill_system.branch_levels.get(skill_key, {}).get(branch_id, 0) > 0
@@ -1924,6 +2038,7 @@ class SkillTreeUI:
                     if total_lv > base_lv:
                         txt = f"{base_lv}+{total_lv-base_lv}/{max_lv}"
                     self.canvas.itemconfig(lv_text_id, text=txt)
+
 
 # ==================== 主程序 ====================
 class DiabloCalculator:
@@ -1959,7 +2074,6 @@ class DiabloCalculator:
     def on_profession_change(self, e):
         self.current_profession = self.profession_cb.get()
         self.current_db = get_profession_db(self.current_profession)
-        self.info_label.config(text=f'（当前：{self.current_profession} | {len(self.current_db["powers"]["all"])}威能）')
         self.equip_data = {pos: {} for pos in POSITIONS}
         for pos in POSITIONS:
             self.update_equip_button(pos)
@@ -2322,8 +2436,6 @@ class DiabloCalculator:
         self.profession_cb.set('巫师')
         self.profession_cb.pack(side=tk.LEFT, padx=8)
         self.profession_cb.bind('<<ComboboxSelected>>', self.on_profession_change)
-        self.info_label = tk.Label(top_frame, text='（当前：D4计算器 V2.2.1）', font=('微软雅黑',10), fg='#00FF00', bg='#1a0505')
-        self.info_label.pack(side=tk.LEFT, padx=10)
 
         notebook = ttk.Notebook(self.root)
         notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
