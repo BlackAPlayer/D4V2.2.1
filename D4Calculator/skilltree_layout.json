@@ -9,6 +9,7 @@
   "offsetX": -185.237699818044,
   "offsetY": 3078.4778349516537,
   "backgroundMargin": 250,
+  "backgroundImagePath": "images/skill_bg.png",
   "nodes": [
     {
       "id": 100,

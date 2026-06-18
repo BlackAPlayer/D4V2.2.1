@@ -158,14 +158,6 @@
         .batch-active-btn:hover {
             background: #8a5a5a !important;
         }
-        .passive-badge {
-            font-size: 10px;
-            background: #4a7a9a;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-left: 6px;
-        }
     </style>
 </head>
 <body>
@@ -187,7 +179,7 @@
     <div class="style-panel">
         <label>背景边距</label>
         <input type="number" id="bg-margin" value="250" style="width:60px; background:#3a3f4a; border:none; color:#fff; padding:4px; border-radius:4px;">
-        <span style="font-size:11px; color:#aaa;">(保存时写入，影响背景图范围)</span>
+        <span style="font-size:11px; color:#aaa;">(保存时写入)</span>
     </div>
     <div class="separator"></div>
     <button id="btn-pan" class="active">🖱️ 平移</button>
@@ -225,7 +217,7 @@
     🖱️ **Ctrl+左键** 多选节点；单击选中单个节点（取消其他选中）。<br>
     双击节点编辑：绑定技能/分支，或上传边框图片。<br>
     📥 **被动技能**：双击节点 → 点击"设为被动"，节点缩小65%<br>
-    🌄 **背景图片**：默认加载 <code>images/skill_bg.png</code>，随拖拽/缩放移动<br>
+    🌄 **背景图片**：默认加载 <code>images/skill_bg.png</code>，可手动导入其他图片（路径记录到布局文件）<br>
     📌 背景图范围受"背景边距"控制（默认250），与主程序一致<br>
     🔗 连线只记录起点和终点，不保存样式。
 </div>
@@ -250,7 +242,7 @@
 
         // 背景图片
         let bgImage = null;
-        let bgImageLoaded = false;
+        let bgImagePath = null;  // 存储相对路径，如 "images/my_bg.png"
 
         let view = { x: 0, y: 0, zoom: 1 };
         let isDragging = false;
@@ -362,6 +354,66 @@
                 callback(null);
             };
             img.src = path;
+        }
+
+        // ---------- 背景图片 ----------
+        function loadDefaultBackground() {
+            const img = new Image();
+            img.onload = () => {
+                bgImage = img;
+                bgImagePath = 'images/skill_bg.png';
+                statusEl.innerText = '背景已加载: images/skill_bg.png';
+                redraw();
+                setTimeout(() => statusEl.innerText = '就绪', 2000);
+            };
+            img.onerror = () => {
+                bgImage = null;
+                bgImagePath = null;
+                statusEl.innerText = '默认背景不存在，可手动导入';
+                setTimeout(() => statusEl.innerText = '就绪', 2000);
+            };
+            img.src = 'images/skill_bg.png';
+        }
+
+        function importBackground() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // 自动生成路径：images/文件名
+                const relativePath = `images/${file.name}`;
+                bgImagePath = relativePath;
+
+                // 预览图片
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        bgImage = img;
+                        statusEl.innerText = `背景已导入: ${relativePath}`;
+                        redraw();
+                        setTimeout(() => statusEl.innerText = '就绪', 3000);
+                    };
+                    img.onerror = () => {
+                        statusEl.innerText = '❌ 背景图片加载失败';
+                        setTimeout(() => statusEl.innerText = '就绪', 2000);
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        }
+
+        function clearBackground() {
+            bgImage = null;
+            bgImagePath = null;
+            statusEl.innerText = '背景已清除';
+            redraw();
+            setTimeout(() => statusEl.innerText = '就绪', 1500);
         }
 
         // ---------- 分支解析 ----------
@@ -506,18 +558,6 @@
             });
         }
 
-        // ---------- 被动技能切换 ----------
-        function toggleNodePassive(node) {
-            node.isPassive = !node.isPassive;
-            redraw();
-            return node.isPassive;
-        }
-
-        function setNodePassive(node, isPassive) {
-            node.isPassive = isPassive;
-            redraw();
-        }
-
         function batchSetPassive(isPassive) {
             if (selectedNodes.length === 0) {
                 alert('请先选中一个或多个节点（Ctrl+左键多选）');
@@ -528,43 +568,6 @@
             }
             redraw();
             statusEl.innerText = `已${isPassive ? '设为被动' : '设为主动'} ${selectedNodes.length} 个节点`;
-            setTimeout(() => statusEl.innerText = '就绪', 1500);
-        }
-
-        // ---------- 背景图片 ----------
-        function importBackground() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        bgImage = img;
-                        bgImageLoaded = true;
-                        statusEl.innerText = `背景图片已导入: ${file.name}`;
-                        redraw();
-                        setTimeout(() => statusEl.innerText = '就绪', 2000);
-                    };
-                    img.onerror = () => {
-                        statusEl.innerText = '❌ 背景图片加载失败';
-                        setTimeout(() => statusEl.innerText = '就绪', 2000);
-                    };
-                    img.src = ev.target.result;
-                };
-                reader.readAsDataURL(file);
-            };
-            input.click();
-        }
-
-        function clearBackground() {
-            bgImage = null;
-            bgImageLoaded = false;
-            statusEl.innerText = '背景已清除';
-            redraw();
             setTimeout(() => statusEl.innerText = '就绪', 1500);
         }
 
@@ -627,7 +630,6 @@
             `;
             document.body.appendChild(dialog);
 
-            // ---- 被动技能切换 ----
             const passiveBtn = dialog.querySelector('#passive-toggle-btn');
             let tempIsPassive = isPassive;
 
@@ -647,7 +649,6 @@
             const skillListDiv = dialog.querySelector('#skill-list');
             let currentSkills = allSkillsList.length ? [...allSkillsList] : [];
 
-            // ---- 边框图片上传 ----
             const fileInput = dialog.querySelector('#border-file-input');
             const previewImg = dialog.querySelector('#border-preview-img');
             const borderStatus = dialog.querySelector('#border-status');
@@ -688,7 +689,6 @@
                 redraw();
             };
 
-            // ---------- 技能列表 ----------
             function renderSkillList(skills) {
                 skillListDiv.innerHTML = '';
                 if (!skills.length) {
@@ -745,7 +745,6 @@
             searchInput.addEventListener('input', filterSkills);
             renderSkillList(currentSkills);
 
-            // ---------- 图标设置 ----------
             dialog.querySelector('#set-icon-btn').onclick = () => {
                 const input = dialog.querySelector('#icon-id-input');
                 const id = input.value.trim();
@@ -841,52 +840,56 @@
             ctx.clearRect(0, 0, w, h);
             ctx.save();
 
-            // ---- 0. 背景图片（世界坐标系，随拖拽/缩放移动） ----
-            if (bgImage && nodes.length > 0) {
-                const xs = nodes.map(n => n.x);
-                const ys = nodes.map(n => n.y);
-                const minX = Math.min(...xs);
-                const maxX = Math.max(...xs);
-                const minY = Math.min(...ys);
-                const maxY = Math.max(...ys);
+            // ---- 0. 背景图片 ----
+            if (bgImage) {
+                if (nodes.length > 0) {
+                    // 有节点：基于节点边界 + 边距
+                    const xs = nodes.map(n => n.x);
+                    const ys = nodes.map(n => n.y);
+                    const minX = Math.min(...xs);
+                    const maxX = Math.max(...xs);
+                    const minY = Math.min(...ys);
+                    const maxY = Math.max(...ys);
 
-                const marginInput = document.getElementById('bg-margin');
-                const margin = parseInt(marginInput.value) || 250;
+                    const marginInput = document.getElementById('bg-margin');
+                    const margin = parseInt(marginInput.value) || 250;
 
-                const centerX = (minX + maxX) / 2;
-                const centerY = (minY + maxY) / 2;
-                const bgWidth = maxX - minX + 2 * margin;
-                const bgHeight = maxY - minY + 2 * margin;
+                    const centerX = (minX + maxX) / 2;
+                    const centerY = (minY + maxY) / 2;
+                    const bgWidth = maxX - minX + 2 * margin;
+                    const bgHeight = maxY - minY + 2 * margin;
 
-                if (bgWidth > 0 && bgHeight > 0) {
-                    const left = centerX - bgWidth / 2;
-                    const top = centerY - bgHeight / 2;
+                    if (bgWidth > 0 && bgHeight > 0) {
+                        const left = centerX - bgWidth / 2;
+                        const top = centerY - bgHeight / 2;
 
-                    const p1 = transformPoint(left, top);
-                    const p2 = transformPoint(left + bgWidth, top + bgHeight);
-                    const screenWidth = p2.x - p1.x;
-                    const screenHeight = p2.y - p1.y;
+                        const p1 = transformPoint(left, top);
+                        const p2 = transformPoint(left + bgWidth, top + bgHeight);
+                        const screenWidth = p2.x - p1.x;
+                        const screenHeight = p2.y - p1.y;
 
-                    if (screenWidth > 0 && screenHeight > 0) {
-                        ctx.drawImage(bgImage, p1.x, p1.y, screenWidth, screenHeight);
+                        if (screenWidth > 0 && screenHeight > 0) {
+                            ctx.drawImage(bgImage, p1.x, p1.y, screenWidth, screenHeight);
+                        }
                     }
-                }
-            } else if (bgImage) {
-                const imgAspect = bgImage.width / bgImage.height;
-                const canvasAspect = w / h;
-                let drawW, drawH, offsetX, offsetY;
-                if (imgAspect > canvasAspect) {
-                    drawW = w;
-                    drawH = w / imgAspect;
-                    offsetX = 0;
-                    offsetY = (h - drawH) / 2;
                 } else {
-                    drawH = h;
-                    drawW = h * imgAspect;
-                    offsetX = (w - drawW) / 2;
-                    offsetY = 0;
+                    // 无节点：居中显示，保持宽高比
+                    const imgAspect = bgImage.width / bgImage.height;
+                    const canvasAspect = w / h;
+                    let drawW, drawH, offsetX, offsetY;
+                    if (imgAspect > canvasAspect) {
+                        drawW = w;
+                        drawH = w / imgAspect;
+                        offsetX = 0;
+                        offsetY = (h - drawH) / 2;
+                    } else {
+                        drawH = h;
+                        drawW = h * imgAspect;
+                        offsetX = (w - drawW) / 2;
+                        offsetY = 0;
+                    }
+                    ctx.drawImage(bgImage, offsetX, offsetY, drawW, drawH);
                 }
-                ctx.drawImage(bgImage, offsetX, offsetY, drawW, drawH);
             }
 
             // ---- 绘制连线 ----
@@ -907,11 +910,10 @@
                 const hasIcon = !isBranch && node.iconImg && node.iconImg.complete;
                 const passiveScale = node.isPassive ? 0.65 : 1.0;
 
-                // ---- 计算图标尺寸和边框尺寸（边框 = 图标 × 1.6 倍） ----
                 const iconSize = 50 * view.zoom * passiveScale;
                 const borderSize = iconSize * 1.6;
 
-                // ---- 1. 边框图片（自适应图标大小） ----
+                // ---- 1. 边框图片 ----
                 if (node.borderImg && node.borderImg.complete && node.borderImg.width > 0) {
                     ctx.drawImage(node.borderImg, pos.x - borderSize/2, pos.y - borderSize/2, borderSize, borderSize);
                 }
@@ -1264,6 +1266,7 @@
                 offsetX: centerX,
                 offsetY: centerY,
                 backgroundMargin: backgroundMargin,
+                backgroundImagePath: bgImagePath || null,  // 存背景图路径
                 nodes: nodes.map(n => ({
                     id: n.id,
                     skillKey: n.skillKey,
@@ -1291,7 +1294,7 @@
             URL.revokeObjectURL(url);
             const borderCount = nodes.filter(n => n.borderImage).length;
             const passiveCount = nodes.filter(n => n.isPassive).length;
-            statusEl.innerText = `已保存 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线`;
+            statusEl.innerText = `已保存 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
         }
 
         function loadLayoutFromFile(file) {
@@ -1346,6 +1349,29 @@
                         toNodeId: e.toNodeId
                     }));
 
+                    // ---- 加载背景图路径 ----
+                    if (layout.backgroundImagePath) {
+                        const img = new Image();
+                        img.onload = () => {
+                            bgImage = img;
+                            bgImagePath = layout.backgroundImagePath;
+                            statusEl.innerText = `背景已加载: ${bgImagePath}`;
+                            redraw();
+                            setTimeout(() => statusEl.innerText = '就绪', 2000);
+                        };
+                        img.onerror = () => {
+                            bgImage = null;
+                            bgImagePath = null;
+                            statusEl.innerText = `⚠️ 背景图片不存在: ${layout.backgroundImagePath}，使用默认背景`;
+                            loadDefaultBackground();
+                            redraw();
+                            setTimeout(() => statusEl.innerText = '就绪', 2000);
+                        };
+                        img.src = layout.backgroundImagePath;
+                    } else {
+                        loadDefaultBackground();
+                    }
+
                     let maxId = 100;
                     nodes.forEach(n => { if (n.id >= maxId) maxId = n.id + 1; });
                     nextId = maxId;
@@ -1353,7 +1379,7 @@
                     redraw();
                     const borderCount = nodes.filter(n => n.borderImage).length;
                     const passiveCount = nodes.filter(n => n.isPassive).length;
-                    statusEl.innerText = `已加载 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线`;
+                    statusEl.innerText = `已加载 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
                 } catch(err) { alert('加载失败: '+err.message); }
             };
             reader.readAsText(file);
@@ -1464,11 +1490,9 @@
                 input.click();
             };
 
-            // 背景导入/清除
             document.getElementById('btn-import-bg').addEventListener('click', importBackground);
             document.getElementById('btn-clear-bg').addEventListener('click', clearBackground);
 
-            // 批量被动/主动
             document.getElementById('btn-batch-passive').addEventListener('click', () => batchSetPassive(true));
             document.getElementById('btn-batch-active').addEventListener('click', () => batchSetPassive(false));
 
@@ -1516,25 +1540,6 @@
             loadDefaultTexture();
             loadDefaultBackground();
             redraw();
-        }
-
-        // ---------- 加载默认背景 ----------
-        function loadDefaultBackground() {
-            const img = new Image();
-            img.onload = () => {
-                bgImage = img;
-                bgImageLoaded = true;
-                statusEl.innerText = '背景已加载: images/skill_bg.png';
-                redraw();
-                setTimeout(() => statusEl.innerText = '就绪', 2000);
-            };
-            img.onerror = () => {
-                bgImage = null;
-                bgImageLoaded = false;
-                statusEl.innerText = '默认背景不存在，可手动导入';
-                setTimeout(() => statusEl.innerText = '就绪', 2000);
-            };
-            img.src = 'images/skill_bg.png';
         }
 
         init();
