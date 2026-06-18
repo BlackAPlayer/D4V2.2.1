@@ -64,6 +64,12 @@ class SkillTreeUI:
         self.node_refs = {}
         self.background_margin = 500
 
+        # 背景图边界（用于滚动区域）
+        self.bg_left = 0
+        self.bg_top = 0
+        self.bg_width = 0
+        self.bg_height = 0
+
         # 标志：首次绘制是否完成
         self._first_draw_done = False
 
@@ -74,10 +80,6 @@ class SkillTreeUI:
 
         self.canvas.bind('<ButtonPress-1>', self._on_drag_start)
         self.canvas.bind('<B1-Motion>', self._on_drag_move)
-        # 移除滚轮缩放绑定
-        # self.canvas.bind('<MouseWheel>', self._on_mousewheel)
-        # self.canvas.bind('<Button-4>', self._on_mousewheel)
-        # self.canvas.bind('<Button-5>', self._on_mousewheel)
 
         self.skill_system.add_listener(self.refresh)
         self.refresh()
@@ -111,7 +113,6 @@ class SkillTreeUI:
             if not self._first_draw_done:
                 self._on_first_draw()
             else:
-                # 后续 resize 重绘
                 self._redraw_all()
 
     def _on_first_draw(self):
@@ -121,22 +122,18 @@ class SkillTreeUI:
         self._redraw_all()
 
     def _load_background_image(self):
-        """加载默认背景图（作为回退）"""
         bg_path = resource_path('images/skill_bg.png')
         if os.path.exists(bg_path):
             try:
                 self.bg_image = Image.open(bg_path)
                 self.bg_photo = None
                 print(f"[DEBUG] 默认背景图加载成功: {bg_path}，尺寸 {self.bg_image.size}")
-                logging.info("默认背景图加载成功: %s", bg_path)
             except Exception as e:
                 self.bg_image = None
                 print(f"[DEBUG] 默认背景图加载失败: {e}")
-                logging.warning("默认背景图加载失败: %s", e)
         else:
             self.bg_image = None
             print(f"[DEBUG] 默认背景图文件不存在: {bg_path}")
-            logging.warning("默认背景图文件不存在: %s", bg_path)
 
     def _load_background_image_from_path(self, path):
         if not path:
@@ -148,13 +145,10 @@ class SkillTreeUI:
                 self.bg_image = Image.open(full_path)
                 self.bg_photo = None
                 print(f"[DEBUG] 从布局路径加载背景图成功: {full_path}")
-                logging.info("从布局路径加载背景图成功: %s", full_path)
                 return
             except Exception as e:
                 print(f"[DEBUG] 加载路径背景图失败: {e}")
-                logging.warning("加载路径背景图失败: %s", e)
         print(f"[DEBUG] 背景图不存在或无法加载: {full_path}，回退到默认背景")
-        logging.warning("背景图不存在或无法加载: %s，回退到默认背景", full_path)
         self._load_background_image()
 
     def _load_layout(self, layout_file):
@@ -173,7 +167,6 @@ class SkillTreeUI:
 
         if isinstance(data, dict):
             self.background_margin = data.get('backgroundMargin', 250)
-            logging.info("背景图边距设置为: %d", self.background_margin)
             bg_path = data.get('backgroundImagePath')
             if bg_path:
                 self._load_background_image_from_path(bg_path)
@@ -193,7 +186,8 @@ class SkillTreeUI:
         unmatched = []
 
         for nd in nodes_data:
-            skill_id = nd.get('skill_id') or nd.get('skillKey')
+            # 优先使用 skillKey，兼容 skill_id
+            skill_key = nd.get('skillKey') or nd.get('skill_id')
             branch_skill = nd.get('branch_skill') or nd.get('branchSkill')
             branch_id = nd.get('branch_id') or nd.get('branchId')
             icon_id = nd.get('iconId')
@@ -201,34 +195,18 @@ class SkillTreeUI:
             y = nd.get('top') or nd.get('y')
             if x is None or y is None:
                 continue
-            if skill_id is None:
-                node = {
-                    'id': nd.get('id'),
-                    'skill_key': None,
-                    'skill': None,
-                    'x': x,
-                    'y': y,
-                    'type': nd.get('type', 'skill'),
-                    'internal_id': f"branch_{x}_{y}",
-                    'branch_skill': branch_skill,
-                    'branch_id': branch_id,
-                    'icon_id': icon_id,
-                    'borderImage': nd.get('borderImage'),
-                    'isPassive': nd.get('isPassive', False),
-                }
-                self.nodes.append(node)
-                continue
-            skill = self.skill_system.skill_data.get(skill_id)
-            if skill is None:
-                unmatched.append(skill_id)
+
+            # 尝试获取技能对象（可能为 None）
+            skill = self.skill_system.skill_data.get(skill_key) if skill_key else None
+
             node = {
                 'id': nd.get('id'),
-                'skill_key': skill_id if skill else None,
+                'skill_key': skill_key,          # 保留原始键，不因 skill 缺失而丢弃
                 'skill': skill,
                 'x': x,
                 'y': y,
                 'type': nd.get('type', 'skill'),
-                'internal_id': skill_id if skill_id else f"token_{x}_{y}",
+                'internal_id': skill_key if skill_key else f"token_{x}_{y}",
                 'branch_skill': branch_skill,
                 'branch_id': branch_id,
                 'icon_id': icon_id,
@@ -240,8 +218,6 @@ class SkillTreeUI:
         if unmatched:
             logging.info("未匹配 %d 个技能节点，示例：%s", len(unmatched), unmatched[:10])
         logging.info("成功加载 %d 个技能节点，%d 条连线", len(self.nodes), len(self.edges))
-
-        # 不直接绘制，由 Configure 事件或延迟检查触发
 
     def _auto_layout(self):
         type_order = ['基础', '核心', '防御', '咒唤', '掌控', '终极', '关键被动']
@@ -296,7 +272,6 @@ class SkillTreeUI:
                     node_id += 1
                     x += col_width
             current_y += row_count * row_height + 40
-        # 不直接绘制，等待事件
 
     def _get_icon_path(self, skill_key, skill, icon_id=None):
         if skill_key:
@@ -336,7 +311,6 @@ class SkillTreeUI:
             to_node = node_map.get(to_id)
             if not from_node or not to_node:
                 continue
-            # 直接使用世界坐标
             x1 = from_node['x']
             y1 = from_node['y']
             x2 = to_node['x']
@@ -350,11 +324,9 @@ class SkillTreeUI:
         self.canvas.tag_raise('edge')
 
     def _redraw_all(self):
-        """完整重绘：先绘制，再设置滚动区域并定位"""
         self.canvas.delete('all')
         self.canvas.update_idletasks()
 
-        # 1. 绘制所有内容
         self._draw_background()
         self._draw_edges()
         self._draw_all_nodes()
@@ -363,25 +335,22 @@ class SkillTreeUI:
         self.canvas.tag_raise('edge')
         self.canvas.tag_raise('node')
 
-        # 2. 设置滚动区域并定位到第二个主动技能
         self._adjust_viewport()
-
         print("[DEBUG] 重绘完成，已定位")
 
     def _adjust_viewport(self):
-        """计算所有节点的范围盒，设置scrollregion，并定位到第二个主动技能"""
         if not self.nodes:
             return
 
-        # 计算所有节点的边界（包括背景图边界，但背景图由节点边界决定）
         xs = [n['x'] for n in self.nodes]
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
 
-        # 添加垂直扩展（与工具一致）
-        min_y -= 250
-        max_y += 250
+        # 硬编码上下边距改为 150（原来是 500）
+        VERTICAL_EXTRA = 150
+        min_y -= VERTICAL_EXTRA
+        max_y += VERTICAL_EXTRA
 
         margin = self.background_margin
         left = min_x - margin
@@ -389,30 +358,33 @@ class SkillTreeUI:
         right = max_x + margin
         bottom = max_y + margin
 
-        # 如果有背景图，扩展区域包含背景图（但背景图范围由节点范围决定，不需要额外扩展）
-        # 设置scrollregion
+        if hasattr(self, 'bg_left') and self.bg_width > 0:
+            left = min(left, self.bg_left)
+            top = min(top, self.bg_top)
+            right = max(right, self.bg_left + self.bg_width)
+            bottom = max(bottom, self.bg_top + self.bg_height)
+
+        extra = 50
+        left -= extra
+        top -= extra
+        right += extra
+        bottom += extra
+
         self.canvas.config(scrollregion=(left, top, right, bottom))
 
-        # 寻找第二个主动技能节点（第一个skill_key不为空且isPassive为False的节点）
         active_nodes = [n for n in self.nodes if n.get('skill_key') and not n.get('isPassive', False)]
         if len(active_nodes) >= 2:
-            target_node = active_nodes[1]  # 第二个主动技能
+            target_node = active_nodes[1]
         else:
-            # 如果没有第二个主动技能，使用第一个主动技能，或使用范围盒中心
-            if active_nodes:
-                target_node = active_nodes[0]
-            else:
-                target_node = None
+            target_node = active_nodes[0] if active_nodes else None
 
         if target_node:
             target_x = target_node['x']
             target_y = target_node['y']
         else:
-            # 使用范围盒中心
             target_x = (left + right) / 2
             target_y = (top + bottom) / 2
 
-        # 计算使target_x, target_y位于画布中心所需的xview/yview
         cw = self.canvas.winfo_width()
         ch = self.canvas.winfo_height()
         if cw > 1 and ch > 1:
@@ -429,7 +401,6 @@ class SkillTreeUI:
                 self.view_y = frac_y
 
     def _draw_background(self):
-        """绘制背景图（使用世界坐标）"""
         if not self.bg_image:
             return
 
@@ -442,7 +413,6 @@ class SkillTreeUI:
         if img_w <= 0 or img_h <= 0:
             return
 
-        # 无节点：居中绘制（屏幕坐标）
         if not self.nodes:
             canvas_aspect = w / h
             img_aspect = img_w / img_h
@@ -460,37 +430,52 @@ class SkillTreeUI:
             scaled = self.bg_image.resize((int(draw_w), int(draw_h)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
             self.canvas.create_image(offset_x, offset_y, image=self.bg_photo, anchor='nw', tags=('bg',))
+            self.bg_left = offset_x
+            self.bg_top = offset_y
+            self.bg_width = draw_w
+            self.bg_height = draw_h
             return
 
-        # 有节点：基于节点边界 + 边距（世界坐标）
         xs = [n['x'] for n in self.nodes]
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
 
-        min_y -= 250
-        max_y += 250
+        # 硬编码上下边距改为 150（原来是 500）
+        VERTICAL_EXTRA = 150
+        min_y -= VERTICAL_EXTRA
+        max_y += VERTICAL_EXTRA
 
         margin = self.background_margin
+        # 上下不额外增减（保持原样）
+        top_extra = 0
+        bottom_extra = 0
+
         center_x = (min_x + max_x) / 2
         center_y = (min_y + max_y) / 2
+
         width = max_x - min_x + 2 * margin
-        height = max_y - min_y + 2 * margin
+        height = max_y - min_y + 2 * margin + top_extra + bottom_extra
 
         if width <= 0 or height <= 0:
             return
 
         left = center_x - width / 2
-        top = center_y - height / 2
+        top = center_y - (max_y - min_y + 2 * margin) / 2 - top_extra
 
         try:
             scaled = self.bg_image.resize((int(width), int(height)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
             self.canvas.create_image(left, top, image=self.bg_photo, anchor='nw', tags=('bg',))
+            self.bg_left = left
+            self.bg_top = top
+            self.bg_width = width
+            self.bg_height = height
         except Exception as e:
             logging.warning("绘制背景图失败: %s", e)
 
     def _draw_all_nodes(self):
+        # 节点大小大一倍：32/28 → 64/56
         BASE_NODE_RADIUS = 64
         BASE_ICON_SIZE = 56
         self.node_refs.clear()
@@ -645,19 +630,20 @@ class SkillTreeUI:
                 self.drag_start_x = event.x
                 self.drag_start_y = event.y
 
-    # ---- 移除缩放相关方法 ----
-
     def _on_left_click(self, skill_key):
+        print(f"[DEBUG] 左键点击技能: {skill_key}")
         if not skill_key:
             return
         self.skill_system.add_level(skill_key)
 
     def _on_right_click(self, skill_key):
+        print(f"[DEBUG] 右键点击技能: {skill_key}")
         if not skill_key:
             return
         self.skill_system.remove_level(skill_key)
 
     def _on_branch_click(self, skill_key, branch_id):
+        print(f"[DEBUG] 点击分支: {skill_key} -> {branch_id}")
         if not skill_key or not branch_id:
             return
         if self.skill_system.branch_levels.get(skill_key, {}).get(branch_id, 0) > 0:
@@ -665,11 +651,13 @@ class SkillTreeUI:
         self.skill_system.activate_branch(skill_key, branch_id)
 
     def _on_branch_right_click(self, skill_key, branch_id):
+        print(f"[DEBUG] 右键分支: {skill_key} -> {branch_id}")
         if not skill_key or not branch_id:
             return
         self.skill_system.deactivate_branch(skill_key, branch_id)
 
     def _show_branch_tooltip(self, event, skill_key, branch_id):
+        print(f"[DEBUG] 悬停分支: {skill_key} -> {branch_id}")
         self._hide_tooltip()
         branches = self.skill_system.get_branches(skill_key)
         branch = branches.get(branch_id)
@@ -683,6 +671,7 @@ class SkillTreeUI:
         label.pack(padx=5, pady=5)
 
     def _show_tooltip(self, event, skill_key):
+        print(f"[DEBUG] 悬停技能: {skill_key}")
         self._hide_tooltip()
         if not skill_key:
             return
@@ -713,7 +702,6 @@ class SkillTreeUI:
             desc = desc[:300] + '...'
         tk.Label(frame, text=desc, font=('微软雅黑', 9), fg=fg, bg=bg,
                  wraplength=280, justify='left').pack(anchor='w')
-
         if info['active_branches']:
             tk.Frame(frame, height=1, bg='#333333').pack(fill=tk.X, pady=3)
             tk.Label(frame, text="激活分支:", font=('微软雅黑', 9, 'bold'),
