@@ -8,7 +8,7 @@
   },
   "offsetX": -185.237699818044,
   "offsetY": 3078.4778349516537,
-  "backgroundMargin": 250,
+  "backgroundMargin": 200,
   "backgroundImagePath": "images/skill_bg.png",
   "nodes": [
     {
@@ -548,7 +548,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "1777188871",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {
@@ -1076,7 +1076,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "3047367406",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {
@@ -1280,7 +1280,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "3561673758",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {
@@ -1844,7 +1844,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "242924977",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {
@@ -2432,7 +2432,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "3945044458",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {
@@ -2456,7 +2456,7 @@
       "branchSkill": null,
       "branchId": null,
       "iconId": "35213322",
-      "borderImage": null,
+      "borderImage": "images/icons/4.png",
       "isPassive": false
     },
     {

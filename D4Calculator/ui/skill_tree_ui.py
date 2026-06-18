@@ -53,7 +53,6 @@ class SkillTreeUI:
         self.bg_photo = None
         self._load_background_image()
 
-        self.zoom = 1.0
         self.drag_start_x = 0
         self.drag_start_y = 0
         self.view_x = 0.0
@@ -75,9 +74,10 @@ class SkillTreeUI:
 
         self.canvas.bind('<ButtonPress-1>', self._on_drag_start)
         self.canvas.bind('<B1-Motion>', self._on_drag_move)
-        self.canvas.bind('<MouseWheel>', self._on_mousewheel)
-        self.canvas.bind('<Button-4>', self._on_mousewheel)
-        self.canvas.bind('<Button-5>', self._on_mousewheel)
+        # 移除滚轮缩放绑定
+        # self.canvas.bind('<MouseWheel>', self._on_mousewheel)
+        # self.canvas.bind('<Button-4>', self._on_mousewheel)
+        # self.canvas.bind('<Button-5>', self._on_mousewheel)
 
         self.skill_system.add_listener(self.refresh)
         self.refresh()
@@ -350,14 +350,11 @@ class SkillTreeUI:
         self.canvas.tag_raise('edge')
 
     def _redraw_all(self):
-        """完整重绘：先设视口，再绘制，最后扩展视口包含背景"""
+        """完整重绘：先绘制，再设置滚动区域并定位"""
         self.canvas.delete('all')
         self.canvas.update_idletasks()
 
-        # 1. 先建立基于节点的 scrollregion
-        self._update_viewport(center=True)
-
-        # 2. 绘制所有内容
+        # 1. 绘制所有内容
         self._draw_background()
         self._draw_edges()
         self._draw_all_nodes()
@@ -366,21 +363,25 @@ class SkillTreeUI:
         self.canvas.tag_raise('edge')
         self.canvas.tag_raise('node')
 
-        # 3. 扩展 scrollregion 包含背景图区域（但不再居中）
-        self._update_viewport(center=False)
+        # 2. 设置滚动区域并定位到第二个主动技能
+        self._adjust_viewport()
 
-        print("[DEBUG] 重绘完成")
+        print("[DEBUG] 重绘完成，已定位")
 
-    def _update_viewport(self, center=True):
+    def _adjust_viewport(self):
+        """计算所有节点的范围盒，设置scrollregion，并定位到第二个主动技能"""
         if not self.nodes:
             return
+
+        # 计算所有节点的边界（包括背景图边界，但背景图由节点边界决定）
         xs = [n['x'] for n in self.nodes]
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
 
-        min_y -= 500
-        max_y += 500
+        # 添加垂直扩展（与工具一致）
+        min_y -= 250
+        max_y += 250
 
         margin = self.background_margin
         left = min_x - margin
@@ -388,43 +389,60 @@ class SkillTreeUI:
         right = max_x + margin
         bottom = max_y + margin
 
-        if hasattr(self, 'bg_left'):
-            left = min(left, self.bg_left)
-            top = min(top, self.bg_top)
-            right = max(right, self.bg_left + self.bg_width)
-            bottom = max(bottom, self.bg_top + self.bg_height)
-
+        # 如果有背景图，扩展区域包含背景图（但背景图范围由节点范围决定，不需要额外扩展）
+        # 设置scrollregion
         self.canvas.config(scrollregion=(left, top, right, bottom))
 
-        if center:
-            cw = self.canvas.winfo_width()
-            ch = self.canvas.winfo_height()
-            if cw > 1 and ch > 1 and (right - left) > 0 and (bottom - top) > 0:
-                center_x = (min_x + max_x) / 2
-                center_y = (min_y + max_y) / 2
-                self.canvas.xview_moveto((center_x - left - cw/2) / (right-left))
-                self.canvas.yview_moveto((center_y - top - ch/2) / (bottom-top))
-            self.view_x = self.canvas.xview()[0]
-            self.view_y = self.canvas.yview()[0]
+        # 寻找第二个主动技能节点（第一个skill_key不为空且isPassive为False的节点）
+        active_nodes = [n for n in self.nodes if n.get('skill_key') and not n.get('isPassive', False)]
+        if len(active_nodes) >= 2:
+            target_node = active_nodes[1]  # 第二个主动技能
+        else:
+            # 如果没有第二个主动技能，使用第一个主动技能，或使用范围盒中心
+            if active_nodes:
+                target_node = active_nodes[0]
+            else:
+                target_node = None
+
+        if target_node:
+            target_x = target_node['x']
+            target_y = target_node['y']
+        else:
+            # 使用范围盒中心
+            target_x = (left + right) / 2
+            target_y = (top + bottom) / 2
+
+        # 计算使target_x, target_y位于画布中心所需的xview/yview
+        cw = self.canvas.winfo_width()
+        ch = self.canvas.winfo_height()
+        if cw > 1 and ch > 1:
+            total_w = right - left
+            total_h = bottom - top
+            if total_w > 0 and total_h > 0:
+                frac_x = (target_x - left - cw/2) / total_w
+                frac_y = (target_y - top - ch/2) / total_h
+                frac_x = max(0, min(1, frac_x))
+                frac_y = max(0, min(1, frac_y))
+                self.canvas.xview_moveto(frac_x)
+                self.canvas.yview_moveto(frac_y)
+                self.view_x = frac_x
+                self.view_y = frac_y
 
     def _draw_background(self):
-        """绘制背景图（使用世界坐标，随滚动/缩放自动适配）"""
+        """绘制背景图（使用世界坐标）"""
         if not self.bg_image:
-            print("[DEBUG] _draw_background: 背景图为空，跳过")
             return
 
         w = self.canvas.winfo_width()
         h = self.canvas.winfo_height()
         if w <= 1 or h <= 1:
-            print(f"[DEBUG] _draw_background: 画布尺寸 {w}x{h} 无效，跳过")
             return
 
         img_w, img_h = self.bg_image.size
         if img_w <= 0 or img_h <= 0:
-            print("[DEBUG] _draw_background: 图片尺寸无效")
             return
 
-        # ---- 无节点：居中绘制（屏幕坐标） ----
+        # 无节点：居中绘制（屏幕坐标）
         if not self.nodes:
             canvas_aspect = w / h
             img_aspect = img_w / img_h
@@ -442,17 +460,16 @@ class SkillTreeUI:
             scaled = self.bg_image.resize((int(draw_w), int(draw_h)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
             self.canvas.create_image(offset_x, offset_y, image=self.bg_photo, anchor='nw', tags=('bg',))
-            print(f"[DEBUG] 无节点背景绘制完成，位置 ({offset_x}, {offset_y})，尺寸 {draw_w}x{draw_h}")
             return
 
-        # ---- 有节点：基于节点边界 + 边距（世界坐标） ----
+        # 有节点：基于节点边界 + 边距（世界坐标）
         xs = [n['x'] for n in self.nodes]
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
 
-        min_y -= 500
-        max_y += 500
+        min_y -= 250
+        max_y += 250
 
         margin = self.background_margin
         center_x = (min_x + max_x) / 2
@@ -461,31 +478,21 @@ class SkillTreeUI:
         height = max_y - min_y + 2 * margin
 
         if width <= 0 or height <= 0:
-            print("[DEBUG] _draw_background: 计算的宽度或高度 <= 0")
             return
 
         left = center_x - width / 2
         top = center_y - height / 2
 
-        # 调试输出
-        print(f"[DEBUG] 背景参数: 左={left}, 顶={top}, 宽={width}, 高={height}, 图片原始尺寸={img_w}x{img_h}")
-
         try:
             scaled = self.bg_image.resize((int(width), int(height)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
             self.canvas.create_image(left, top, image=self.bg_photo, anchor='nw', tags=('bg',))
-            # 保存世界坐标边界
-            self.bg_left = left
-            self.bg_top = top
-            self.bg_width = width
-            self.bg_height = height
-            print("[DEBUG] 背景图绘制成功（有节点）")
         except Exception as e:
-            print(f"[DEBUG] 绘制背景图异常: {e}")
+            logging.warning("绘制背景图失败: %s", e)
 
     def _draw_all_nodes(self):
-        BASE_NODE_RADIUS = 32
-        BASE_ICON_SIZE = 28
+        BASE_NODE_RADIUS = 64
+        BASE_ICON_SIZE = 56
         self.node_refs.clear()
 
         if not hasattr(self, '_border_photos'):
@@ -638,59 +645,7 @@ class SkillTreeUI:
                 self.drag_start_x = event.x
                 self.drag_start_y = event.y
 
-    # ---------- 关键修正：缩放时保持鼠标焦点 ----------
-    def _on_mousewheel(self, event):
-        cw = self.canvas.winfo_width()
-        ch = self.canvas.winfo_height()
-        if cw <= 1 or ch <= 1:
-            return
-
-        # 获取鼠标在世界坐标系中的位置（缩放前）
-        world_x = self.canvas.canvasx(event.x)
-        world_y = self.canvas.canvasy(event.y)
-
-        # 计算缩放倍数
-        if event.delta:
-            delta = event.delta / 120
-        else:
-            if event.num == 4:
-                delta = 1
-            elif event.num == 5:
-                delta = -1
-            else:
-                return
-        scale = 1.1 ** delta
-        new_zoom = self.zoom * scale
-        if new_zoom < 0.2 or new_zoom > 3.0:
-            return
-        self.zoom = new_zoom
-
-        # 以鼠标位置为中心缩放
-        self.canvas.scale('node', world_x, world_y, scale, scale)
-        self.canvas.scale('edge', world_x, world_y, scale, scale)
-        self.canvas.scale('bg', world_x, world_y, scale, scale)
-
-        # 更新滚动区域
-        self.canvas.configure(scrollregion=self.canvas.bbox('all'))
-
-        # 调整视图，使缩放前的 world_x, world_y 仍位于鼠标位置
-        bbox = self.canvas.bbox('all')
-        if bbox:
-            left, top, right, bottom = bbox
-            if right > left and bottom > top:
-                # 计算目标视图偏移
-                view_left = world_x - (event.x / cw) * (right - left)
-                view_top = world_y - (event.y / ch) * (bottom - top)
-                frac_x = (view_left - left) / (right - left)
-                frac_y = (view_top - top) / (bottom - top)
-                # 限制范围
-                frac_x = max(0, min(1, frac_x))
-                frac_y = max(0, min(1, frac_y))
-                self.canvas.xview_moveto(frac_x)
-                self.canvas.yview_moveto(frac_y)
-                self.view_x = frac_x
-                self.view_y = frac_y
-    # ---------- 修正结束 ----------
+    # ---- 移除缩放相关方法 ----
 
     def _on_left_click(self, skill_key):
         if not skill_key:
