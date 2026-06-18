@@ -1,0 +1,104 @@
+{
+  "seals": {
+    "diamond_heart_seal": {
+      "id": "diamond_heart_seal",
+      "name": "钻石心智封印",
+      "rarity": "mythic",
+      "slots_base": 6,
+      "class_restriction": null,
+      "seal_affix": {
+        "affix_id": "mythic_diamond_heart",
+        "type": "system_modifier",
+        "modifier_type": "set_requirement_reduction",
+        "value": 1,
+        "display": "激活套装所需神符数量 -1（最低2件）"
+      },
+      "set_affixes": [
+        {
+          "affix_id": "set_all_stats_10",
+          "type": "stat_bonus",
+          "target": "all_stats",
+          "value": 10,
+          "display": "全属性 +10"
+        },
+        {
+          "affix_id": "set_damage_reduction_5",
+          "type": "stat_bonus",
+          "target": "damage_reduction",
+          "value": 0.05,
+          "display": "全伤害减免 5%"
+        }
+      ],
+      "description": "传说中能够看穿一切伪装的远古封印"
+    },
+    "golden_enlightenment_seal": {
+      "id": "golden_enlightenment_seal",
+      "name": "黄金顿悟封印",
+      "rarity": "mythic",
+      "slots_base": 6,
+      "class_restriction": null,
+      "seal_affix": {
+        "affix_id": "mythic_golden_enlightenment",
+        "type": "system_modifier",
+        "modifier_type": "socket_and_unique_override",
+        "value": {
+          "socket_count": 4,
+          "unique_limit": 3
+        },
+        "display": "神符槽数固定为 4，可装配 3 个暗金神符"
+      },
+      "set_affixes": [],
+      "description": "顿悟之时，暗金共鸣"
+    },
+    "severed_finger_seal": {
+      "id": "severed_finger_seal",
+      "name": "断指封印",
+      "rarity": "mythic",
+      "slots_base": 6,
+      "class_restriction": null,
+      "seal_affix": {
+        "affix_id": "mythic_severed_finger",
+        "type": "system_modifier",
+        "modifier_type": "socket_and_unique_override",
+        "value": {
+          "socket_count": 5,
+          "unique_limit": 2
+        },
+        "display": "神符槽数固定为 5，可装配 2 个暗金神符"
+      },
+      "set_affixes": [],
+      "description": "献祭一指，换取暗金之力"
+    },
+    "legendary_rage_seal": {
+      "id": "legendary_rage_seal",
+      "name": "狂怒传奇封印",
+      "rarity": "legendary",
+      "slots_base": 5,
+      "class_restriction": ["barbarian"],
+      "seal_affix": {
+        "affix_id": "legendary_crit_damage_25",
+        "type": "stat_bonus",
+        "target": "critical_strike_damage",
+        "value": 0.25,
+        "display": "暴击伤害提高 25%[x]"
+      },
+      "set_affixes": [
+        {
+          "affix_id": "set_socket_plus_1",
+          "type": "system_modifier",
+          "modifier_type": "socket_increase",
+          "value": 1,
+          "display": "+1 神符槽数"
+        },
+        {
+          "affix_id": "set_damage_when_rage_active",
+          "type": "conditional_damage",
+          "condition": "set_active:barbarian_ancestral_rage",
+          "value": 0.10,
+          "display": "【先祖之怒】套装激活时，伤害提高 10%[x]"
+        }
+      ],
+      "description": "野蛮人先祖遗留的狂暴封印"
+    }
+  }
+}

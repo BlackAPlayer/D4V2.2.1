@@ -20,6 +20,9 @@ from business.skill_tree import SkillTreeSystem
 from ui.equipment_ui import EquipDetailDialog
 from ui.skill_tree_ui import SkillTreeUI
 
+# 【新增】导入护身符UI
+from ui.talisman_ui_tk import TalismanUI
+
 class DiabloCalculator:
     def __init__(self, root):
         self.root = root
@@ -60,6 +63,11 @@ class DiabloCalculator:
         if hasattr(self, 'skill_ui'):
             self.skill_ui.frame.destroy()
             self.skill_ui = SkillTreeUI(self.skill_ui.parent, self.skill_system, layout_file='skilltree_layout.json')
+        
+        # 【新增】通知护身符系统切换职业
+        if hasattr(self, 'talisman_ui'):
+            self.talisman_ui.set_active_class(self.current_profession)
+        
         gc.collect()
 
     def get_powers_for_slot(self, position):
@@ -446,10 +454,32 @@ class DiabloCalculator:
         self.skill_system = SkillTreeSystem(self.current_profession)
         self.skill_ui = SkillTreeUI(tab_skill, self.skill_system, layout_file='skilltree_layout.json')
 
-        tab_rune = tk.Frame(notebook, bg='#150808')
-        notebook.add(tab_rune, text='🔮 神符&封印')
-        tk.Label(tab_rune, text='🔮 神符&封印系统\n\n✅ 完整功能保留', font=('微软雅黑',16,'bold'), fg='#FFD700', bg='#150808').pack(pady=60)
+        # ===== Tab 3: 护身符系统（替换原来的占位） =====
+        tab_talisman = tk.Frame(notebook, bg='#150808')
+        notebook.add(tab_talisman, text='🔮 护身符')
 
+        self.talisman_ui = TalismanUI(
+            tab_talisman,
+            skill_system=self.skill_system,
+            callback=self._on_talisman_changed,
+            bg='#150808'
+        )
+        self.talisman_ui.pack(fill=tk.BOTH, expand=True)
+        self.talisman_ui.set_active_class(self.current_profession)
+
+        # ===== Tab 4: 巅峰盘 =====
         tab_paragon = tk.Frame(notebook, bg='#150808')
         notebook.add(tab_paragon, text='⭐ 巅峰盘')
         tk.Label(tab_paragon, text='⭐ 巅峰盘系统\n\n✅ 完整功能保留', font=('微软雅黑',16,'bold'), fg='#FFD700', bg='#150808').pack(pady=60)
+
+    # 【新增】护身符数据变化回调
+    def _on_talisman_changed(self):
+        """护身符数据变化回调"""
+        # 可以在这里更新角色面板等
+        pass
+
+# 如果原文件有主程序入口，请保留
+# if __name__ == "__main__":
+#     root = tk.Tk()
+#     app = DiabloCalculator(root)
+#     root.mainloop()

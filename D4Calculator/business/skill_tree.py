@@ -13,7 +13,7 @@ import copy
 from PIL import Image, ImageTk
 import logging
 
-from config import resource_path  # 修改：从 config 导入 resource_path
+from config import resource_path
 
 class SkillTreeSystem:
     def __init__(self, profession, data_path='skill.json'):
@@ -296,6 +296,14 @@ class SkillTreeSystem:
                     self.external_bonuses['specific'][skill_key] = {}
                 for k, v in data.items():
                     self.external_bonuses['specific'][skill_key][k] = v
+        self._notify_change()
+
+    def reset_external_bonuses(self):
+        """重置所有外部技能加成（护身符、装备等）"""
+        self.external_bonuses = {
+            "global": {"all_skills": 0, "fire_skills": 0, "frost_skills": 0, "shock_skills": 0},
+            "specific": {}
+        }
         self._notify_change()
 
     def reset_all(self):

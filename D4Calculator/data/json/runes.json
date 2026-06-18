@@ -1,0 +1,144 @@
+{
+  "runes": {
+    "rune_ancestral_fel": {
+      "id": "rune_ancestral_fel",
+      "name": "斐尔",
+      "rarity": "set",
+      "set_id": "barbarian_ancestral_rage",
+      "class_restriction": ["barbarian"],
+      "affixes": [
+        {
+          "affix_id": "affix_fire_resist_8",
+          "type": "stat_bonus",
+          "target": "fire_resist",
+          "value": 8,
+          "display": "+8% 火焰抗性"
+        },
+        {
+          "affix_id": "affix_skill_war_cry_1",
+          "type": "skill_rank",
+          "target": "barbarian_war_cry",
+          "value": 1,
+          "display": "战吼技能等级 +1"
+        }
+      ],
+      "set_tiers": {
+        "2": "战吼技能冷却缩短 10%",
+        "3": "狂暴状态下伤害提高 15%",
+        "5": "每消耗 100 怒气召唤先祖之魂，造成 50% 武器伤害"
+      }
+    },
+    "rune_ancestral_lingta": {
+      "id": "rune_ancestral_lingta",
+      "name": "凌塔",
+      "rarity": "set",
+      "set_id": "barbarian_ancestral_rage",
+      "class_restriction": ["barbarian"],
+      "affixes": [
+        {
+          "affix_id": "affix_cold_resist_8",
+          "type": "stat_bonus",
+          "target": "cold_resist",
+          "value": 8,
+          "display": "+8% 冰霜抗性"
+        },
+        {
+          "affix_id": "affix_skill_challenging_shout_1",
+          "type": "skill_rank",
+          "target": "barbarian_challenging_shout",
+          "value": 1,
+          "display": "挑战怒吼技能等级 +1"
+        }
+      ],
+      "set_tiers": {
+        "2": "战吼技能冷却缩短 10%",
+        "3": "狂暴状态下伤害提高 15%",
+        "5": "每消耗 100 怒气召唤先祖之魂，造成 50% 武器伤害"
+      }
+    },
+    "rune_ancestral_gor": {
+      "id": "rune_ancestral_gor",
+      "name": "戈尔",
+      "rarity": "set",
+      "set_id": "barbarian_ancestral_rage",
+      "class_restriction": ["barbarian"],
+      "affixes": [
+        {
+          "affix_id": "affix_lightning_resist_8",
+          "type": "stat_bonus",
+          "target": "lightning_resist",
+          "value": 8,
+          "display": "+8% 闪电抗性"
+        },
+        {
+          "affix_id": "affix_skill_rupture_1",
+          "type": "skill_rank",
+          "target": "barbarian_rupture",
+          "value": 1,
+          "display": "撕裂技能等级 +1"
+        }
+      ],
+      "set_tiers": {
+        "2": "战吼技能冷却缩短 10%",
+        "3": "狂暴状态下伤害提高 15%",
+        "5": "每消耗 100 怒气召唤先祖之魂，造成 50% 武器伤害"
+      }
+    },
+    "rune_ancestral_kor": {
+      "id": "rune_ancestral_kor",
+      "name": "科尔",
+      "rarity": "set",
+      "set_id": "barbarian_ancestral_rage",
+      "class_restriction": ["barbarian"],
+      "affixes": [
+        {
+          "affix_id": "affix_poison_resist_8",
+          "type": "stat_bonus",
+          "target": "poison_resist",
+          "value": 8,
+          "display": "+8% 毒素抗性"
+        },
+        {
+          "affix_id": "affix_skill_hammer_of_ancients_1",
+          "type": "skill_rank",
+          "target": "barbarian_hammer_of_ancients",
+          "value": 1,
+          "display": "先祖之锤技能等级 +1"
+        }
+      ],
+      "set_tiers": {
+        "2": "战吼技能冷却缩短 10%",
+        "3": "狂暴状态下伤害提高 15%",
+        "5": "每消耗 100 怒气召唤先祖之魂，造成 50% 武器伤害"
+      }
+    },
+    "rune_ancestral_dol": {
+      "id": "rune_ancestral_dol",
+      "name": "多尔",
+      "rarity": "set",
+      "set_id": "barbarian_ancestral_rage",
+      "class_restriction": ["barbarian"],
+      "affixes": [
+        {
+          "affix_id": "affix_shadow_resist_8",
+          "type": "stat_bonus",
+          "target": "shadow_resist",
+          "value": 8,
+          "display": "+8% 暗影抗性"
+        },
+        {
+          "affix_id": "affix_skill_whirlwind_1",
+          "type": "skill_rank",
+          "target": "barbarian_whirlwind",
+          "value": 1,
+          "display": "旋风斩技能等级 +1"
+        }
+      ],
+      "set_tiers": {
+        "2": "战吼技能冷却缩短 10%",
+        "3": "狂暴状态下伤害提高 15%",
+        "5": "每消耗 100 怒气召唤先祖之魂，造成 50% 武器伤害"
+      }
+    }
+  }
+}
