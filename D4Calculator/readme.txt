@@ -1,41 +1,56 @@
-skill_tree_editor.html使用说明
-加载技能数据：先点击 📂 skill.json 加载技能定义，否则无法绑定技能。
+# 项目概述
+- 项目名称：D4Calculator（暗黑破坏神4 计算器）V2.2.1
+- 技术栈：Python 3 + Tkinter，PIL 图片处理，JSON 数据存储
+- 核心功能：技能树加点、装备编辑、护身符系统、巅峰盘（占位）
 
-加载布局：支持新、旧两种格式（自动兼容 skillName 冗余字段）。
-
-保存布局：自动移除 skillName，纹理数据建议外置（若使用内联纹理，会提示下载）。
-
-清理冗余：一键移除节点中的冗余 skillName 字段。
-
-批量设图标：点击“📌 批量设图标”按钮，输入数字 ID，所有未绑定技能的节点将统一设置该图标。也可按住 Shift 双击任意节点触发批量设置。
-=========================================================
-2026-06-17日志
-D4计算器 V2.2.1 (技能树增强版 - 完整整合)
-- 技能树系统重构：支持分支、外部加成、动态描述、局部刷新
-- 图标加载兼容 key 和数字 icon 两种命名方式
-- 技能树背景图 skill_bg.png
-- 悬浮窗边框 tooltip-frame.png，背景图 tooltip-base.png
-- 移除顶部冗余状态标签
-- 移除滚动条，支持鼠标拖拽和滚轮缩放
-- 加载 skilltree_layout.json（用户自定义布局），未绑定节点显示为空节点
-- 新增：背景图以节点中心居中绘制，画布自动居中视图
-- 修复：坐标归一化支持，图层顺序修正
-=========================================================
+# 目录结构（关键部分）
 D4Calculator/
-├── main.py                    # 程序入口
-├── config/
-│   └── __init__.py            # 全局配置（路径、常量、resource_path）
-├── data/
-│   ├── __init__.py
-│   └── loader.py              # 数据加载：JSON数据库、图片缓存、职业数据库
+├── main.py                      # 程序入口
+├── skill.json                   # 全职业技能数据（含分支、数值）
+├── full_database_new.json       # 装备、威能、词缀、暗金等完整数据库
+├── skilltree_layout.json        # 技能树节点布局（坐标、连线、边框、被动）
+├── skill_tree_editor.html       # 可视化布局编辑器（独立HTML，浏览器使用）
 ├── business/
-│   ├── __init__.py
-│   ├── equipment.py           # 词缀计算（品质、远古、回火）
-│   └── skill_tree.py          # 技能树业务逻辑（加点、分支、外部加成）
+│   └── skill_tree.py            # SkillTreeSystem 类（加点、分支、外部加成）
 ├── ui/
-│   ├── __init__.py
-│   ├── main_window.py         # 主窗口（布局、装备槽、切换职业）
-│   ├── equipment_ui.py        # 装备编辑/宝石/符文选择对话框
-│   ├── skill_tree_ui.py       # 技能树画布绘制与交互
-│   └── widgets.py             # 通用UI组件（filter_combobox）
-└── utils/                     # （可选）可存放辅助工具，当前为空
+│   ├── main_window.py           # 主窗口，整合所有标签页
+│   ├── skill_tree_ui.py         # SkillTreeUI 类（绘制、交互、提示）—— 已优化
+│   ├── equipment_ui.py          # 装备UI
+│   ├── talisman_ui_tk.py        # 护身符UI
+│   └── widgets.py               # 通用UI组件
+├── data/
+│   └── loader.py                # 加载图片、数据库（含图片缓存）
+├── config/
+│   └── __init__.py              # resource_path，职业、槽位常量
+└── utils/
+    └── image_cache.py           # 全局图片缓存字典
+
+# 关键模块与接口
+- SkillTreeSystem（business/skill_tree.py）
+  - 主要属性：skill_data, skill_levels, branch_levels, available_points, listeners
+  - 主要方法：add_level, remove_level, activate_branch, deactivate_branch, reset_all, get_skill_display_info
+  - 监听机制：add_listener(callback) 在数据变化时调用
+
+- SkillTreeUI（ui/skill_tree_ui.py）—— 已做轻量级优化
+  - 初始化：加载布局，创建画布，绑定事件
+  - 绘制：_draw_background, _draw_edges, _draw_all_nodes
+  - 交互：点击加点/减点，拖拽平移，悬停提示
+  - 优化内容：
+    1. 背景图缩放缓存（_bg_cache）
+    2. refresh 改为增量更新（只改等级文本，不重建节点）
+    3. 未改动结构，保证运行效果不变
+
+- SkillTreeEditor（skill_tree_editor.html）
+  - 独立工具，用于可视化编辑布局
+  - 支持添加节点、连线、设定技能/分支、上传边框图片、设置被动
+  - 可加载/保存 layout.json
+
+# 已完成的工作
+- 运行了 `optimize_skill_tree_ui.py` 脚本，对 skill_tree_ui.py 进行了性能优化（背景缓存 + 增量刷新）
+- 确认优化不影响原功能
+
+# 待办/待讨论事项（按优先级）
+1. 轻量级拆分：将 SkillTreeTooltip 类提取到独立文件（安全且易于维护）
+2. 完整模块化拆分：将 SkillTreeUI 拆分为 Renderer、EventHandler、LayoutLoader 等（需要设计）
+3. 增强 HTML 编辑器：增加自动布局、撤销/重做、节点对齐等功能
+4. 统一图片缓存：所有 load_photo_image 调用迁移到 utils/image_cache.py（目前 data/loader.py 也有自己的缓存）
