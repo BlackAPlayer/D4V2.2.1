@@ -34,12 +34,15 @@ class SkillTreeSystem:
 
     def _load_data(self):
         full_path = resource_path(self.data_path)
+        print(f"[DEBUG] 加载技能数据: {full_path}")
         try:
             with open(full_path, 'r', encoding='utf-8') as f:
                 raw = json.load(f)
         except Exception as e:
             logging.warning("加载技能数据失败: %s", e)
+            print(f"[DEBUG] 加载失败: {e}")
             return
+
         if isinstance(raw, list):
             skills_list = raw
         elif isinstance(raw, dict):
@@ -49,14 +52,38 @@ class SkillTreeSystem:
                 skills_list = raw.get('skills', [])
         else:
             skills_list = []
-        prefix = f"{self.profession.lower()}_"
+
+        print(f"[DEBUG] 原始技能数据条数: {len(skills_list)}")
+
+        profession_map = {
+            '巫师': 'Sorcerer',
+            '野蛮人': 'Barbarian',
+            '德鲁伊': 'Druid',
+            '游侠': 'Rogue',
+            '死灵法师': 'Necromancer',
+            '灵巫': 'Spiritborn',
+            '圣骑士': 'Paladin',
+            '术士': 'Warlock'
+        }
+        target_char = profession_map.get(self.profession, self.profession)
+
+        count = 0
+        loaded_icons = []
+
         for skill in skills_list:
-            key = skill.get('key')
-            if not key or not key.startswith(prefix):
+            char = skill.get('char', '')
+            if char and char != target_char:
                 continue
-            self.skill_data[key] = {
-                'id': skill.get('id'),
-                'name': skill.get('name'),
+            skill_id = skill.get('id')
+            if skill_id is None:
+                continue
+
+            # 加载主动技能
+            self.skill_data[skill_id] = {
+                'id': skill_id,
+                'key': skill.get('key', ''),
+                'name': skill.get('name', ''),
+                'active': skill.get('active', False),
                 'type': 'active' if skill.get('active') else 'passive',
                 'tags': skill.get('tags', []),
                 'damage_type': skill.get('damageType', '物理伤害'),
@@ -71,6 +98,55 @@ class SkillTreeSystem:
                 'val4': skill.get('val4', []),
                 'level_scaling': skill.get('level_scaling', {})
             }
+            count += 1
+            if skill.get('icon'):
+                loaded_icons.append(skill.get('icon'))
+
+            # 加载 mods 中的被动技能（使用唯一键）
+            mods = skill.get('mods', [])
+            for mod in mods:
+                raw_mod_id = mod.get('id') or mod.get('modId')
+                if raw_mod_id is None:
+                    continue
+                mod_icon = mod.get('icon')
+                unique_key = f"{skill_id}_{raw_mod_id}"
+                if unique_key in self.skill_data:
+                    continue
+                parent_key = skill.get('key', '')
+                mod_key = f"{parent_key}_mod_{raw_mod_id}"
+                desc_lines = mod.get('desc', [])
+                desc_text = ' '.join(desc_lines)
+                desc_text = re.sub(r'\{c_[^}]+\}|{/c}', '', desc_text)
+
+                self.skill_data[unique_key] = {
+                    'id': unique_key,
+                    'key': mod_key,
+                    'name': mod.get('name', f'被动技能 ({raw_mod_id})'),
+                    'active': False,
+                    'type': 'passive',
+                    'tags': skill.get('tags', []),
+                    'damage_type': skill.get('damageType', '物理伤害'),
+                    'base_max_level': 1,
+                    'desc_template': desc_text,
+                    'enchant_desc': '',
+                    'mods': [],
+                    'icon': mod_icon,
+                    'val1': [],
+                    'val2': [],
+                    'val3': [],
+                    'val4': [],
+                    'level_scaling': {},
+                    '_parent_skill_id': skill_id,
+                    '_mod_data': mod,
+                    '_mod_id': raw_mod_id,
+                    '_mod_icon': mod_icon,
+                }
+                count += 1
+                if mod_icon:
+                    loaded_icons.append(mod_icon)
+
+        print(f"[DEBUG] 加载完成: 职业 {self.profession} -> {target_char}, 共 {count} 个技能（含被动）")
+        print(f"[DEBUG] 加载的图标列表 (前30个): {loaded_icons[:30]}")
 
     def _extract_desc_template(self, skill):
         desc_parts = skill.get('desc', [])
@@ -139,7 +215,9 @@ class SkillTreeSystem:
         base = self.get_base_level(skill_key)
         extra = 0
         extra += self.external_bonuses['global'].get('all_skills', 0)
-        skill = self.skill_data.get(skill_key, {})
+        skill = self._find_skill(skill_key)
+        if not skill:
+            return base
         for tag in skill.get('tags', []):
             if '火焰' in tag or 'Fire' in tag:
                 extra += self.external_bonuses['global'].get('fire_skills', 0)
@@ -150,10 +228,40 @@ class SkillTreeSystem:
         extra += self.external_bonuses['specific'].get(skill_key, {}).get('level', 0)
         return base + extra
 
+    def _find_skill(self, skill_key):
+        """
+        通过 id、key、icon、_mod_id 任意字段查找技能
+        """
+        str_key = str(skill_key)
+        # 直接匹配 skill_data 的键
+        if skill_key in self.skill_data:
+            return self.skill_data[skill_key]
+        # 遍历所有技能进行匹配
+        for sid, skill in self.skill_data.items():
+            if str(skill.get('key')) == str_key:
+                return skill
+            if str(skill.get('icon')) == str_key:
+                return skill
+            if str(skill.get('id')) == str_key:
+                return skill
+            # 匹配被动技能的 _mod_id（原始 mod_id）
+            if str(skill.get('_mod_id')) == str_key:
+                return skill
+            # 检查 _mod_data 中的 id 和 modId
+            mod_data = skill.get('_mod_data', {})
+            if str(mod_data.get('id')) == str_key:
+                return skill
+            if str(mod_data.get('modId')) == str_key:
+                return skill
+        return None
+
     def can_add_level(self, skill_key):
+        skill = self._find_skill(skill_key)
+        if not skill:
+            return False
         if self.available_points <= 0:
             return False
-        base_max = self.skill_data.get(skill_key, {}).get('base_max_level', 15)
+        base_max = skill.get('base_max_level', 15)
         if self.get_base_level(skill_key) >= base_max:
             return False
         return True
@@ -224,14 +332,28 @@ class SkillTreeSystem:
         except:
             return 0.0
 
+    # ========== 修改的方法 ==========
     def get_skill_display_info(self, skill_key):
-        skill = self.skill_data.get(skill_key)
+        skill = self._find_skill(skill_key)
         if not skill:
-            return {}
+            return {
+                'name': f"未知技能 ({skill_key})",
+                'icon': None,
+                'base_level': 0,
+                'total_level': 0,
+                'extra_level': 0,
+                'tags': [],
+                'damage_type': '',
+                'description': '未找到技能数据',
+                'active_branches': {},
+                'all_branches': {},
+                'branch_groups': [],
+            }
         base_level = self.get_base_level(skill_key)
         total_level = self.get_total_level(skill_key)
         extra_level = total_level - base_level
 
+        # 计算各 val 占位符
         vals = {}
         for i in range(1, 10):
             key = f'val{i}'
@@ -245,32 +367,62 @@ class SkillTreeSystem:
         if 'val1' in vals and '{damage}' in skill.get('desc_template', ''):
             vals['damage'] = vals['val1']
 
-        desc = skill.get('desc_template', '')
+        # 基础描述（替换占位符）
+        base_desc = skill.get('desc_template', '')
         for k, v in vals.items():
-            desc = desc.replace(f'{{{k}}}', str(int(v)) if isinstance(v, float) and v.is_integer() else f"{v:.1f}")
+            if isinstance(v, (int, float)):
+                if isinstance(v, float) and v.is_integer():
+                    base_desc = base_desc.replace(f'{{{k}}}', str(int(v)))
+                else:
+                    base_desc = base_desc.replace(f'{{{k}}}', f"{v:.1f}")
+            else:
+                base_desc = base_desc.replace(f'{{{k}}}', str(v))
 
+        # 组装最终描述的各段落
+        desc_parts = [base_desc]  # 第一部分：基础描述
+
+        # 附魔描述
+        enchant = skill.get('enchant_desc', '')
+        if enchant:
+            desc_parts.append(f"附魔：{enchant}")
+
+        # 所有分支（按 mods 原始顺序）
+        mods = skill.get('mods', [])
+        if mods:
+            branch_lines = []
+            for mod in mods:
+                mod_id = mod.get('id') or mod.get('modId')
+                if mod_id is None:
+                    continue
+                mod_id_str = str(mod_id)
+                # 检查是否激活（branch_levels 的键是字符串）
+                is_active = mod_id_str in self.branch_levels.get(skill_key, {}) and self.branch_levels[skill_key][mod_id_str] > 0
+                name = mod.get('name', '')
+                desc_lines = mod.get('desc', [])
+                mod_desc = ' '.join(desc_lines)
+                # 移除颜色标记
+                mod_desc = re.sub(r'\{c_[^}]+\}|{/c}', '', mod_desc)
+                if name and mod_desc:
+                    line = f"{'✅' if is_active else '○'} {name}: {mod_desc}"
+                elif name:
+                    line = f"{'✅' if is_active else '○'} {name}"
+                else:
+                    line = f"{'✅' if is_active else '○'} {mod_desc or '分支'}"
+                branch_lines.append(line)
+            if branch_lines:
+                desc_parts.append("--- 分支 ---")
+                desc_parts.append("\n".join(branch_lines))
+
+        # 最终描述（段落间用 \n\n 分隔）
+        final_desc = "\n\n".join(desc_parts)
+
+        # 标签处理（保留原逻辑）
         tags = skill.get('tags', [])
         if skill_key in self.external_bonuses['specific']:
             tags_change = self.external_bonuses['specific'][skill_key].get('tags_change', {})
             for old, new in tags_change.items():
                 if old in tags:
                     tags = [new if t == old else t for t in tags]
-
-        branches = self.get_branches(skill_key)
-        active_branches = {bid: lvl for bid, lvl in self.branch_levels.get(skill_key, {}).items() if lvl > 0}
-        branch_desc = []
-        for bid, lvl in active_branches.items():
-            branch = branches.get(bid)
-            if branch:
-                effect = branch.get('desc', '')
-                effect = re.sub(r'\{c_[^}]+\}|{/c}', '', effect)
-                branch_desc.append(f"✨ {branch['name']}: {effect}")
-        if branch_desc:
-            desc += "\n\n" + "\n".join(branch_desc)
-
-        enchant = skill.get('enchant_desc', '')
-        if enchant:
-            desc += f"\n\n✨ 附魔: {enchant}"
 
         return {
             'name': skill['name'],
@@ -280,11 +432,12 @@ class SkillTreeSystem:
             'extra_level': extra_level,
             'tags': tags,
             'damage_type': skill.get('damage_type', ''),
-            'description': desc,
-            'active_branches': active_branches,
-            'all_branches': branches,
+            'description': final_desc,
+            'active_branches': {bid: lvl for bid, lvl in self.branch_levels.get(skill_key, {}).items() if lvl > 0},
+            'all_branches': self.get_branches(skill_key),
             'branch_groups': self.get_branch_groups(skill_key),
         }
+    # ========== 修改结束 ==========
 
     def update_external_bonuses(self, bonus_data):
         if 'global' in bonus_data:
@@ -299,7 +452,6 @@ class SkillTreeSystem:
         self._notify_change()
 
     def reset_external_bonuses(self):
-        """重置所有外部技能加成（护身符、装备等）"""
         self.external_bonuses = {
             "global": {"all_skills": 0, "fire_skills": 0, "frost_skills": 0, "shock_skills": 0},
             "specific": {}

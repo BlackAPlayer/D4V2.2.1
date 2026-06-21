@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技能树编辑器 - 方形图标 + 边框图片</title>
+    <title>技能树编辑器 - 方形图标 + 边框图片 + 美化/方向 + 撤销重做</title>
     <style>
         * { user-select: none; box-sizing: border-box; }
         body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: #1e1e2f; color: #eee; }
@@ -21,6 +21,7 @@
         }
         #toolbar button.active { background: #f0b27a; color: #1e1e2f; }
         #toolbar button:hover, #toolbar label.file-label:hover { background: #5a6f8a; }
+        #toolbar button:disabled { opacity: 0.4; cursor: not-allowed; }
         .separator { width: 1px; background: #5a6f8a; margin: 0 6px; }
         .style-panel {
             background: #1a1e2a; padding: 4px 10px; border-radius: 28px;
@@ -64,28 +65,35 @@
         .icon-section .icon-input-row { display: flex; gap: 6px; }
         .icon-section .icon-input-row input { flex: 1; }
         .icon-section .icon-input-row button { padding: 4px 12px; }
-        .passive-section {
+        .type-section {
             margin-top: 12px;
             border-top: 1px solid #444;
             padding-top: 10px;
         }
-        .passive-section label { font-size: 13px; display: block; margin-bottom: 6px; }
-        .passive-toggle-btn {
-            background: #3a3f4a;
-            border: none;
-            color: white;
-            padding: 6px 18px;
-            border-radius: 20px;
-            cursor: pointer;
+        .type-section label { font-size: 13px; display: block; margin-bottom: 6px; }
+        .type-options {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .type-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
             font-size: 13px;
-            transition: all 0.2s;
+            cursor: pointer;
         }
-        .passive-toggle-btn.active {
-            background: #4a7a9a;
-            box-shadow: 0 0 12px rgba(74, 122, 154, 0.4);
+        .type-options input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
         }
-        .passive-toggle-btn:hover { background: #5a6f8a; }
-        .passive-toggle-btn.active:hover { background: #5a8aaa; }
+        .type-hint {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+        }
         .border-section {
             margin-top: 12px;
             border-top: 1px solid #444;
@@ -158,6 +166,12 @@
         .batch-active-btn:hover {
             background: #8a5a5a !important;
         }
+        .batch-decor-btn {
+            background: #6a5a3a !important;
+        }
+        .batch-decor-btn:hover {
+            background: #8a7a5a !important;
+        }
     </style>
 </head>
 <body>
@@ -198,7 +212,10 @@
     <span class="batch-actions">
         <button id="btn-batch-passive" class="batch-passive-btn">📥 批量被动</button>
         <button id="btn-batch-active" class="batch-active-btn">📤 批量主动</button>
+        <button id="btn-batch-decor" class="batch-decor-btn">⭐ 批量美化</button>
     </span>
+    <div class="separator"></div>
+    <button id="btn-infer-directions">➡️ 推断连线方向</button>
     <div class="separator"></div>
     <button id="btn-import-bg">📂 导入背景</button>
     <button id="btn-clear-bg">✕ 清除背景</button>
@@ -207,6 +224,9 @@
     <label class="file-label" id="load-layout-label">📂 布局</label>
     <button id="btn-save">💾 保存布局</button>
     <button id="btn-reset-view">🖥️ 重置视图</button>
+    <div class="separator"></div>
+    <button id="btn-undo" disabled>↩️ 撤销</button>
+    <button id="btn-redo" disabled>↪️ 重做</button>
     <div id="status">就绪</div>
 </div>
 <div id="canvas-container">
@@ -216,10 +236,11 @@
     💡 拖拽空白平移；滚轮缩放；连线模式点击两个节点连线；<br>
     🖱️ **Ctrl+左键** 多选节点；单击选中单个节点（取消其他选中）。<br>
     双击节点编辑：绑定技能/分支，或上传边框图片。<br>
-    📥 **被动技能**：双击节点 → 点击"设为被动"，节点缩小65%<br>
+    📥 **节点类型**：主动（正常大小）、被动（缩小65%）、美化（仅排版，不参与逻辑）<br>
     🌄 **背景图片**：默认加载 <code>images/skill_bg.png</code>，可手动导入其他图片（路径记录到布局文件）<br>
     📌 背景图范围受"背景边距"控制（默认250），与主程序一致<br>
-    🔗 连线只记录起点和终点，不保存样式。
+    🔗 连线只记录起点和终点，方向由主动→被动推断。<br>
+    ⏪ **撤销/重做**：Ctrl+Z / Ctrl+Y
 </div>
 
 <script>
@@ -229,6 +250,8 @@
         const ctx = canvas.getContext('2d');
         const container = document.getElementById('canvas-container');
         const statusEl = document.getElementById('status');
+        const undoBtn = document.getElementById('btn-undo');
+        const redoBtn = document.getElementById('btn-redo');
 
         // ---------- 数据 ----------
         let nodes = [];
@@ -242,7 +265,7 @@
 
         // 背景图片
         let bgImage = null;
-        let bgImagePath = null;  // 存储相对路径，如 "images/my_bg.png"
+        let bgImagePath = null;
 
         let view = { x: 0, y: 0, zoom: 1 };
         let isDragging = false;
@@ -252,6 +275,106 @@
         let currentMode = 'pan';
         let linkSelectedNode = null;
         let ctrlPressed = false;
+
+        // ---------- 撤销/重做 ----------
+        let history = [];
+        let historyIndex = -1;
+        const MAX_HISTORY = 50;
+        let isUndoRedo = false;
+
+        function captureState() {
+            // 深拷贝 nodes 和 edges
+            const state = {
+                nodes: JSON.parse(JSON.stringify(nodes)),
+                edges: JSON.parse(JSON.stringify(edges)),
+                nextId: nextId
+            };
+            return state;
+        }
+
+        function pushHistory() {
+            if (isUndoRedo) return;
+            // 移除当前索引之后的历史（如果有）
+            if (historyIndex < history.length - 1) {
+                history = history.slice(0, historyIndex + 1);
+            }
+            const state = captureState();
+            history.push(state);
+            if (history.length > MAX_HISTORY) {
+                history.shift();
+            }
+            historyIndex = history.length - 1;
+            updateUndoRedoButtons();
+        }
+
+        function undo() {
+            if (historyIndex <= 0) return;
+            isUndoRedo = true;
+            historyIndex--;
+            restoreState(history[historyIndex]);
+            isUndoRedo = false;
+            updateUndoRedoButtons();
+            redraw();
+            statusEl.innerText = '撤销';
+            setTimeout(() => statusEl.innerText = '就绪', 1000);
+        }
+
+        function redo() {
+            if (historyIndex >= history.length - 1) return;
+            isUndoRedo = true;
+            historyIndex++;
+            restoreState(history[historyIndex]);
+            isUndoRedo = false;
+            updateUndoRedoButtons();
+            redraw();
+            statusEl.innerText = '重做';
+            setTimeout(() => statusEl.innerText = '就绪', 1000);
+        }
+
+        function restoreState(state) {
+            nodes = JSON.parse(JSON.stringify(state.nodes));
+            edges = JSON.parse(JSON.stringify(state.edges));
+            nextId = state.nextId;
+            selectedNodes = [];
+            // 重新加载节点中的图片（图标和边框）可能需要重新加载，但这里简单起见，只恢复数据，图片会通过 lazy load 重新加载
+            // 由于我们存储的是路径，需要在显示时重新加载。我们可以在这里触发重新加载，但为了简单，直接标记需要重新加载，在 redraw 中处理
+            // 这里我们重新加载图标和边框图片（异步）
+            for (let node of nodes) {
+                if (node.iconId) {
+                    loadIconById(node.iconId, (img) => {
+                        node.iconImg = img;
+                        redraw();
+                    });
+                } else if (node.skillKey && !node.branchSkill) {
+                    loadSkillIcon(node.skillKey, (img) => {
+                        node.iconImg = img;
+                        redraw();
+                    });
+                }
+                if (node.borderImage) {
+                    loadBorderImage(node.borderImage, (img) => {
+                        node.borderImg = img;
+                        redraw();
+                    });
+                }
+            }
+            // 选中状态清零
+            selectedNodes = [];
+            // 更新计数
+            document.getElementById('selection-count').textContent = '已选: 0';
+        }
+
+        function updateUndoRedoButtons() {
+            undoBtn.disabled = historyIndex <= 0;
+            redoBtn.disabled = historyIndex >= history.length - 1;
+        }
+
+        // 在修改数据后调用 pushHistory
+        function withHistory(fn) {
+            fn();
+            pushHistory();
+            redraw();
+        }
 
         // ---------- 样式 ----------
         let lineColor = "#8a9bb5";
@@ -382,12 +505,8 @@
             input.onchange = (e) => {
                 const file = e.target.files[0];
                 if (!file) return;
-
-                // 自动生成路径：images/文件名
                 const relativePath = `images/${file.name}`;
                 bgImagePath = relativePath;
-
-                // 预览图片
                 const reader = new FileReader();
                 reader.onload = (ev) => {
                     const img = new Image();
@@ -396,6 +515,7 @@
                         statusEl.innerText = `背景已导入: ${relativePath}`;
                         redraw();
                         setTimeout(() => statusEl.innerText = '就绪', 3000);
+                        pushHistory(); // 记录背景变化
                     };
                     img.onerror = () => {
                         statusEl.innerText = '❌ 背景图片加载失败';
@@ -414,38 +534,45 @@
             statusEl.innerText = '背景已清除';
             redraw();
             setTimeout(() => statusEl.innerText = '就绪', 1500);
+            pushHistory();
         }
 
-        // ---------- 分支解析 ----------
-        function parseBranches(skill) {
+        // ---------- 分支解析（用于编辑器识别分组） ----------
+        function parseBranchesWithGroups(skill) {
             const mods = skill.mods || [];
-            const morphs = [];
-            const passives = [];
-            for (let mod of mods) {
-                const name = mod.name || '';
-                if (['强化', '变体', '形态', '替换', '变为'].some(kw => name.includes(kw))) {
-                    morphs.push(mod);
-                } else {
-                    passives.push(mod);
+            const morphs = mods.filter(m => m.border);
+            const passives = mods.filter(m => !m.border);
+            const groups = [];
+            if (morphs.length) {
+                groups.push({
+                    type: 'morph',
+                    name: '形态变化',
+                    items: morphs,
+                    groupId: 'morph'
+                });
+            }
+            for (let i = 0; i < passives.length; i += 2) {
+                const pair = passives.slice(i, i+2);
+                if (pair.length) {
+                    groups.push({
+                        type: 'passive_pair',
+                        name: `被动组 ${Math.floor(i/2)+1}`,
+                        items: pair,
+                        groupId: `passive_${Math.floor(i/2)}`
+                    });
                 }
             }
-            const all = [...morphs, ...passives];
-            return all.map(m => ({
-                id: String(m.modId || m.id || ''),
-                name: m.name || '',
-                desc: (m.desc || ['']).join('\n'),
-                type: morphs.includes(m) ? 'morph' : 'passive'
-            }));
+            return groups;
         }
 
-        // ---------- 分支选择对话框 ----------
-        function showBranchDialog(node, skillKey, skill) {
+        // ---------- 分支选择对话框（带分组显示） ----------
+        function showBranchSelectionDialog(node, skill) {
+            const groups = parseBranchesWithGroups(skill);
+            if (groups.length === 0) {
+                // 无分支，直接完成
+                return;
+            }
             return new Promise((resolve) => {
-                const branches = parseBranches(skill);
-                if (branches.length === 0) {
-                    resolve(null);
-                    return;
-                }
                 const dialog = document.createElement('div');
                 dialog.className = 'skill-dialog';
                 dialog.innerHTML = `
@@ -460,15 +587,31 @@
                 const branchListDiv = dialog.querySelector('#branch-list');
                 const cancelBtn = dialog.querySelector('#branch-cancel');
 
-                for (let branch of branches) {
-                    const div = document.createElement('div');
-                    div.className = 'skill-item';
-                    div.innerHTML = `<strong>${branch.name}</strong> <span style="font-size:11px; color:#88CCFF;">[${branch.type}]</span><br><span style="font-size:11px; color:#aaa;">${branch.desc.slice(0,50)}${branch.desc.length>50?'...':''}</span>`;
-                    div.onclick = () => {
-                        document.body.removeChild(dialog);
-                        resolve(branch);
-                    };
-                    branchListDiv.appendChild(div);
+                for (let group of groups) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.style.marginBottom = '8px';
+                    const groupLabel = document.createElement('div');
+                    groupLabel.style.fontSize = '13px';
+                    groupLabel.style.color = '#88ccff';
+                    groupLabel.style.fontWeight = 'bold';
+                    groupLabel.textContent = group.name + ' (最多选1个)';
+                    groupDiv.appendChild(groupLabel);
+                    for (let mod of group.items) {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'skill-item';
+                        itemDiv.innerHTML = `<strong>${mod.name}</strong> <span style="font-size:11px; color:#88CCFF;">[${mod.border ? '形态' : '被动'}]</span><br><span style="font-size:11px; color:#aaa;">${(mod.desc||['']).join(' ').slice(0,50)}...</span>`;
+                        itemDiv.onclick = () => {
+                            document.body.removeChild(dialog);
+                            resolve({
+                                groupId: group.groupId,
+                                branchId: String(mod.modId || mod.id || ''),
+                                name: mod.name,
+                                desc: (mod.desc||['']).join('\n')
+                            });
+                        };
+                        groupDiv.appendChild(itemDiv);
+                    }
+                    branchListDiv.appendChild(groupDiv);
                 }
                 cancelBtn.onclick = () => {
                     document.body.removeChild(dialog);
@@ -486,10 +629,40 @@
             node.branchSkill = null;
             node.branchId = null;
             node.iconId = null;
-            loadSkillIcon(skillKey, (img) => {
-                node.iconImg = img;
+            node.branchGroup = null;
+            // 清除旧的图标
+            node.iconImg = null;
+            // 如果有分支，让用户选择
+            const groups = parseBranchesWithGroups(skill);
+            if (groups.length > 0) {
+                showBranchSelectionDialog(node, skill).then(result => {
+                    if (result) {
+                        node.branchId = result.branchId;
+                        node.branchGroup = result.groupId;
+                        node.skillName = skill.name + ' → ' + result.name;
+                        // 图标可能由分支提供，但这里我们保留技能图标，或尝试加载分支图标
+                        // 如果有分支图标，使用分支图标；否则用技能图标
+                        const mod = skill.mods.find(m => (String(m.modId||m.id) === result.branchId));
+                        if (mod && mod.icon) {
+                            loadIconById(mod.icon, (img) => { node.iconImg = img; redraw(); });
+                        } else {
+                            loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
+                        }
+                        pushHistory();
+                        redraw();
+                    } else {
+                        // 用户取消，仍绑定技能但无分支
+                        loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
+                        pushHistory();
+                        redraw();
+                    }
+                });
+            } else {
+                // 无分支，直接加载图标
+                loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
+                pushHistory();
                 redraw();
-            });
+            }
             return true;
         }
 
@@ -506,6 +679,7 @@
             }
             statusEl.innerText = `已设置图标 ID: ${iconId}`;
             setTimeout(() => statusEl.innerText = '就绪', 2000);
+            pushHistory();
         }
 
         function addUniversalToken(worldX, worldY) {
@@ -521,11 +695,13 @@
                 branchId: null,
                 borderImage: null,
                 borderImg: null,
-                isPassive: false,
+                nodeType: 'decor',
+                branchGroup: null,
             };
             nodes.push(node);
+            pushHistory();
             redraw();
-            statusEl.innerText = '已添加万能token';
+            statusEl.innerText = '已添加万能token（默认美化）';
             setTimeout(() => statusEl.innerText = '就绪', 1500);
         }
 
@@ -539,6 +715,7 @@
             nodes = nodes.filter(n => n.id !== nodeId);
             edges = edges.filter(e => e.fromNodeId !== nodeId && e.toNodeId !== nodeId);
             selectedNodes = selectedNodes.filter(n => n.id !== nodeId);
+            pushHistory();
             redraw();
             statusEl.innerText = '已删除节点';
             setTimeout(() => statusEl.innerText = '就绪', 1500);
@@ -548,6 +725,7 @@
             if (!path) {
                 node.borderImage = null;
                 node.borderImg = null;
+                pushHistory();
                 redraw();
                 return;
             }
@@ -555,27 +733,51 @@
             loadBorderImage(path, (img) => {
                 node.borderImg = img;
                 redraw();
+                pushHistory();
             });
         }
 
-        function batchSetPassive(isPassive) {
+        function batchSetType(type) {
             if (selectedNodes.length === 0) {
                 alert('请先选中一个或多个节点（Ctrl+左键多选）');
                 return;
             }
             for (let node of selectedNodes) {
-                node.isPassive = isPassive;
+                node.nodeType = type;
             }
+            inferEdgeDirections();
+            pushHistory();
             redraw();
-            statusEl.innerText = `已${isPassive ? '设为被动' : '设为主动'} ${selectedNodes.length} 个节点`;
+            const typeNames = { active: '主动', passive: '被动', decor: '美化' };
+            statusEl.innerText = `已设为 ${typeNames[type]} ${selectedNodes.length} 个节点，方向已推断`;
             setTimeout(() => statusEl.innerText = '就绪', 1500);
+        }
+
+        // ---------- 连线方向推断 ----------
+        function inferEdgeDirections() {
+            for (let edge of edges) {
+                const fromNode = nodes.find(n => n.id === edge.fromNodeId);
+                const toNode = nodes.find(n => n.id === edge.toNodeId);
+                if (!fromNode || !toNode) continue;
+                if (fromNode.nodeType === 'active' && toNode.nodeType === 'passive') {
+                    edge.direction = 'down';
+                } else if (fromNode.nodeType === 'passive' && toNode.nodeType === 'active') {
+                    edge.fromNodeId = toNode.id;
+                    edge.toNodeId = fromNode.id;
+                    edge.direction = 'down';
+                } else {
+                    edge.direction = null;
+                }
+            }
+            pushHistory();
+            redraw();
         }
 
         // ---------- 技能选择对话框 ----------
         async function showSkillDialog(node) {
             const dialog = document.createElement('div');
             dialog.className = 'skill-dialog';
-            const isPassive = node.isPassive || false;
+            const currentType = node.nodeType || 'decor';
             dialog.innerHTML = `
                 <h3>编辑节点 #${node.id}</h3>
                 <p style="font-size:12px; color:#aaa;">${node.skillName}</p>
@@ -593,14 +795,16 @@
                     </div>
                 </div>
 
-                <div class="passive-section">
-                    <label>📥 技能类型：</label>
-                    <button id="passive-toggle-btn" class="passive-toggle-btn ${isPassive ? 'active' : ''}">
-                        ${isPassive ? '✅ 被动技能' : '📥 设为被动'}
-                    </button>
-                    <span style="font-size:11px; color:#888; margin-left:8px;">
-                        ${isPassive ? '（节点缩小65%）' : '（主动技能，正常大小）'}
-                    </span>
+                <div class="type-section">
+                    <label>📌 节点类型（决定大小和逻辑）：</label>
+                    <div class="type-options">
+                        <label><input type="radio" name="nodeType" value="active" ${currentType === 'active' ? 'checked' : ''}> 主动技能</label>
+                        <label><input type="radio" name="nodeType" value="passive" ${currentType === 'passive' ? 'checked' : ''}> 被动技能</label>
+                        <label><input type="radio" name="nodeType" value="decor" ${currentType === 'decor' ? 'checked' : ''}> ⭐ 美化节点（仅排版）</label>
+                    </div>
+                    <div class="type-hint">
+                        ${currentType === 'active' ? '🟢 正常大小，可加点，可连线指向被动' : currentType === 'passive' ? '🟡 缩小65%，可激活分支，需主动解锁' : '⭐ 仅用于排版，不参与任何逻辑'}
+                    </div>
                 </div>
 
                 <div class="border-section">
@@ -630,20 +834,24 @@
             `;
             document.body.appendChild(dialog);
 
-            const passiveBtn = dialog.querySelector('#passive-toggle-btn');
-            let tempIsPassive = isPassive;
-
-            passiveBtn.addEventListener('click', () => {
-                tempIsPassive = !tempIsPassive;
-                passiveBtn.textContent = tempIsPassive ? '✅ 被动技能' : '📥 设为被动';
-                passiveBtn.classList.toggle('active', tempIsPassive);
-                const hint = passiveBtn.parentElement.querySelector('span');
-                if (hint) {
-                    hint.textContent = tempIsPassive ? '（节点缩小65%）' : '（主动技能，正常大小）';
+            const typeRadios = dialog.querySelectorAll('input[name="nodeType"]');
+            const typeHint = dialog.querySelector('.type-hint');
+            function updateTypeHint() {
+                const selected = dialog.querySelector('input[name="nodeType"]:checked');
+                if (selected) {
+                    const val = selected.value;
+                    const hints = {
+                        active: '🟢 正常大小，可加点，可连线指向被动',
+                        passive: '🟡 缩小65%，可激活分支，需主动解锁',
+                        decor: '⭐ 仅用于排版，不参与任何逻辑'
+                    };
+                    typeHint.textContent = hints[val] || '';
                 }
-                node.isPassive = tempIsPassive;
-                redraw();
+            }
+            typeRadios.forEach(radio => {
+                radio.addEventListener('change', updateTypeHint);
             });
+            updateTypeHint();
 
             const searchInput = dialog.querySelector('#skill-search');
             const skillListDiv = dialog.querySelector('#skill-list');
@@ -701,33 +909,15 @@
                     const isActive = sk.active !== undefined ? (sk.active ? '🟢主动' : '🟡被动') : '';
                     div.innerHTML = `<strong>${sk.name}</strong> <span style="font-size:10px; color:#888;">${isActive}</span><br><span style="font-size: 11px;">${sk.key}</span>`;
                     div.onclick = async () => {
+                        // 更新技能
                         if (updateNodeSkill(node, sk.key)) {
-                            const branch = await showBranchDialog(node, sk.key, sk);
-                            if (branch) {
-                                node.branchSkill = sk.key;
-                                node.branchId = branch.id;
-                                node.skillName = sk.name + ' → ' + branch.name;
-                                node.iconImg = null;
-                                statusEl.innerText = `已绑定分支: ${branch.name}`;
-                            } else {
-                                statusEl.innerText = `已指定技能: ${sk.name}`;
-                            }
-                            if (sk.active !== undefined) {
-                                node.isPassive = !sk.active;
-                                tempIsPassive = node.isPassive;
-                                passiveBtn.textContent = node.isPassive ? '✅ 被动技能' : '📥 设为被动';
-                                passiveBtn.classList.toggle('active', node.isPassive);
-                                const hint = passiveBtn.parentElement.querySelector('span');
-                                if (hint) {
-                                    hint.textContent = node.isPassive ? '（节点缩小65%）' : '（主动技能，正常大小）';
-                                }
-                            }
-                            if (tempBorderPath) setNodeBorderImage(node, tempBorderPath);
-                            redraw();
+                            // 分支选择已在 updateNodeSkill 中异步处理，我们只需等待
+                            // 但 updateNodeSkill 是异步的，我们直接关闭对话框
+                            document.body.removeChild(dialog);
+                            // 触发重绘和记录历史由 updateNodeSkill 内部处理
                         } else {
                             alert('技能数据异常');
                         }
-                        document.body.removeChild(dialog);
                     };
                     skillListDiv.appendChild(div);
                 }
@@ -750,9 +940,10 @@
                 const id = input.value.trim();
                 if (id && /^\d+$/.test(id)) {
                     setNodeIcon(node, id);
-                    node.isPassive = tempIsPassive;
                     if (tempBorderPath) setNodeBorderImage(node, tempBorderPath);
                     document.body.removeChild(dialog);
+                    pushHistory();
+                    redraw();
                 } else {
                     alert('请输入有效的数字ID');
                 }
@@ -771,19 +962,34 @@
                 redraw();
                 statusEl.innerText = '已清除图标';
                 setTimeout(() => statusEl.innerText = '就绪', 1500);
+                pushHistory();
             };
 
             dialog.querySelector('#dialog-ok').onclick = () => {
-                node.isPassive = tempIsPassive;
+                const selectedRadio = dialog.querySelector('input[name="nodeType"]:checked');
+                if (selectedRadio) {
+                    node.nodeType = selectedRadio.value;
+                }
                 if (tempBorderPath) setNodeBorderImage(node, tempBorderPath);
+                if (node.nodeType === 'decor') {
+                    node.skillKey = null;
+                    node.skillName = '美化节点';
+                    node.iconImg = null;
+                    node.iconId = null;
+                    node.branchSkill = null;
+                    node.branchId = null;
+                    node.branchGroup = null;
+                }
+                inferEdgeDirections();
                 redraw();
-                statusEl.innerText = `节点 #${node.id} 已更新${node.borderImage ? ' (带边框图片)' : ''}${node.isPassive ? ' [被动]' : ''}`;
+                const typeNames = { active: '主动', passive: '被动', decor: '美化' };
+                statusEl.innerText = `节点 #${node.id} 已更新为 ${typeNames[node.nodeType]}${node.borderImage ? ' (带边框)' : ''}`;
                 setTimeout(() => statusEl.innerText = '就绪', 1500);
                 document.body.removeChild(dialog);
+                pushHistory();
             };
 
             dialog.querySelector('#dialog-cancel').onclick = () => {
-                node.isPassive = isPassive;
                 redraw();
                 document.body.removeChild(dialog);
             };
@@ -796,22 +1002,37 @@
         }
 
         // ---------- 绘制 ----------
-        function drawLine(ctx, p1, p2) {
+        function drawArrow(ctx, fromX, fromY, toX, toY, color) {
+            const headLen = 12;
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+            const tipX = toX - 4;
+            const tipY = toY - 4;
+            ctx.save();
+            ctx.translate(tipX, tipY);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-headLen, -headLen/2);
+            ctx.lineTo(-headLen, headLen/2);
+            ctx.closePath();
+            ctx.fillStyle = color || lineColor;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawLine(ctx, p1, p2, direction) {
             const dx = p2.x - p1.x, dy = p2.y - p1.y;
             const length = Math.hypot(dx, dy);
             if (length < 1) return;
-            const angle = Math.atan2(dy, dx);
 
             if (useTexture && lineTextureImg && textureLoaded) {
                 const img = lineTextureImg;
                 const targetHeight = lineWidth * 2.5;
                 const scale = targetHeight / img.height;
                 const tileWidth = img.width * scale;
-
                 ctx.save();
                 ctx.translate(p1.x, p1.y);
-                ctx.rotate(angle);
-
+                ctx.rotate(Math.atan2(dy, dx));
                 const count = Math.ceil(length / tileWidth);
                 for (let i = 0; i < count; i++) {
                     const x = i * tileWidth;
@@ -832,6 +1053,10 @@
                 ctx.setLineDash([]);
                 ctx.restore();
             }
+
+            if (direction === 'down') {
+                drawArrow(ctx, p1.x, p1.y, p2.x, p2.y, '#FFD700');
+            }
         }
 
         function render() {
@@ -840,40 +1065,33 @@
             ctx.clearRect(0, 0, w, h);
             ctx.save();
 
-            // ---- 0. 背景图片 ----
+            // ---- 背景 ----
             if (bgImage) {
                 if (nodes.length > 0) {
-                    // 有节点：基于节点边界 + 边距
                     const xs = nodes.map(n => n.x);
                     const ys = nodes.map(n => n.y);
                     const minX = Math.min(...xs);
                     const maxX = Math.max(...xs);
                     const minY = Math.min(...ys);
                     const maxY = Math.max(...ys);
-
                     const marginInput = document.getElementById('bg-margin');
                     const margin = parseInt(marginInput.value) || 250;
-
                     const centerX = (minX + maxX) / 2;
                     const centerY = (minY + maxY) / 2;
                     const bgWidth = maxX - minX + 2 * margin;
                     const bgHeight = maxY - minY + 2 * margin;
-
                     if (bgWidth > 0 && bgHeight > 0) {
                         const left = centerX - bgWidth / 2;
                         const top = centerY - bgHeight / 2;
-
                         const p1 = transformPoint(left, top);
                         const p2 = transformPoint(left + bgWidth, top + bgHeight);
                         const screenWidth = p2.x - p1.x;
                         const screenHeight = p2.y - p1.y;
-
                         if (screenWidth > 0 && screenHeight > 0) {
                             ctx.drawImage(bgImage, p1.x, p1.y, screenWidth, screenHeight);
                         }
                     }
                 } else {
-                    // 无节点：居中显示，保持宽高比
                     const imgAspect = bgImage.width / bgImage.height;
                     const canvasAspect = w / h;
                     let drawW, drawH, offsetX, offsetY;
@@ -892,33 +1110,34 @@
                 }
             }
 
-            // ---- 绘制连线 ----
+            // ---- 连线 ----
             for (let edge of edges) {
                 const fromNode = nodes.find(n => n.id === edge.fromNodeId);
                 const toNode = nodes.find(n => n.id === edge.toNodeId);
                 if (!fromNode || !toNode) continue;
                 const p1 = transformPoint(fromNode.x, fromNode.y);
                 const p2 = transformPoint(toNode.x, toNode.y);
-                drawLine(ctx, p1, p2);
+                drawLine(ctx, p1, p2, edge.direction);
             }
 
-            // ---- 绘制节点 ----
+            // ---- 节点 ----
             for (let node of nodes) {
                 const pos = transformPoint(node.x, node.y);
                 const isSelected = selectedNodes.includes(node);
                 const isBranch = node.branchSkill && node.branchId;
                 const hasIcon = !isBranch && node.iconImg && node.iconImg.complete;
-                const passiveScale = node.isPassive ? 0.65 : 1.0;
+                const passiveScale = (node.nodeType === 'passive') ? 0.65 : 1.0;
+                const isDecor = (node.nodeType === 'decor');
 
                 const iconSize = 50 * view.zoom * passiveScale;
                 const borderSize = iconSize * 1.6;
 
-                // ---- 1. 边框图片 ----
+                // 边框图片
                 if (node.borderImg && node.borderImg.complete && node.borderImg.width > 0) {
                     ctx.drawImage(node.borderImg, pos.x - borderSize/2, pos.y - borderSize/2, borderSize, borderSize);
                 }
 
-                // ---- 2. 选中高亮 ----
+                // 选中高亮
                 if (isSelected) {
                     ctx.beginPath();
                     const ringSize = (node.borderImg ? 40 : 36) * view.zoom * passiveScale;
@@ -930,7 +1149,7 @@
                     ctx.setLineDash([]);
                 }
 
-                // ---- 3. 分支节点边框标记 ----
+                // 分支标记
                 if (isBranch) {
                     ctx.beginPath();
                     ctx.arc(pos.x, pos.y, 30 * view.zoom * passiveScale, 0, 2 * Math.PI);
@@ -939,8 +1158,14 @@
                     ctx.stroke();
                 }
 
-                // ---- 4. 技能图标 ----
-                if (hasIcon) {
+                // 图标/文字
+                if (isDecor) {
+                    ctx.font = `${Math.max(24, 30 * view.zoom)}px 'Segoe UI'`;
+                    ctx.fillStyle = '#FFD700';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('⭐', pos.x, pos.y);
+                } else if (hasIcon) {
                     const img = node.iconImg;
                     const aspect = img.width / img.height;
                     let drawW = iconSize;
@@ -973,8 +1198,8 @@
                     ctx.fillText(node.skillKey ? '⚡' : '?', pos.x, pos.y);
                 }
 
-                // ---- 5. 节点名称 ----
-                if (view.zoom >= 0.5) {
+                // 节点名称
+                if (view.zoom >= 0.5 && !isDecor) {
                     ctx.font = `${Math.max(10, 12 * view.zoom * passiveScale)}px 'Segoe UI'`;
                     ctx.fillStyle = '#ddd';
                     ctx.textAlign = 'center';
@@ -984,9 +1209,17 @@
                     const nameY = node.borderImg ? pos.y - 42 * view.zoom * passiveScale - 6 : pos.y - 34 * view.zoom * passiveScale - 4;
                     ctx.fillText(displayName, pos.x, nameY);
                 }
+
+                if (isDecor && view.zoom >= 0.6) {
+                    ctx.font = `${Math.max(8, 10 * view.zoom)}px 'Segoe UI'`;
+                    ctx.fillStyle = '#888';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText('装饰', pos.x, pos.y + 28 * view.zoom);
+                }
             }
 
-            // ---- 连线模式高亮 ----
+            // 连线模式高亮
             if (currentMode === 'link' && linkSelectedNode) {
                 const pos = transformPoint(linkSelectedNode.x, linkSelectedNode.y);
                 ctx.beginPath();
@@ -1023,7 +1256,7 @@
 
             let hitNode = null;
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.isPassive ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
                     hitNode = node;
                     break;
@@ -1044,7 +1277,9 @@
                             );
                             if (!exists) {
                                 edges.push({ fromNodeId: linkSelectedNode.id, toNodeId: hitNode.id });
-                                statusEl.innerText = '已添加连线';
+                                inferEdgeDirections();
+                                statusEl.innerText = '已添加连线，方向已推断';
+                                pushHistory();
                             } else {
                                 statusEl.innerText = '连线已存在';
                             }
@@ -1111,6 +1346,10 @@
         }
 
         function onMouseUp() {
+            if (dragNode) {
+                // 节点移动结束，记录历史
+                pushHistory();
+            }
             dragNode = null;
             isDragging = false;
             canvas.style.cursor = 'grab';
@@ -1137,7 +1376,7 @@
             const { x: screenX, y: screenY } = getCanvasCoords(e);
             const world = inverseTransform(screenX, screenY);
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.isPassive ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
                     showSkillDialog(node);
                     break;
@@ -1150,7 +1389,7 @@
             const { x: screenX, y: screenY } = getCanvasCoords(e);
             const world = inverseTransform(screenX, screenY);
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.isPassive ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
                     if (confirm(`删除节点 "${node.skillName}" 及其所有连线？`)) {
                         deleteNodeById(node.id);
@@ -1161,6 +1400,16 @@
         }
 
         function onKeyDown(e) {
+            if (e.ctrlKey && e.key === 'z') {
+                e.preventDefault();
+                undo();
+                return;
+            }
+            if (e.ctrlKey && e.key === 'y') {
+                e.preventDefault();
+                redo();
+                return;
+            }
             if (e.key === 'Delete' || e.key === 'Backspace') {
                 if (selectedNodes.length > 0) {
                     const ids = selectedNodes.map(n => n.id);
@@ -1168,6 +1417,7 @@
                         nodes = nodes.filter(n => !ids.includes(n.id));
                         edges = edges.filter(e => !ids.includes(e.fromNodeId) && !ids.includes(e.toNodeId));
                         selectedNodes = [];
+                        pushHistory();
                         redraw();
                         statusEl.innerText = `已删除 ${ids.length} 个节点`;
                         setTimeout(() => statusEl.innerText = '就绪', 1500);
@@ -1211,6 +1461,7 @@
                         for (let node of selectedNodes) {
                             setNodeBorderImage(node, relativePath);
                         }
+                        pushHistory();
                         redraw();
                         statusEl.innerText = `已为 ${selectedNodes.length} 个节点设置边框图片: ${relativePath}`;
                         setTimeout(() => statusEl.innerText = '就绪', 2000);
@@ -1231,6 +1482,7 @@
                 for (let node of selectedNodes) {
                     setNodeBorderImage(node, null);
                 }
+                pushHistory();
                 redraw();
                 statusEl.innerText = `已清除 ${selectedNodes.length} 个节点的边框`;
                 setTimeout(() => statusEl.innerText = '就绪', 1500);
@@ -1256,7 +1508,7 @@
             const backgroundMargin = parseInt(marginInput.value) || 250;
 
             const layout = {
-                version: '2.8',
+                version: '3.1',
                 bounds: {
                     minX: minX,
                     maxX: maxX,
@@ -1266,7 +1518,7 @@
                 offsetX: centerX,
                 offsetY: centerY,
                 backgroundMargin: backgroundMargin,
-                backgroundImagePath: bgImagePath || null,  // 存背景图路径
+                backgroundImagePath: bgImagePath || null,
                 nodes: nodes.map(n => ({
                     id: n.id,
                     skillKey: n.skillKey,
@@ -1277,9 +1529,14 @@
                     branchId: n.branchId || null,
                     iconId: n.iconId || null,
                     borderImage: n.borderImage || null,
-                    isPassive: n.isPassive || false
+                    nodeType: n.nodeType || 'decor',
+                    branchGroup: n.branchGroup || null,   // 保存分组
                 })),
-                edges: edges.map(e => ({ fromNodeId: e.fromNodeId, toNodeId: e.toNodeId }))
+                edges: edges.map(e => ({
+                    fromNodeId: e.fromNodeId,
+                    toNodeId: e.toNodeId,
+                    direction: e.direction || null
+                }))
             };
 
             const dataStr = JSON.stringify(layout, null, 2);
@@ -1292,9 +1549,11 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            const borderCount = nodes.filter(n => n.borderImage).length;
-            const passiveCount = nodes.filter(n => n.isPassive).length;
-            statusEl.innerText = `已保存 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
+            const decorCount = nodes.filter(n => n.nodeType === 'decor').length;
+            const activeCount = nodes.filter(n => n.nodeType === 'active').length;
+            const passiveCount = nodes.filter(n => n.nodeType === 'passive').length;
+            const dirCount = edges.filter(e => e.direction).length;
+            statusEl.innerText = `已保存 ${nodes.length} 个节点（主动${activeCount}，被动${passiveCount}，美化${decorCount}），${edges.length} 条连线（${dirCount} 有方向）${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
         }
 
         function loadLayoutFromFile(file) {
@@ -1323,7 +1582,8 @@
                             branchId: n.branchId || null,
                             borderImage: n.borderImage || null,
                             borderImg: null,
-                            isPassive: n.isPassive || false
+                            nodeType: n.nodeType || 'decor',
+                            branchGroup: n.branchGroup || null,   // 恢复分组
                         };
                         if (node.borderImage) {
                             loadBorderImage(node.borderImage, (img) => {
@@ -1346,10 +1606,10 @@
                     });
                     edges = (layout.edges || []).map(e => ({
                         fromNodeId: e.fromNodeId,
-                        toNodeId: e.toNodeId
+                        toNodeId: e.toNodeId,
+                        direction: e.direction || null
                     }));
 
-                    // ---- 加载背景图路径 ----
                     if (layout.backgroundImagePath) {
                         const img = new Image();
                         img.onload = () => {
@@ -1376,10 +1636,17 @@
                     nodes.forEach(n => { if (n.id >= maxId) maxId = n.id + 1; });
                     nextId = maxId;
                     selectedNodes = [];
+                    inferEdgeDirections();
+                    // 清空历史并重置
+                    history = [];
+                    historyIndex = -1;
+                    pushHistory(); // 初始状态
                     redraw();
-                    const borderCount = nodes.filter(n => n.borderImage).length;
-                    const passiveCount = nodes.filter(n => n.isPassive).length;
-                    statusEl.innerText = `已加载 ${nodes.length} 个节点（${borderCount} 带边框，${passiveCount} 被动），${edges.length} 条连线${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
+                    const decorCount = nodes.filter(n => n.nodeType === 'decor').length;
+                    const activeCount = nodes.filter(n => n.nodeType === 'active').length;
+                    const passiveCount = nodes.filter(n => n.nodeType === 'passive').length;
+                    const dirCount = edges.filter(e => e.direction).length;
+                    statusEl.innerText = `已加载 ${nodes.length} 个节点（主动${activeCount}，被动${passiveCount}，美化${decorCount}），${edges.length} 条连线（${dirCount} 有方向）${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
                 } catch(err) { alert('加载失败: '+err.message); }
             };
             reader.readAsText(file);
@@ -1392,6 +1659,7 @@
                 nodes[i].x = startX + (i % 6) * stepX;
                 nodes[i].y = startY + Math.floor(i / 6) * stepY;
             }
+            pushHistory();
             redraw();
             statusEl.innerText = '节点已重新排列';
             setTimeout(() => statusEl.innerText = '就绪', 1500);
@@ -1471,7 +1739,7 @@
             });
             document.getElementById('btn-zoom-in').addEventListener('click', zoomIn);
             document.getElementById('btn-zoom-out').addEventListener('click', zoomOut);
-            document.getElementById('btn-clear-edges').addEventListener('click', () => { edges = []; redraw(); });
+            document.getElementById('btn-clear-edges').addEventListener('click', () => { edges = []; pushHistory(); redraw(); });
             document.getElementById('btn-reset-nodes').addEventListener('click', resetNodesPosition);
             document.getElementById('btn-save').addEventListener('click', saveLayout);
             document.getElementById('btn-reset-view').addEventListener('click', resetView);
@@ -1493,8 +1761,17 @@
             document.getElementById('btn-import-bg').addEventListener('click', importBackground);
             document.getElementById('btn-clear-bg').addEventListener('click', clearBackground);
 
-            document.getElementById('btn-batch-passive').addEventListener('click', () => batchSetPassive(true));
-            document.getElementById('btn-batch-active').addEventListener('click', () => batchSetPassive(false));
+            document.getElementById('btn-batch-passive').addEventListener('click', () => batchSetType('passive'));
+            document.getElementById('btn-batch-active').addEventListener('click', () => batchSetType('active'));
+            document.getElementById('btn-batch-decor').addEventListener('click', () => batchSetType('decor'));
+            document.getElementById('btn-infer-directions').addEventListener('click', () => {
+                inferEdgeDirections();
+                statusEl.innerText = '连线方向已推断';
+                setTimeout(() => statusEl.innerText = '就绪', 1500);
+            });
+
+            document.getElementById('btn-undo').addEventListener('click', undo);
+            document.getElementById('btn-redo').addEventListener('click', redo);
 
             document.getElementById('line-color').addEventListener('input', (e) => { lineColor = e.target.value; redraw(); });
             document.getElementById('line-width').addEventListener('input', (e) => { lineWidth = parseInt(e.target.value); redraw(); });
@@ -1514,6 +1791,8 @@
 
             document.getElementById('btn-pan').classList.add('active');
             statusEl.innerText = '就绪';
+            // 初始化历史
+            pushHistory();
         }
 
         // ---------- 启动 ----------

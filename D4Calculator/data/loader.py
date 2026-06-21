@@ -8,6 +8,9 @@ import gc
 import logging
 from PIL import Image, ImageTk
 
+# 从统一缓存模块导入图片加载函数
+from utils.image_cache import load_photo_image
+
 try:
     from config import resource_path, BASE_DIR
 except ImportError:
@@ -49,26 +52,12 @@ GEMS_DATABASE = FULL_DB.get('gems', {})
 RUNES_DATABASE = FULL_DB.get('runes', {})
 AFFIX_VALUES = FULL_DB.get('affix_values', {})
 AFFIX_BY_POSITION = FULL_DB.get('affix_by_position', {})
-IMAGE_CACHE = {}
+
+# 注意：IMAGE_CACHE 和 load_photo_image 已移除，统一使用 utils.image_cache
 
 # 新增护身符数据导出
 SEALS_DATABASE = FULL_DB.get('seals', {})
 TALISMAN_RUNES_DATABASE = FULL_DB.get('talisman_runes', {})
-
-def load_photo_image(path, size=None):
-    key = (os.path.abspath(path), None if size is None else tuple(size))
-    if key in IMAGE_CACHE:
-        return IMAGE_CACHE[key]
-    try:
-        img = Image.open(path)
-        if size:
-            img = img.resize(size, Image.Resampling.LANCZOS)
-        photo = ImageTk.PhotoImage(img)
-        IMAGE_CACHE[key] = photo
-        return photo
-    except Exception as e:
-        logging.debug("加载图片失败 %s -> %s", path, e)
-        return None
 
 _PROFESSION_CACHE = {}
 
