@@ -64,9 +64,12 @@ class DiabloCalculator:
             self.skill_ui.frame.destroy()
             self.skill_ui = SkillTreeUI(self.skill_ui.parent, self.skill_system, layout_file='skilltree_layout.json')
         
-        # 【新增】通知护身符系统切换职业
+        # 【新增】通知护身符系统切换职业，并更新技能系统引用
         if hasattr(self, 'talisman_ui'):
             self.talisman_ui.set_active_class(self.current_profession)
+            # 关键：更新护身符UI中的技能系统引用，确保其使用新的技能数据
+            if hasattr(self.talisman_ui, 'set_skill_system'):
+                self.talisman_ui.set_skill_system(self.skill_system)
         
         gc.collect()
 

@@ -5,13 +5,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import json
 import os
-import gc
-import sys
-import re
-import math
-import copy
-from PIL import Image, ImageTk
 import logging
+from PIL import Image, ImageTk
 
 from config import resource_path
 from utils.image_cache import load_photo_image
@@ -64,13 +59,12 @@ class SkillTreeUI:
         self.line_style = {}
         self.node_refs = {}
         self.background_margin = 500
-
         self.bg_left = 0
         self.bg_top = 0
         self.bg_width = 0
         self.bg_height = 0
-
         self._first_draw_done = False
+        self.selected_nodes = []
 
         self.canvas.bind('<Configure>', self._on_canvas_configure)
 
@@ -83,15 +77,14 @@ class SkillTreeUI:
 
         self.skill_system.add_listener(self.refresh)
         self.refresh()
-
         self.canvas.after(100, self._check_and_draw)
 
+    # ---------- 辅助方法 ----------
     def _check_and_draw(self):
         w = self.canvas.winfo_width()
         h = self.canvas.winfo_height()
         if w > 1 and h > 1:
             if not self._first_draw_done:
-                print("[DEBUG] 延迟检查触发首次绘制")
                 self._on_first_draw()
         else:
             if not hasattr(self, '_check_count'):
@@ -100,7 +93,6 @@ class SkillTreeUI:
             if self._check_count < 50:
                 self.canvas.after(100, self._check_and_draw)
             else:
-                print("[DEBUG] 检查超时，强制绘制（可能存在布局问题）")
                 self._on_first_draw()
 
     def _on_canvas_configure(self, event):
@@ -113,7 +105,6 @@ class SkillTreeUI:
                 self._redraw_all()
 
     def _on_first_draw(self):
-        print(f"[DEBUG] 首次绘制，画布尺寸 {self.canvas.winfo_width()}x{self.canvas.winfo_height()}")
         self._first_draw_done = True
         self._redraw_all()
 
@@ -123,13 +114,10 @@ class SkillTreeUI:
             try:
                 self.bg_image = Image.open(bg_path)
                 self.bg_photo = None
-                print(f"[DEBUG] 默认背景图加载成功: {bg_path}，尺寸 {self.bg_image.size}")
-            except Exception as e:
+            except Exception:
                 self.bg_image = None
-                print(f"[DEBUG] 默认背景图加载失败: {e}")
         else:
             self.bg_image = None
-            print(f"[DEBUG] 默认背景图文件不存在: {bg_path}")
 
     def _load_background_image_from_path(self, path):
         if not path:
@@ -140,24 +128,21 @@ class SkillTreeUI:
             try:
                 self.bg_image = Image.open(full_path)
                 self.bg_photo = None
-                print(f"[DEBUG] 从布局路径加载背景图成功: {full_path}")
                 return
-            except Exception as e:
-                print(f"[DEBUG] 加载路径背景图失败: {e}")
-        print(f"[DEBUG] 背景图不存在或无法加载: {full_path}，回退到默认背景")
+            except Exception:
+                pass
         self._load_background_image()
 
     def _load_layout(self, layout_file):
         full_path = resource_path(layout_file)
         if not os.path.exists(full_path):
-            logging.warning("布局文件不存在，使用自动布局")
             self._auto_layout()
             return
         try:
             with open(full_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-        except Exception as e:
-            logging.warning("布局文件解析失败: %s", e)
+                self._layout_data = data
+        except Exception:
             self._auto_layout()
             return
 
@@ -180,58 +165,50 @@ class SkillTreeUI:
         self.nodes = []
         self.edges = edges_data
 
-        # 建立 key -> skill_id 映射（所有技能）
         key_to_id = {}
+        name_to_id = {}
         for sid, skill in self.skill_system.skill_data.items():
             if skill.get('key'):
                 key_to_id[skill['key']] = sid
+            if skill.get('name'):
+                name_to_id[skill['name']] = sid
 
         for nd in nodes_data:
             skill_key = None
             icon_id = nd.get('iconId')
             sk = nd.get('skillKey') or nd.get('skill_id')
+            skill_name = nd.get('skillName')
             is_passive = nd.get('isPassive', False)
+            node_type = nd.get('nodeType', 'decor')
+            is_decor = (node_type == 'decor')
+            scale = nd.get('scale', 1.0)
+            mod_data = nd.get('mod_data')
+            border_image = nd.get('borderImage')
+            icon_path = nd.get('iconPath')
+            owner_skill_key = nd.get('ownerSkillKey')
+            branch_id = nd.get('branchId')
 
-            # 1. 优先用 skillKey 匹配
-            if sk and sk in key_to_id:
-                skill_key = key_to_id[sk]
-            elif sk and isinstance(sk, str):
-                try:
-                    skill_key = int(sk)
-                except:
-                    pass
-
-            # 2. 如果 skillKey 无效，或者匹配到的技能不是主动的但节点是主动节点，则用 iconId 重新匹配主动技能
-            if (not skill_key or (skill_key and not self.skill_system.skill_data.get(skill_key, {}).get('active', False) and not is_passive)) and icon_id is not None:
-                str_icon_id = str(icon_id)
-                # 先找主动技能
-                for sid, skill in self.skill_system.skill_data.items():
-                    if str(skill.get('icon')) == str_icon_id and skill.get('active') == True:
-                        skill_key = sid
-                        break
-                # 如果找不到主动，则保留之前的 skill_key（可能为 None 或被动）
-                # 但如果是主动节点，不应该接受被动，所以如果还是找不到主动，设为 None
-                if skill_key and not self.skill_system.skill_data.get(skill_key, {}).get('active', False) and not is_passive:
-                    skill_key = None
-
-            # 3. 如果节点是被动节点，确保匹配到被动技能（如果没有被动，保留 None）
-            if is_passive and icon_id is not None:
-                str_icon_id = str(icon_id)
-                # 优先找被动
-                for sid, skill in self.skill_system.skill_data.items():
-                    if str(skill.get('icon')) == str_icon_id and skill.get('active') == False:
-                        skill_key = sid
-                        break
-                # 如果没找到被动，但找到了主动（因为主动也有相同 icon），则清除 skill_key，防止主动节点显示为被动
-                if skill_key and self.skill_system.skill_data.get(skill_key, {}).get('active', False):
-                    skill_key = None
-
-            # 如果最终 skill_key 对应的技能 active 与节点期望不符，强制置 None
-            if skill_key:
-                skill_obj = self.skill_system.skill_data.get(skill_key)
-                if skill_obj:
-                    if (is_passive and skill_obj.get('active', False)) or (not is_passive and not skill_obj.get('active', False)):
-                        skill_key = None
+            if is_decor:
+                skill_key = None
+            else:
+                # 1. 通过 skillKey 匹配
+                if sk and sk in key_to_id:
+                    skill_key = key_to_id[sk]
+                elif sk and isinstance(sk, str):
+                    try:
+                        skill_key = int(sk)
+                    except:
+                        pass
+                # 2. 通过 skillName 匹配
+                if not skill_key and skill_name and skill_name in name_to_id:
+                    skill_key = name_to_id[skill_name]
+                # 3. 回退到 iconId
+                if not skill_key and icon_id is not None:
+                    str_icon_id = str(icon_id)
+                    for sid, skill in self.skill_system.skill_data.items():
+                        if str(skill.get('icon')) == str_icon_id:
+                            skill_key = sid
+                            break
 
             branch_skill = nd.get('branch_skill') or nd.get('branchSkill')
             branch_id = nd.get('branch_id') or nd.get('branchId')
@@ -253,12 +230,18 @@ class SkillTreeUI:
                 'branch_skill': branch_skill,
                 'branch_id': branch_id,
                 'icon_id': icon_id,
-                'borderImage': nd.get('borderImage'),
+                'borderImage': border_image,
                 'isPassive': is_passive,
+                'isDecor': is_decor,
+                'nodeType': node_type,
+                'scale': scale,
+                'skillName': skill_name,
+                'mod_data': mod_data,
+                'iconPath': icon_path,
+                'owner_skill_key': owner_skill_key,   # 从布局读取
+                'branch_id': branch_id,               # 从布局读取
             }
             self.nodes.append(node)
-
-        logging.info("成功加载 %d 个技能节点，%d 条连线", len(self.nodes), len(self.edges))
 
     def _auto_layout(self):
         type_order = ['基础', '核心', '防御', '咒唤', '掌控', '终极', '关键被动']
@@ -309,12 +292,22 @@ class SkillTreeUI:
                         'icon_id': None,
                         'borderImage': None,
                         'isPassive': False,
+                        'isDecor': False,
+                        'nodeType': 'active',
+                        'scale': 1.0,
+                        'skillName': skill['name'] if skill else None,
+                        'mod_data': None,
+                        'iconPath': None,
+                        'owner_skill_key': None,
+                        'branch_id': None,
                     })
                     node_id += 1
                     x += col_width
             current_y += row_count * row_height + 40
 
-    def _get_icon_path(self, skill_key, skill, icon_id=None):
+    def _get_icon_path(self, skill_key, skill, icon_id=None, icon_path=None):
+        if icon_path and os.path.exists(resource_path(icon_path)):
+            return resource_path(icon_path)
         if skill and skill.get('icon'):
             icon_path = resource_path(f'images/icons/{skill["icon"]}.png')
             if os.path.exists(icon_path):
@@ -340,9 +333,6 @@ class SkillTreeUI:
     def _draw_edges(self):
         if not self.edges:
             return
-        self._draw_solid_edges()
-
-    def _draw_solid_edges(self):
         color = self.line_style.get('color', '#8a9bb5')
         width = self.line_style.get('width', 2)
         dash = self.line_style.get('dash', False)
@@ -371,74 +361,54 @@ class SkillTreeUI:
     def _redraw_all(self):
         self.canvas.delete('all')
         self.canvas.update_idletasks()
-
         self._draw_background()
         self._draw_edges()
         self._draw_all_nodes()
-
         self.canvas.tag_lower('bg')
         self.canvas.tag_raise('edge')
         self.canvas.tag_raise('node')
-
         self._adjust_viewport()
-        print("[DEBUG] 重绘完成，已定位")
 
     def _adjust_viewport(self):
         if not self.nodes:
             return
-
         xs = [n['x'] for n in self.nodes]
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
-
-        VERTICAL_EXTRA = 150
-        min_y -= VERTICAL_EXTRA
-        max_y += VERTICAL_EXTRA
-
+        min_y -= 150
+        max_y += 150
         margin = self.background_margin
         left = min_x - margin
         top = min_y - margin
         right = max_x + margin
         bottom = max_y + margin
-
         if hasattr(self, 'bg_left') and self.bg_width > 0:
             left = min(left, self.bg_left)
             top = min(top, self.bg_top)
             right = max(right, self.bg_left + self.bg_width)
             bottom = max(bottom, self.bg_top + self.bg_height)
-
-        extra = 50
-        left -= extra
-        top -= extra
-        right += extra
-        bottom += extra
-
+        left -= 50
+        top -= 50
+        right += 50
+        bottom += 50
         self.canvas.config(scrollregion=(left, top, right, bottom))
-
         active_nodes = [n for n in self.nodes if n.get('skill_key') and not n.get('isPassive', False)]
-        if len(active_nodes) >= 2:
-            target_node = active_nodes[1]
-        else:
-            target_node = active_nodes[0] if active_nodes else None
-
+        target_node = active_nodes[1] if len(active_nodes) >= 2 else (active_nodes[0] if active_nodes else None)
         if target_node:
             target_x = target_node['x']
             target_y = target_node['y']
         else:
             target_x = (left + right) / 2
             target_y = (top + bottom) / 2
-
         cw = self.canvas.winfo_width()
         ch = self.canvas.winfo_height()
         if cw > 1 and ch > 1:
             total_w = right - left
             total_h = bottom - top
             if total_w > 0 and total_h > 0:
-                frac_x = (target_x - left - cw/2) / total_w
-                frac_y = (target_y - top - ch/2) / total_h
-                frac_x = max(0, min(1, frac_x))
-                frac_y = max(0, min(1, frac_y))
+                frac_x = max(0, min(1, (target_x - left - cw/2) / total_w))
+                frac_y = max(0, min(1, (target_y - top - ch/2) / total_h))
                 self.canvas.xview_moveto(frac_x)
                 self.canvas.yview_moveto(frac_y)
                 self.view_x = frac_x
@@ -447,12 +417,10 @@ class SkillTreeUI:
     def _draw_background(self):
         if not self.bg_image:
             return
-
         w = self.canvas.winfo_width()
         h = self.canvas.winfo_height()
         if w <= 1 or h <= 1:
             return
-
         img_w, img_h = self.bg_image.size
         if img_w <= 0 or img_h <= 0:
             return
@@ -470,7 +438,6 @@ class SkillTreeUI:
                 draw_w = h * img_aspect
                 offset_x = (w - draw_w) / 2
                 offset_y = 0
-
             scaled = self.bg_image.resize((int(draw_w), int(draw_h)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
             self.canvas.create_image(offset_x, offset_y, image=self.bg_photo, anchor='nw', tags=('bg',))
@@ -484,27 +451,17 @@ class SkillTreeUI:
         ys = [n['y'] for n in self.nodes]
         min_x, max_x = min(xs), max(xs)
         min_y, max_y = min(ys), max(ys)
-
-        VERTICAL_EXTRA = 150
-        min_y -= VERTICAL_EXTRA
-        max_y += VERTICAL_EXTRA
-
+        min_y -= 150
+        max_y += 150
         margin = self.background_margin
-        top_extra = 0
-        bottom_extra = 0
-
         center_x = (min_x + max_x) / 2
         center_y = (min_y + max_y) / 2
-
         width = max_x - min_x + 2 * margin
-        height = max_y - min_y + 2 * margin + top_extra + bottom_extra
-
+        height = max_y - min_y + 2 * margin
         if width <= 0 or height <= 0:
             return
-
         left = center_x - width / 2
-        top = center_y - (max_y - min_y + 2 * margin) / 2 - top_extra
-
+        top = center_y - height / 2
         try:
             scaled = self.bg_image.resize((int(width), int(height)), Image.Resampling.LANCZOS)
             self.bg_photo = ImageTk.PhotoImage(scaled)
@@ -513,14 +470,14 @@ class SkillTreeUI:
             self.bg_top = top
             self.bg_width = width
             self.bg_height = height
-        except Exception as e:
-            logging.warning("绘制背景图失败: %s", e)
+        except Exception:
+            pass
 
+    # ---------- 核心绘制节点 ----------
     def _draw_all_nodes(self):
         BASE_NODE_RADIUS = 64
         BASE_ICON_SIZE = 56
         self.node_refs.clear()
-
         if not hasattr(self, '_border_photos'):
             self._border_photos = []
 
@@ -530,114 +487,173 @@ class SkillTreeUI:
             internal_id = node['internal_id']
             is_branch = node.get('branch_skill') is not None and node.get('branch_id') is not None
             icon_id = node.get('icon_id')
-
             is_passive = node.get('isPassive', False)
-            passive_scale = 0.65 if is_passive else 1.0
+            is_decor = node.get('isDecor', False)
+            node_type = node.get('nodeType', 'decor')
+            scale = node.get('scale', 1.0)
+            mod_data = node.get('mod_data')
+            owner_skill = node.get('owner_skill_key')
+            branch_id = node.get('branch_id')
 
-            ICON_SIZE = BASE_ICON_SIZE * passive_scale
+            # 是否选中
+            is_selected = node in self.selected_nodes
+
+            # ---- 美化节点：无星标 ----
+            if is_decor:
+                passive_scale = scale
+                NODE_RADIUS = BASE_NODE_RADIUS * 0.7 * passive_scale
+                ICON_SIZE = BASE_ICON_SIZE * 0.7 * passive_scale
+                # 边框图片
+                border_image_path = node.get('borderImage')
+                if border_image_path:
+                    full_path = resource_path(border_image_path)
+                    if os.path.exists(full_path):
+                        photo = load_photo_image(full_path, size=(int(ICON_SIZE * 1.6), int(ICON_SIZE * 1.6)))
+                        if photo:
+                            self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'node'))
+                            self._border_photos.append(photo)
+                # 图标
+                icon_path = node.get('iconPath') or self._get_icon_path(node['skill_key'], skill, icon_id)
+                if icon_path and os.path.exists(icon_path):
+                    photo = load_photo_image(icon_path, size=(int(ICON_SIZE), int(ICON_SIZE)))
+                    if photo:
+                        self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'node'))
+                # 选中高亮
+                if is_selected:
+                    ring_size = (border_image_path and 40 or 36) * passive_scale
+                    self.canvas.create_oval(x - ring_size, y - ring_size, x + ring_size, y + ring_size,
+                                            outline='#ffffff', width=2.5, dash=(5, 5),
+                                            tags=(internal_id, 'node'))
+                # 不绘制任何文字（名称和装饰已移除，或仅保留装饰小字）
+                if view.zoom >= 0.6:
+                    self.canvas.create_text(x, y + 28 * passive_scale, text='装饰',
+                                            fill='#888', font=('微软雅黑', int(10 * passive_scale)),
+                                            tags=(internal_id, 'node'))
+                continue
+
+            # ---- 普通节点（主动/形态/被动） ----
+            passive_scale = 0.65 if is_passive else 1.0
+            ICON_SIZE = BASE_ICON_SIZE * passive_scale * scale
             BORDER_SIZE = int(ICON_SIZE * 1.6)
-            NODE_RADIUS = BASE_NODE_RADIUS * passive_scale
-            FONT_SIZE_NAME = int(12 * passive_scale)
-            FONT_SIZE_LEVEL = int(8 * passive_scale)
-            FONT_SIZE_BRANCH = int(12 * passive_scale)
+            NODE_RADIUS = BASE_NODE_RADIUS * passive_scale * scale
 
             has_icon = False
             icon_path = None
             if not is_branch:
-                icon_path = self._get_icon_path(node['skill_key'], skill, icon_id)
+                icon_path = node.get('iconPath') or self._get_icon_path(node['skill_key'], skill, icon_id)
                 if icon_path and os.path.exists(icon_path):
                     has_icon = True
 
+            # 分支外框（如果是分支节点）
             if is_branch:
-                oval = self.canvas.create_oval(
+                self.canvas.create_oval(
                     x - NODE_RADIUS, y - NODE_RADIUS,
                     x + NODE_RADIUS, y + NODE_RADIUS,
-                    fill='#1a3a5a', outline='#66CCFF', width=max(1, int(2 * passive_scale)),
+                    fill='#1a3a5a', outline='#66CCFF', width=max(1, int(2 * passive_scale * scale)),
                     tags=(internal_id, 'node')
                 )
-            else:
-                oval = None
 
-            border_img_obj = None
+            # 边框图片
             border_image_path = node.get('borderImage')
             if border_image_path:
                 full_path = resource_path(border_image_path)
                 if os.path.exists(full_path):
                     photo = load_photo_image(full_path, size=(BORDER_SIZE, BORDER_SIZE))
                     if photo:
-                        border_img_obj = self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'node'))
+                        self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'node'))
                         self._border_photos.append(photo)
 
-            icon_obj = None
+            # 图标/文字
             if is_branch:
                 branches = self.skill_system.get_branches(node['branch_skill'])
                 branch = branches.get(node['branch_id'])
                 display_text = branch['name'][:2] if branch else 'BR'
-                icon_obj = self.canvas.create_text(x, y, text=display_text, fill='#88CCFF',
-                                                   font=('微软雅黑', int(FONT_SIZE_BRANCH), 'bold'),
-                                                   tags=(internal_id, 'node'))
+                self.canvas.create_text(x, y, text=display_text, fill='#88CCFF',
+                                        font=('微软雅黑', int(12 * passive_scale * scale), 'bold'),
+                                        tags=(internal_id, 'node'))
+                # 分支激活状态
                 is_active = self.skill_system.branch_levels.get(node['branch_skill'], {}).get(node['branch_id'], 0) > 0
-                self.canvas.create_text(x, y + NODE_RADIUS + int(6 * passive_scale), text='✓' if is_active else '',
-                                        fill='#88FF88', font=('微软雅黑', int(10 * passive_scale), 'bold'),
+                self.canvas.create_text(x, y + NODE_RADIUS + int(6 * passive_scale * scale), text='✓' if is_active else '',
+                                        fill='#88FF88', font=('微软雅黑', int(10 * passive_scale * scale), 'bold'),
                                         tags=(internal_id, 'node'))
             else:
                 if has_icon:
                     photo = load_photo_image(icon_path, size=(int(ICON_SIZE), int(ICON_SIZE)))
                     if photo:
-                        icon_obj = self.canvas.create_image(x, y, image=photo,
-                                                            tags=(internal_id, 'node'))
-                if not icon_obj and skill:
+                        self.canvas.create_image(x, y, image=photo, tags=(internal_id, 'node'))
+                elif skill:
                     text = skill['name'][:2]
-                    icon_obj = self.canvas.create_text(x, y, text=text, fill='white',
-                                                       font=('微软雅黑', int(FONT_SIZE_BRANCH), 'bold'),
-                                                       tags=(internal_id, 'node'))
-                elif not icon_obj and not skill:
-                    icon_obj = self.canvas.create_text(x, y, text='?', fill='#888888',
-                                                       font=('微软雅黑', int(FONT_SIZE_BRANCH + 2), 'bold'),
-                                                       tags=(internal_id, 'node'))
+                    self.canvas.create_text(x, y, text=text, fill='white',
+                                            font=('微软雅黑', int(12 * passive_scale * scale), 'bold'),
+                                            tags=(internal_id, 'node'))
+                else:
+                    self.canvas.create_text(x, y, text='?', fill='#888888',
+                                            font=('微软雅黑', int(14 * passive_scale * scale), 'bold'),
+                                            tags=(internal_id, 'node'))
 
-            # 等级文本（所有可加点的技能都显示）
-            lv_text = None
-            if skill and not is_branch:
+            # 等级文本（仅主动技能且非分支）
+            if skill and not is_branch and skill.get('active', False):
                 lv_text = self.canvas.create_text(
-                    x + 22, y + 22,
+                    x + 22 * scale, y + 22 * scale,
                     text='', fill='#88FF88',
-                    font=('微软雅黑', int(FONT_SIZE_LEVEL), 'bold'),
+                    font=('微软雅黑', int(8 * passive_scale * scale), 'bold'),
                     anchor='se',
                     tags=(internal_id, 'node')
                 )
                 self.canvas.tag_raise(lv_text)
+            else:
+                lv_text = None
 
+            # 可点击区域
             hitbox = self.canvas.create_rectangle(
                 x - NODE_RADIUS, y - NODE_RADIUS,
                 x + NODE_RADIUS, y + NODE_RADIUS,
                 fill='', outline='', tags=(internal_id, 'hitbox', 'node')
             )
-            if is_branch:
-                self.canvas.tag_bind(hitbox, '<Button-1>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self._on_branch_click(sk, bid))
-                self.canvas.tag_bind(hitbox, '<Button-3>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self._on_branch_right_click(sk, bid))
-                self.canvas.tag_bind(hitbox, '<Enter>', lambda e, sk=node['branch_skill'], bid=node['branch_id']: self.tooltip_manager.show_branch_tip(e, sk, bid))
+
+            # ---- 事件绑定 ----
+            if node_type in ('passive', 'morph'):
+                if owner_skill and branch_id:
+                    # 分支节点：绑定分支激活事件
+                    self.canvas.tag_bind(hitbox, '<Button-1>',
+                        lambda e, sk=owner_skill, bid=branch_id: self._on_branch_click(sk, bid))
+                    self.canvas.tag_bind(hitbox, '<Button-3>',
+                        lambda e, sk=owner_skill, bid=branch_id: self._on_branch_right_click(sk, bid))
+                    # 悬停提示使用 mod_data
+                    if mod_data:
+                        self.canvas.tag_bind(hitbox, '<Enter>',
+                            lambda e, data=mod_data: self.tooltip_manager.show_skill_tip(e, {'mod_data': data}))
+                    else:
+                        self.canvas.tag_bind(hitbox, '<Enter>', lambda e: self.tooltip_manager.hide())
+                    self.canvas.tag_bind(hitbox, '<Leave>', self.tooltip_manager.hide)
+                else:
+                    # 没有归属的分支，不处理点击
+                    pass
+            elif node_type == 'active':
+                # 主动节点：加点事件
+                self.canvas.tag_bind(hitbox, '<Button-1>',
+                    lambda e, key=node['skill_key']: self._on_left_click(key))
+                self.canvas.tag_bind(hitbox, '<Button-3>',
+                    lambda e, key=node['skill_key']: self._on_right_click(key))
+                self.canvas.tag_bind(hitbox, '<Enter>',
+                    lambda e, key=node['skill_key']: self.tooltip_manager.show_skill_tip(e, key))
                 self.canvas.tag_bind(hitbox, '<Leave>', self.tooltip_manager.hide)
             else:
-                self.canvas.tag_bind(hitbox, '<Button-1>', lambda e, key=node['skill_key']: self._on_left_click(key))
-                self.canvas.tag_bind(hitbox, '<Button-3>', lambda e, key=node['skill_key']: self._on_right_click(key))
-                self.canvas.tag_bind(hitbox, '<Enter>', lambda e, key=node['skill_key']: self.tooltip_manager.show_skill_tip(e, key))
-                self.canvas.tag_bind(hitbox, '<Leave>', self.tooltip_manager.hide)
+                # 美化或其他节点无交互
+                pass
 
             self.node_refs[internal_id] = {
-                'oval': oval,
-                'icon': icon_obj,
-                'lv_bg': None,
                 'lv_text': lv_text,
                 'hitbox': hitbox,
                 'node': node,
                 'is_branch': is_branch,
                 'branch_skill': node.get('branch_skill'),
                 'branch_id': node.get('branch_id'),
-                'border_image': border_img_obj,
                 'is_passive': is_passive,
+                'is_decor': is_decor,
             }
 
+    # ---------- 事件处理 ----------
     def _on_drag_start(self, event):
         self.drag_start_x = event.x
         self.drag_start_y = event.y
@@ -668,19 +684,16 @@ class SkillTreeUI:
                 self.drag_start_y = event.y
 
     def _on_left_click(self, skill_key):
-        print(f"[DEBUG] 左键点击技能: {skill_key}")
         if not skill_key:
             return
         self.skill_system.add_level(skill_key)
 
     def _on_right_click(self, skill_key):
-        print(f"[DEBUG] 右键点击技能: {skill_key}")
         if not skill_key:
             return
         self.skill_system.remove_level(skill_key)
 
     def _on_branch_click(self, skill_key, branch_id):
-        print(f"[DEBUG] 点击分支: {skill_key} -> {branch_id}")
         if not skill_key or not branch_id:
             return
         if self.skill_system.branch_levels.get(skill_key, {}).get(branch_id, 0) > 0:
@@ -688,7 +701,6 @@ class SkillTreeUI:
         self.skill_system.activate_branch(skill_key, branch_id)
 
     def _on_branch_right_click(self, skill_key, branch_id):
-        print(f"[DEBUG] 右键分支: {skill_key} -> {branch_id}")
         if not skill_key or not branch_id:
             return
         self.skill_system.deactivate_branch(skill_key, branch_id)
@@ -723,21 +735,24 @@ class SkillTreeUI:
                 skill_key = ref['branch_skill']
                 branch_id = ref['branch_id']
                 is_active = self.skill_system.branch_levels.get(skill_key, {}).get(branch_id, 0) > 0
+                # 更新分支状态（√标记）
                 for item in self.canvas.find_withtag(node['internal_id']):
                     if 'branch_status' in self.canvas.gettags(item):
                         self.canvas.itemconfig(item, text='✓' if is_active else '')
                         break
             else:
                 skill_key = node.get('skill_key')
-                if not skill_key:
+                if not skill_key or node.get('isDecor', False):
                     continue
                 skill = self.skill_system._find_skill(skill_key)
                 if not skill:
                     continue
                 lv_text_id = ref.get('lv_text')
-                if lv_text_id:
+                if lv_text_id and skill.get('active', False):
                     base_lv = self.skill_system.get_base_level(skill_key)
                     max_lv = skill.get('base_max_level', 15)
                     txt = f"{base_lv}/{max_lv}"
                     self.canvas.itemconfig(lv_text_id, text=txt)
                     self.canvas.tag_raise(lv_text_id)
+        # 不需要重绘整个画布，只更新文本
+        self.canvas.update_idletasks()

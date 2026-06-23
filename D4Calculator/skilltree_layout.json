@@ -1,4525 +1,5506 @@
 {
-  "version": "2.8",
+  "version": "3.9",
   "bounds": {
     "minX": -1196.6875747064748,
-    "maxX": 826.2121750703868,
+    "maxX": 749.2121750703868,
     "minY": 469.2396204786919,
     "maxY": 5687.716049424615
   },
-  "offsetX": -185.237699818044,
+  "offsetX": -223.737699818044,
   "offsetY": 3078.4778349516537,
-  "backgroundMargin": 100,
+  "backgroundMargin": 250,
   "backgroundImagePath": "images/skill_bg.png",
   "nodes": [
     {
       "id": 100,
       "skillKey": "sorcerer_frost_bolt",
       "skillName": "寒霜弹",
-      "x": 70.71133522244062,
+      "x": 109.21133522244062,
       "y": -2272.426059829224,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3413655459",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 101,
       "skillKey": "sorcerer_spark",
       "skillName": "电花",
-      "x": -9.587966614294487,
+      "x": 28.912033385705513,
       "y": -2067.147942278969,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1281178120",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 102,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 709.1113379345871,
-      "y": -2244.1977098359366,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 744.6113379345871,
+      "y": -2215.1977098359366,
       "iconId": "3169811489",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 103,
       "skillKey": "sorcerer_fire_bolt",
       "skillName": "火焰弹",
-      "x": 499.3145425645056,
+      "x": 537.8145425645056,
       "y": -2271.047223264897,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3081623323",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 104,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -127.67822780077319,
+      "x": -89.17822780077319,
       "y": -1872.5674042890657,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3549828161",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 105,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -210.31132513817477,
+      "x": -171.81132513817477,
       "y": -1871.087419797282,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2920834280",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 106,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -297.0335846774772,
-      "y": -1981.3558190991637,
-      "branchSkill": null,
-      "branchId": null,
+      "x": -258.5335846774772,
+      "y": -1982.8799770019225,
       "iconId": "1676136447",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 107,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -363.5685143775887,
+      "x": -325.0685143775887,
       "y": -2067.6712379706287,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1281178120",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 108,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -299.1717240704074,
+      "x": -260.6717240704074,
       "y": -2151.119549623975,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1281178120",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 109,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -124.50594529065,
+      "skillName": "美化节点",
+      "x": -86.00594529065,
       "y": -2185.198408224376,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 110,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -218.217086811007,
+      "x": -179.717086811007,
       "y": -2276.7351781388547,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1587379851",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 111,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -125.4647971289653,
+      "x": -86.9647971289653,
       "y": -2277.2077199857786,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2920834280",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 112,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -4.2223523439768655,
+      "skillName": "美化节点",
+      "x": 34.277647656023134,
       "y": -2399.8778510604393,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 113,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -100.0183247819013,
+      "skillName": "穿刺",
+      "x": -61.5183247819013,
       "y": -2396.8400657712036,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "1006006396",
+      "iconId": 1006006396,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "穿刺",
+        "desc": [
+          "{c_important}寒霜弹{/c}会穿透 {c_number}1{/c} 次。"
+        ],
+        "modId": 14,
+        "engName": "Pierce",
+        "id": 2686060764,
+        "icon": 1006006396
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 114,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -97.92605461125834,
+      "skillName": "易伤",
+      "x": -59.42605461125834,
       "y": -2491.0918751963413,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "1711395052",
+      "iconId": 1711395052,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "易伤",
+        "desc": [
+          "{c_important}寒霜弹{/c}会使敌人陷入{c_important}易伤{/c}状态，持续 {c_number}4{/c} 秒。"
+        ],
+        "modId": 13,
+        "engName": "Vulnerable",
+        "id": 2686060763,
+        "icon": 1711395052
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 115,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 154.4326494013331,
-      "y": -2549.6487685651546,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "3413655459",
-      "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "skillName": "连环闪电",
+      "x": 192.9326494013331,
+      "y": -2550.6487685651546,
+      "iconId": 3413655459,
+      "borderImage": "images/icons/678742091.png",
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "连环闪电",
+        "desc": [
+          "{c_important}寒霜弹{/c}在发射首枚投射物后会额外发射一枚投射物，每枚投射物造成 {c_number}72%{/c} 点伤害。"
+        ],
+        "modId": 2,
+        "engName": "Relentless Bolt",
+        "id": 2686060809,
+        "icon": 3413655459,
+        "border": 678742091
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 116,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -6.183832755354985,
+      "skillName": "静电震击",
+      "x": 32.316167244645015,
       "y": -2550.9583303953686,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "658829224",
-      "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "iconId": 658829224,
+      "borderImage": "images/icons/858665677.png",
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "静电震击",
+        "desc": [
+          "{c_important}寒霜弹{/c}现在被视作{c_important}电冲{/c}技能并造成闪电伤害。",
+          "",
+          "{c_important}寒霜弹{/c}会向额外敌人弹射 {c_number}1{/c} 至 {c_number}3{/c} 次，每次弹射造成 {c_number}36%{/c} 点伤害，并使其陷入{c_important}虚弱{/c}，持续 {c_number}4{/c} 秒。"
+        ],
+        "modId": 5,
+        "engName": "Static Shock",
+        "id": 2686060811,
+        "icon": 658829224,
+        "border": 858665677
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 117,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 69.68509388591978,
+      "skillName": "碎冰",
+      "x": 108.18509388591978,
       "y": -2609.2382144729618,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "3413655459",
+      "iconId": 3413655459,
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "碎冰",
+        "desc": [
+          "{c_important}寒霜弹{/c}在命中{c_important}被冻结{/c}的敌人时会碎裂并爆炸，造成 {c_number}270%{/c} 点伤害并使其{c_important}冻伤{/c} {c_number}40%{/c}。"
+        ],
+        "modId": 3,
+        "engName": "Shatter",
+        "id": 2686060810,
+        "icon": 3413655459,
+        "border": 2916187532
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 118,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 154.97209135351798,
-      "y": -2398.4600524109796,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 193.47209135351798,
+      "y": -2399.2421864122457,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 119,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 71.34908097060092,
+      "skillName": "美化节点",
+      "x": 109.84908097060092,
       "y": -2460.1675545821563,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 120,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 237.76223590777573,
+      "skillName": "屏障",
+      "x": 276.26223590777573,
       "y": -2492.4605319925163,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "367264118",
+      "iconId": 367264118,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "屏障",
+        "desc": [
+          "{c_important}寒霜弹{/c}在命中第一个敌人时，为你提供一个相当于生命上限 {c_number}2%{/c} {c_number}(17){/c} 的{c_important}屏障{/c}，最高可达 {c_number}6%{/c}，持续 {c_number}6{/c} 秒。"
+        ],
+        "modId": 11,
+        "engName": "Barrier",
+        "id": 2686060761,
+        "icon": 367264118
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 121,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 238.94705291811874,
+      "skillName": "资源生成",
+      "x": 277.44705291811874,
       "y": -2397.9525610602304,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "4274383807",
+      "iconId": 4274383807,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "资源生成",
+        "desc": [
+          "命中第一个敌人时，{c_important}寒霜弹{/c}生成 {c_number}2{/c} 点法力；如果敌人已经{c_important}被冻结{/c}，则生成 {c_number}4{/c} 点法力。"
+        ],
+        "modId": 12,
+        "engName": "Resource Generation",
+        "id": 2686060762,
+        "icon": 4274383807
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 122,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 652.7558253546376,
+      "skillName": "美化节点",
+      "x": 691.2558253546376,
       "y": -2366.9928426869715,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 123,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 471.86262591010603,
+      "skillName": "美化节点",
+      "x": 510.36262591010603,
       "y": -2406.057123780108,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 124,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 374.62856890695144,
+      "skillName": "治疗量",
+      "x": 413.12856890695144,
       "y": -2406.1042825156514,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "1771003917",
+      "iconId": 1771003917,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "治疗量",
+        "desc": [
+          "{c_important}火焰弹{/c}在命中第一个敌人时为你恢复 {c_number}2%{/c} 的生命上限 {c_number}(17){/c}。"
+        ],
+        "modId": 7,
+        "engName": "Healing",
+        "id": 2686060761,
+        "icon": 1771003917
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 125,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 573.4034164830366,
+      "skillName": "美化节点",
+      "x": 611.9034164830366,
       "y": -2472.047395355757,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 126,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 375.61621370513956,
+      "skillName": "资源生成",
+      "x": 414.11621370513956,
       "y": -2497.709276005471,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "4274383807",
+      "iconId": 4274383807,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "资源生成",
+        "desc": [
+          "命中第一个敌人时，{c_important}火焰弹{/c}生成 {c_number}2{/c} 点法力；如果敌人已经处于燃烧状态，则生成 {c_number}4{/c} 点法力。"
+        ],
+        "modId": 8,
+        "engName": "Resource Generation",
+        "id": 2686060762,
+        "icon": 4274383807
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 127,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 751.0598808643879,
+      "skillName": "伤害加成",
+      "x": 789.5598808643879,
       "y": -2363.6537340008535,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "4204752281",
+      "iconId": 4204752281,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "伤害加成",
+        "desc": [
+          "{c_important}火焰弹{/c}造成的燃烧伤害提高 {c_number}50%[x]{/c}。"
+        ],
+        "modId": 9,
+        "engName": "Damage Bonus",
+        "id": 2686060763,
+        "icon": 4204752281
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 128,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 744.0231240090777,
+      "skillName": "压制",
+      "x": 782.5231240090777,
       "y": -2457.5038484599318,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "744033029",
+      "iconId": 744033029,
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": {
+        "name": "压制",
+        "desc": [
+          "{c_important}火焰弹{/c}会生成 {c_number}1{/c} 层{c_important}压制{/c}。"
+        ],
+        "modId": 10,
+        "engName": "Overpower",
+        "id": 2686060764,
+        "icon": 744033029
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 129,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 673.6022462193672,
+      "skillName": "霜刺",
+      "x": 712.1022462193672,
       "y": -2540.6972759214436,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1508985014",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "霜刺",
+        "desc": [
+          "{c_important}火焰弹{/c}现在是{c_important}寒霜{/c}技能，造成 {c_number}27%{/c} 点冰霜伤害并在 {c_number}6{/c} 秒内造成 {c_number}180%{/c} 点霜噬伤害。",
+          "",
+          "{c_important}火焰弹{/c}穿透 {c_number}1{/c} 次并使敌人陷入{c_important}易伤{/c}状态，持续 {c_number}4{/c} 秒。"
+        ],
+        "modId": 6,
+        "engName": "Shiver",
+        "id": 2686060811,
+        "icon": 1508985014,
+        "border": 858665677
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 130,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 496.9490559991394,
+      "skillName": "双生烈焰",
+      "x": 535.4490559991393,
       "y": -2562.556179923675,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3081623323",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "双生烈焰",
+        "desc": [
+          "{c_important}火焰弹{/c}额外发射一枚平行的飞弹，造成 {c_number}18%{/c} 点火焰伤害。"
+        ],
+        "modId": 1,
+        "engName": "Twin Flame",
+        "id": 2686060809,
+        "icon": 3081623323,
+        "border": 678742091
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 131,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 592.7384365905862,
+      "skillName": "萤火虫",
+      "x": 631.2384365905862,
       "y": -2598.843922225738,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "3081623323",
+      "iconId": 3081623323,
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "morph",
+      "scale": 1,
+      "mod_data": {
+        "name": "萤火虫",
+        "desc": [
+          "{c_important}火焰弹{/c}会射出一只萤火虫附着在敌人身上，延迟后爆炸 {c_number}3{/c} 次，每次爆炸造成 {c_number}9%{/c} 点伤害。"
+        ],
+        "modId": 4,
+        "engName": "Firefly",
+        "id": 2686060810,
+        "icon": 3081623323,
+        "border": 2916187532
+      },
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 132,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -129.04614245260672,
+      "skillName": "美化节点",
+      "x": -90.54614245260672,
       "y": -1973.4425067820284,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 133,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 714.2993767837777,
-      "y": -2143.048612853751,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 743.7993767837777,
+      "y": -2141.048612853751,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 134,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -209.39462323698888,
+      "skillName": "美化节点",
+      "x": -170.89462323698888,
       "y": -2066.553826586534,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 135,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 810.8331750665895,
-      "y": -2238.9110755074134,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 806.3331750665895,
+      "y": -2210.9110755074134,
       "iconId": "130962716",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 136,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 1011.4498748884308,
-      "y": -2061.27212033333,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 972.9498748884308,
+      "y": -2056.27212033333,
       "iconId": "142120450",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 137,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 948.636108737555,
-      "y": -1956.9533514872658,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 922.136108737555,
+      "y": -1978.9533514872658,
       "iconId": "3374274781",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 138,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 858.4053724974001,
-      "y": -2060.7536845913287,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 832.9053724974001,
+      "y": -2057.7536845913287,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 139,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 949.8846255851984,
-      "y": -2167.143048213855,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 922.3846255851984,
+      "y": -2129.143048213855,
       "iconId": "142120450",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 140,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 798.5966321841321,
-      "y": -1892.5670312772647,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 805.0966321841321,
+      "y": -1913.5670312772647,
       "iconId": "1534222278",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 141,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 716.2955489645452,
-      "y": -1892.3665635566351,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 737.7955489645452,
+      "y": -1913.3665635566351,
       "iconId": "4274383807",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 142,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 713.7325728338542,
-      "y": -1989.126169924515,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 740.2325728338542,
+      "y": -1992.126169924515,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 143,
       "skillKey": "sorcerer_arc_lash",
       "skillName": "电弧鞭笞",
-      "x": 580.7510388147743,
+      "x": 619.2510388147743,
       "y": -2059.046302133802,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "142120450",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 144,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 279.29622044942556,
+      "skillName": "美化节点",
+      "x": 317.79622044942556,
       "y": -2026.2946711499778,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1777188871",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 145,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -722.6590820334524,
+      "skillName": "美化节点",
+      "x": -684.1590820334524,
       "y": -1058.3491416486233,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 146,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -825.9013229268,
+      "skillName": "美化节点",
+      "x": -787.4013229268,
       "y": -1146.9268084096025,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 147,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -746.5968402533891,
+      "skillName": "美化节点",
+      "x": -708.0968402533891,
       "y": -1231.4070680448147,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 148,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -865.2256928148546,
+      "x": -826.7256928148546,
       "y": -572.4512436183095,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4037552102",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 149,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -1000.0013358004895,
+      "x": -961.5013358004895,
       "y": -650.1979990288146,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4147712587",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 150,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -951.855540786724,
+      "x": -913.355540786724,
       "y": -575.2046261799146,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4147712587",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 151,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -1010.9714853934619,
+      "x": -972.4714853934619,
       "y": -754.6801860218911,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1990297850",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 152,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -1011.4498748884308,
+      "x": -972.9498748884308,
       "y": -835.506919312751,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1006006396",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 153,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -929.3408679389892,
+      "skillName": "美化节点",
+      "x": -890.8408679389892,
       "y": -835.9731787799574,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 154,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -885.030630390275,
+      "skillName": "美化节点",
+      "x": -846.530630390275,
       "y": -679.6497941809002,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 155,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -704.4695059094623,
+      "x": -665.9695059094623,
       "y": -574.3213067677793,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3549828161",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 156,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -705.0554772736591,
+      "x": -666.5554772736591,
       "y": -655.4253736716141,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1994634449",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 157,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -784.7000320797093,
+      "skillName": "美化节点",
+      "x": -746.2000320797093,
       "y": -577.991716658506,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 158,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -610.0743288653217,
+      "x": -571.5743288653217,
       "y": -752.5168004526063,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "898961067",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 159,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -604.7478286709344,
+      "x": -566.2478286709344,
       "y": -664.5718507830647,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "146159251",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 160,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -518.9909940370474,
+      "x": -480.49099403704736,
       "y": -607.9199178963754,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3501185050",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 161,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -516.8874613735867,
+      "skillName": "美化节点",
+      "x": -478.3874613735867,
       "y": -750.4502980203497,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 162,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -429.29922939015205,
+      "x": -392.32338729291075,
       "y": -567.4221303786117,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1917715779",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 163,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -343.71268701919325,
+      "x": -305.21268701919325,
       "y": -602.4905067152372,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1917715779",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 164,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -432.695735832164,
+      "skillName": "美化节点",
+      "x": -394.195735832164,
       "y": -701.4977524186565,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 165,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -332.6304859057858,
+      "skillName": "美化节点",
+      "x": -294.1304859057858,
       "y": -753.2495533894903,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 166,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -246.23523411053992,
+      "x": -207.73523411053992,
       "y": -751.9131538409802,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3713328411",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 167,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -244.14996564463274,
+      "x": -205.64996564463274,
       "y": -668.4946602281079,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1157853967",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 168,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 184.83409705096966,
+      "x": 223.33409705096966,
       "y": -1208.0911399966774,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3897441388",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 169,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 102.04280072091179,
+      "x": 140.54280072091177,
       "y": -1207.1684511750198,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2307159530",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 170,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 239.3108135243018,
+      "x": 277.8108135243018,
       "y": -1294.3742243390795,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2620274440",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 171,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 241.42615767905562,
+      "x": 279.9261576790556,
       "y": -1459.017478681326,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2402480109",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 172,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 282.81520402181616,
+      "x": 321.31520402181616,
       "y": -1378.643836609256,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2402480109",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 173,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 86.38051450193322,
+      "x": 124.88051450193322,
       "y": -1568.5333396724648,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1620674625",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 174,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 172.4160839390487,
+      "x": 210.9160839390487,
       "y": -1564.833249620156,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2281909844",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 175,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 91.53276206583271,
+      "skillName": "美化节点",
+      "x": 130.0327620658327,
       "y": -1475.5751492110967,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 176,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 167.6580342293315,
+      "skillName": "美化节点",
+      "x": 206.1580342293315,
       "y": -1378.1921674822947,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 177,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 103.59842783937347,
+      "skillName": "美化节点",
+      "x": 142.09842783937347,
       "y": -1298.6040001547424,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 178,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 109.13579797209256,
+      "x": 147.63579797209258,
       "y": -1066.1255078825538,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1351945218",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 179,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 111.83063423733631,
+      "skillName": "美化节点",
+      "x": 150.3306342373363,
       "y": -960.4311542064388,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 180,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 210.53549387090732,
+      "x": 249.03549387090732,
       "y": -1061.5164490968061,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1813944211",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 181,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 116.01569540656821,
+      "skillName": "美化节点",
+      "x": 154.51569540656823,
       "y": -772.4265376857879,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 182,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 191.423687502502,
+      "skillName": "美化节点",
+      "x": 229.923687502502,
       "y": -873.15458803824,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 183,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 280.7751268899684,
+      "x": 319.2751268899684,
       "y": -968.1458679899474,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1533841030",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 184,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 349.5308306072987,
+      "x": 388.0308306072987,
       "y": -872.0867309696787,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1533841030",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 185,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 286.26084137380576,
+      "x": 324.76084137380576,
       "y": -782.6516926859563,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1587518667",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 186,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 213.1957569452747,
+      "x": 251.6957569452747,
       "y": -686.5835931099164,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3096561380",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 187,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 115.48847524430337,
+      "x": 153.98847524430337,
       "y": -686.3704867129368,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "744033029",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 188,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -292.55532964280815,
+      "skillName": "美化节点",
+      "x": -254.05532964280815,
       "y": -1146.7262877207845,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3047367406",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 189,
       "skillKey": "sorcerer_ice_shards",
-      "skillName": "寒冰碎片",
-      "x": -684.0716601778756,
+      "skillName": "主动技能",
+      "x": -645.5716601778756,
       "y": -1148.6255777759818,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "462518234",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 190,
       "skillKey": "sorcerer_charged_bolts",
-      "skillName": "电荷弹",
-      "x": -424.0486008505993,
+      "skillName": "主动技能",
+      "x": -385.5486008505993,
       "y": -827.9407345960253,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1917715779",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 191,
       "skillKey": "sorcerer_chain_lightning",
-      "skillName": "连锁闪电",
-      "x": -783.660808362233,
+      "skillName": "主动技能",
+      "x": -745.160808362233,
       "y": -782.3914355958323,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4147712587",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 192,
       "skillKey": "sorcerer_incinerate",
-      "skillName": "焚烧",
-      "x": 5.463434237847991,
+      "skillName": "主动技能",
+      "x": 43.96343423784799,
       "y": -871.1171770497385,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1533841030",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 193,
       "skillKey": "sorcerer_fireball",
-      "skillName": "火球",
-      "x": 40.8420647434107,
+      "skillName": "主动技能",
+      "x": 79.3420647434107,
       "y": -1379.369071371761,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2402480109",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 194,
       "skillKey": "sorcerer_frozen_orb",
-      "skillName": "冰霜球",
-      "x": -376.5180504528129,
+      "skillName": "主动技能",
+      "x": -338.0180504528129,
       "y": -1505.7588928311438,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "331607739",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 195,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -748.1851331775691,
+      "x": -709.6851331775691,
       "y": -1327.512461279485,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1994634449",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 196,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -828.8654363237723,
+      "x": -790.3654363237723,
       "y": -1326.5213998148745,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3283446701",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 197,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -887.4514193881024,
+      "x": -848.9514193881024,
       "y": -1238.2852613813166,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "462518234",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 198,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -959.777536489633,
+      "x": -921.277536489633,
       "y": -1144.8671401527984,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "462518234",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 199,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -881.0540566852184,
+      "x": -842.5540566852184,
       "y": -1060.5664864012303,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2905290015",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 200,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -800.7862222261065,
+      "x": -762.2862222261065,
       "y": -966.2569936280497,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1375884437",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 201,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -721.3418085669705,
+      "x": -682.8418085669705,
       "y": -964.7429919607798,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1620674625",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 202,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -469.35984587124267,
+      "x": -430.85984587124267,
       "y": -1338.263314635713,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1990297850",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 203,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -550.8306613633175,
+      "x": -512.3306613633175,
       "y": -1688.4887710536184,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3616384966",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 204,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -469.96940609553246,
+      "skillName": "美化节点",
+      "x": -431.46940609553246,
       "y": -1602.7834380122595,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 205,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 290.0143076449451,
+      "skillName": "美化节点",
+      "x": 328.5143076449451,
       "y": -143.33624270903874,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3561673758",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 206,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -550.6045859654478,
+      "x": -512.1045859654478,
       "y": -1338.345339543797,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3283446701",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 207,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -472.35330814803535,
+      "x": -433.85330814803535,
       "y": -1693.1118455921953,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2265690523",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 208,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -472.2634740812092,
+      "skillName": "美化节点",
+      "x": -433.7634740812092,
       "y": -1429.64227059193,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 209,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -529.8092068190459,
+      "skillName": "美化节点",
+      "x": -491.3092068190459,
       "y": -1511.3824517357543,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 215,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -657.503561146281,
+      "x": -619.003561146281,
       "y": -1513.388511218794,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "331607739",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 216,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -596.6291923085961,
+      "x": -558.1291923085961,
       "y": -1593.580172385273,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "331607739",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 217,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -596.9055628501244,
+      "x": -558.4055628501244,
       "y": -1440.2279266153514,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1026190482",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 218,
       "skillKey": "sorcerer_flame_shield",
-      "skillName": "火盾",
-      "x": 388.2150280646945,
+      "skillName": "主动技能",
+      "x": 426.7150280646945,
       "y": -490.80899556653503,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1899926082",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 219,
       "skillKey": "sorcerer_teleport",
-      "skillName": "传送术",
-      "x": 696.2033672725785,
+      "skillName": "主动技能",
+      "x": 734.7033672725785,
       "y": -267.75329258456804,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2734934320",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 221,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 530.175663261996,
+      "x": 568.675663261996,
       "y": -652.5524021183155,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1311924934",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 222,
       "skillKey": "sorcerer_ice_armor",
-      "skillName": "寒冰甲",
-      "x": 584.5696881674747,
+      "skillName": "主动技能",
+      "x": 623.0696881674747,
       "y": 100.94797924918748,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3609169654",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 223,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 450.37975721021564,
+      "x": 488.87975721021564,
       "y": -654.2920487538713,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 224,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 338.56903725152165,
+      "skillName": "美化节点",
+      "x": 377.06903725152165,
       "y": 348.22516253356434,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 225,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 473.03171649533044,
+      "x": 511.53171649533044,
       "y": 123.74368006039822,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3840789304",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 226,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 397.2093178151282,
+      "x": 435.7093178151282,
       "y": 121.49733617241054,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2307159530",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 227,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 497.70590686170453,
+      "x": 536.2059068617045,
       "y": 251.09190305968195,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1742578310",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 228,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 398.8413515876176,
-      "y": 207.87851522203482,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 437.3413515876176,
+      "y": 206.0703768863541,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 229,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 438.446904135423,
+      "skillName": "美化节点",
+      "x": 476.946904135423,
       "y": 323.8025028018583,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 230,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 336.86898059376097,
+      "x": 375.36898059376097,
       "y": 432.845430705097,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1711395052",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 231,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 538.947215989511,
+      "x": 577.447215989511,
       "y": 325.19891812825426,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1742578310",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 232,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 412.0119711023948,
+      "x": 450.5119711023948,
       "y": 430.9317343826301,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2920834280",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 233,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 598.7088322930213,
+      "x": 637.2088322930213,
       "y": -569.3411819798102,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1899926082",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 234,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 493.24897368513405,
+      "x": 531.748973685134,
       "y": 398.9628548993319,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1742578310",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 235,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 529.9236374546722,
+      "skillName": "美化节点",
+      "x": 568.4236374546722,
       "y": -492.06634913735206,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 236,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 598.4805841901259,
+      "x": 636.9805841901259,
       "y": -416.52118963326166,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2154593671",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 237,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 449.2704322099894,
+      "skillName": "美化节点",
+      "x": 487.7704322099894,
       "y": -405.78208465114494,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 238,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 453.61529523355637,
+      "skillName": "美化节点",
+      "x": 492.11529523355637,
       "y": -567.6769256500688,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 239,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 808.2495770286878,
+      "skillName": "美化节点",
+      "x": 846.7495770286878,
       "y": -269.86547351994113,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 240,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 739.1316152299343,
+      "skillName": "美化节点",
+      "x": 777.6316152299343,
       "y": -349.1556491742649,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 241,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 529.3046116916731,
+      "x": 567.8046116916731,
       "y": -317.01564561661644,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "833791648",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 242,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 453.63344311153844,
+      "x": 492.13344311153844,
       "y": -317.0815996921915,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "744033029",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 243,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 928.251489434662,
+      "x": 966.751489434662,
       "y": -273.10084906628754,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2734934320",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 244,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 637.5062644653818,
+      "x": 676.0062644653818,
       "y": -491.12573517775036,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1899926082",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 245,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 878.44226890499,
+      "x": 916.94226890499,
       "y": -195.55837087833606,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3243120679",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 246,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 752.3859401547213,
+      "x": 790.8859401547213,
       "y": -104.33746492900264,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3169811489",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 247,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 830.1192368371069,
+      "x": 868.6192368371069,
       "y": -105.45768972670157,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1534222278",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 248,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 761.9271071458637,
+      "x": 800.4271071458637,
       "y": 261.2572718226552,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "663935699",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 249,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 670.371071424663,
+      "x": 708.871071424663,
       "y": 259.9143226387987,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3007795371",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 250,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 662.476273948829,
+      "skillName": "美化节点",
+      "x": 700.976273948829,
       "y": 33.31925199027046,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 251,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 669.2968746601146,
+      "skillName": "美化节点",
+      "x": 707.7968746601146,
       "y": 168.55757444961318,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 252,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 734.988309895177,
+      "skillName": "美化节点",
+      "x": 773.488309895177,
       "y": 101.82557773823328,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 253,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 858.0933651145821,
+      "x": 896.5933651145821,
       "y": 96.60084332307088,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3609169654",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 254,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 819.0400811068698,
+      "x": 857.5400811068698,
       "y": 180.71774185374852,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3609169654",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 255,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -8.828029322020456,
+      "skillName": "美化节点",
+      "x": 29.671970677979544,
       "y": 637.8240610207922,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 256,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 816.7204126620961,
+      "x": 855.2204126620961,
       "y": 26.124957747369535,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3609169654",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 257,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -102.74895296981481,
+      "x": -64.24895296981481,
       "y": 787.4689977466173,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4109480457",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 258,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -364.5321606465068,
+      "skillName": "美化节点",
+      "x": -326.0321606465068,
       "y": 630.648480007007,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "242924977",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 259,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 739.2575628024846,
+      "x": 777.7575628024846,
       "y": -20.345603541225955,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4095438116",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 260,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 22.636169080609307,
+      "x": 61.13616908060931,
       "y": 538.4336971514876,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1329466172",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 261,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 657.2339484449637,
+      "x": 695.7339484449637,
       "y": -53.5048328966127,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 262,
       "skillKey": "sorcerer_familiar",
-      "skillName": "魔宠",
-      "x": -174.56763239697972,
+      "skillName": "主动技能",
+      "x": -136.06763239697972,
       "y": 636.639493962577,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1329466172",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 263,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -104.99583219525402,
+      "x": -66.49583219525402,
       "y": 481.7354796362506,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2920834280",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 264,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -102.1412282872281,
+      "skillName": "美化节点",
+      "x": -63.6412282872281,
       "y": 561.3235161050452,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 265,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -102.096088361552,
+      "skillName": "美化节点",
+      "x": -63.596088361552006,
       "y": 712.0091143563586,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 266,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 33.66003507992744,
+      "x": 72.16003507992744,
       "y": 722.2420779168287,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4109480457",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 267,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -30.881906338702038,
+      "x": 7.618093661297962,
       "y": 480.6795293824921,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2307159530",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 268,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -21.613806877105475,
+      "x": 16.886193122894525,
       "y": 790.3304978142842,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2265690523",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 269,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -440.27744772833375,
+      "x": -401.77744772833375,
       "y": 326.29277392385757,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "898961067",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 270,
       "skillKey": "sorcerer_lightning_spear",
-      "skillName": "闪电矛",
-      "x": -464.05042550909684,
+      "skillName": "主动技能",
+      "x": -425.55042550909684,
       "y": 843.7795243917399,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3577333848",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 271,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 87.81190643425859,
+      "x": 126.31190643425859,
       "y": 664.7854944576557,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1977690456",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 272,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -438.1498236163534,
-      "y": 12.326172872876668,
-      "branchSkill": null,
-      "branchId": null,
+      "x": -399.6498236163534,
+      "y": 19.946962386670293,
       "iconId": "1813944211",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 273,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -441.4498039190685,
+      "skillName": "美化节点",
+      "x": -402.9498039190685,
       "y": 976.4691796219499,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 274,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -633.1805043388372,
+      "x": -594.6805043388372,
       "y": 984.391565127175,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3577333848",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 275,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -360.2056922544242,
+      "x": -321.7056922544242,
       "y": 977.2296679434071,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1417004774",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 276,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -360.97975293650256,
+      "x": -322.47975293650256,
       "y": 1058.3189242022781,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1620674625",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 277,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -598.1345913186468,
+      "x": -559.6345913186468,
       "y": 811.0919669249488,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1185604044",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 278,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -491.43579598854103,
+      "x": -452.93579598854103,
       "y": 1072.517043201301,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3446263887",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 279,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -541.6662398923432,
+      "skillName": "美化节点",
+      "x": -503.16623989234324,
       "y": 993.8239171570494,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 280,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -600.2632131865403,
+      "skillName": "美化节点",
+      "x": -561.7632131865403,
       "y": 893.6567370826633,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 281,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -679.1265514697586,
+      "x": -640.6265514697586,
       "y": 811.1563355797907,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "833791648",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 282,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -439.3107720326934,
+      "skillName": "美化节点",
+      "x": -400.8107720326934,
       "y": 244.55232877458138,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 283,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -586.3670730469548,
+      "x": -547.8670730469548,
       "y": 1071.1925941588452,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3577333848",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 284,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -515.6338209439409,
+      "x": -477.1338209439409,
       "y": 321.8052887403005,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 285,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 821.5269572766892,
+      "x": 860.0269572766892,
       "y": -437.62452359533427,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "146159251",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 286,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 750.736044597773,
+      "skillName": "美化节点",
+      "x": 789.236044597773,
       "y": -185.54166335966647,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 287,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 885.7613920950643,
+      "x": 924.2613920950643,
       "y": -354.444167485487,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2734934320",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 288,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 742.1203737752212,
+      "x": 780.6203737752212,
       "y": -441.7181711564781,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1157853967",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 289,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -577.9395804973049,
+      "x": -539.4395804973049,
       "y": 95.19381965004277,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3327405852",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 290,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -631.437935823303,
+      "x": -592.937935823303,
       "y": 169.38524306801264,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3327405852",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 291,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -523.8130503096735,
+      "skillName": "美化节点",
+      "x": -485.3130503096735,
       "y": 167.468865126139,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 292,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -440.95756303387645,
+      "skillName": "美化节点",
+      "x": -402.45756303387645,
       "y": 90.07670476777366,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 293,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -571.8597689076154,
+      "x": -533.3597689076154,
       "y": 243.79845412990153,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2666782071",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 294,
       "skillKey": "sorcerer_hydra",
-      "skillName": "多头蛇",
-      "x": -377.53291675425726,
+      "skillName": "主动技能",
+      "x": -339.03291675425726,
       "y": 167.34049761958977,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3327405852",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 295,
       "skillKey": "sorcerer_ice_blades",
-      "skillName": "冰刃",
-      "x": -531.0933851687491,
+      "skillName": "主动技能",
+      "x": -492.59338516874914,
       "y": 545.6430145230029,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4022282752",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 296,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -677.6567689188095,
+      "x": -639.1567689188095,
       "y": 717.6333143913093,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "824310412",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 297,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -602.6629966175325,
+      "x": -564.1629966175325,
       "y": 716.7947224753548,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "833791648",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 298,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -601.1617565775626,
+      "skillName": "美化节点",
+      "x": -562.6617565775626,
       "y": 626.1956880447738,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 299,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -743.452140102429,
+      "x": -704.952140102429,
       "y": 621.2458795689236,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "257325815",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 300,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -743.5547723773295,
+      "x": -705.0547723773295,
       "y": 475.43213543738875,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4022282752",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 301,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -675.623880263775,
+      "skillName": "美化节点",
+      "x": -637.123880263775,
       "y": 545.5376650817634,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 302,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -797.4761819084108,
+      "x": -758.9761819084108,
       "y": 546.2263413147648,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4022282752",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 303,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -576.3290476352668,
+      "x": -537.8290476352668,
       "y": 387.622055652922,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 304,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -575.6982720088845,
+      "skillName": "美化节点",
+      "x": -537.1982720088845,
       "y": 471.71334121384916,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 305,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -663.1952104724929,
-      "y": 386.39123700752134,
-      "branchSkill": null,
-      "branchId": null,
+      "x": -624.6952104724929,
+      "y": 384.8670791047625,
       "iconId": "2307159530",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 306,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -513.8629330074,
+      "x": -475.3629330074,
       "y": 20.763052176087513,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3853655021",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 307,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 368.1315164893082,
+      "skillName": "美化节点",
+      "x": 406.6315164893082,
       "y": 1472.0221136976597,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3945044458",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 308,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 84.65247847577857,
+      "x": 123.15247847577857,
       "y": 585.0511486527803,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4008354426",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 309,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 401.6376209208214,
+      "skillName": "美化节点",
+      "x": 440.1376209208214,
       "y": 2228.8349085059563,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "35213322",
       "borderImage": "images/icons/4.png",
-      "isPassive": false
+      "nodeType": "decor",
+      "scale": 1.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 310,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 407.83514397276133,
+      "x": 446.33514397276133,
       "y": 2609.2382144729618,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2473427407",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 311,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 480.45062597840683,
+      "x": 518.9506259784068,
       "y": 2555.8583609574234,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2473427407",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 312,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 336.19876221188736,
+      "x": 374.69876221188736,
       "y": 2552.165596968005,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2473427407",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 313,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 336.0081928802764,
+      "skillName": "美化节点",
+      "x": 374.5081928802764,
       "y": 2437.13885759778,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 314,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 405.9617369834847,
+      "skillName": "美化节点",
+      "x": 444.4617369834847,
       "y": 2498.3786553804957,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 315,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 481.18147211618674,
+      "skillName": "美化节点",
+      "x": 519.6814721161868,
       "y": 2438.397117142723,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 316,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 567.397167174546,
+      "x": 605.897167174546,
       "y": 2449.8089538945133,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "744033029",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 317,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 513.84048153457,
-      "y": 2358.8344984204678,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 552.34048153457,
+      "y": 2357.310340517709,
       "iconId": "2920834280",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 318,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 288.45958910450685,
+      "x": 326.95958910450685,
       "y": 2368.3686437509787,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 319,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 260.2457781066722,
+      "x": 298.7457781066722,
       "y": 2480.7161574800657,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1990297850",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 320,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 157.8653645931419,
+      "skillName": "美化节点",
+      "x": 196.3653645931419,
       "y": 2282.0368658843354,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "25",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 321,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 92.448285377634,
+      "skillName": "美化节点",
+      "x": 130.948285377634,
       "y": 2201.758813073997,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 322,
       "skillKey": "sorcerer_deep_freeze",
       "skillName": "深度冻结",
-      "x": 209.09566511271697,
+      "x": 247.59566511271697,
       "y": 2199.788811754677,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "704167939",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 323,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 103.29920328603414,
+      "x": 141.79920328603413,
       "y": 2349.236911561211,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3840789304",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 324,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -9.124808104801474,
+      "x": 29.375191895198526,
       "y": 2205.714781664051,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "704167939",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 325,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 647.2330810475994,
+      "skillName": "美化节点",
+      "x": 685.7330810475994,
       "y": 2119.583807620713,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 326,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 192.69929463978372,
+      "x": 231.19929463978372,
       "y": 2368.3419622428637,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3007795371",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 327,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 40.94984713318547,
+      "x": 79.44984713318547,
       "y": 2277.9148273409255,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "704167939",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 328,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 616.9104473772954,
-      "y": 2034.9119262808172,
-      "branchSkill": null,
-      "branchId": null,
+      "x": 655.4104473772954,
+      "y": 2033.3877683780584,
       "iconId": "3169811489",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 329,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 153.80769721691328,
+      "skillName": "美化节点",
+      "x": 192.30769721691328,
       "y": 2126.073965118955,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 330,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 38.41766154959427,
+      "x": 76.91766154959427,
       "y": 2134.253671038595,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "704167939",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 331,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 102.25829538718979,
+      "x": 140.75829538718978,
       "y": 2059.097656771666,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1711395052",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 332,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 710.7701788684169,
+      "x": 749.2701788684169,
       "y": 2041.817868588566,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1643528245",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 333,
       "skillKey": "sorcerer_inferno",
       "skillName": "炼狱烈焰",
-      "x": 406.3123004923288,
+      "x": 444.8123004923288,
       "y": 2395.5637993163364,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "2473427407",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 334,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 189.73974576988005,
+      "x": 228.23974576988005,
       "y": 2042.7179051751536,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "833791648",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 335,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 636.7183366094489,
+      "x": 675.2183366094489,
       "y": 2368.490027437282,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1994634449",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 336,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 670.94555882564,
+      "skillName": "美化节点",
+      "x": 709.44555882564,
       "y": 2284.99670756041,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 337,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 784.1784842721588,
+      "x": 822.6784842721588,
       "y": 2113.454139927104,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "458680120",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 338,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 718.1140081154492,
+      "skillName": "美化节点",
+      "x": 756.6140081154492,
       "y": 2195.42483149303,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 339,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 830.6964192257165,
+      "x": 869.1964192257165,
       "y": 2195.8851847612714,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "458680120",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 340,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 731.0896406975805,
+      "x": 769.5896406975805,
       "y": 2371.6369030453397,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1620674625",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 341,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 782.8066450717852,
+      "x": 821.3066450717852,
       "y": 2291.356667840987,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "458680120",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 342,
       "skillKey": "sorcerer_unstable_currents",
       "skillName": "不稳电流",
-      "x": 592.2492322731698,
+      "x": 630.7492322731698,
       "y": 2206.28058136047,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "458680120",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 343,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 623.9338180537417,
+      "skillName": "美化节点",
+      "x": 662.4338180537417,
       "y": 1775.2266338565378,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 344,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 756.9025291714756,
+      "x": 795.4025291714756,
       "y": 1567.0984379393867,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1264068485",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 345,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 542.2112391327335,
+      "x": 580.7112391327335,
       "y": 1150.086674510222,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3616384966",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 346,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 622.5254950636652,
+      "x": 661.0254950636652,
       "y": 1119.8159753883956,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "130962716",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 347,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 813.1441587378184,
+      "x": 851.6441587378184,
       "y": 1203.637003190668,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "244480294",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 348,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 827.2471620672558,
+      "x": 865.7471620672558,
       "y": 1302.5999928271285,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "4050845547",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 349,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 729.5023920198024,
+      "x": 768.0023920198024,
       "y": 1159.0802399571257,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "244480294",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 350,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 809.3789618331135,
+      "x": 847.8789618331135,
       "y": 1478.6430473598448,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1587379851",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 351,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 807.3353153098873,
+      "x": 845.8353153098873,
       "y": 1386.6478848247161,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "833791648",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 352,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 2.610990703241356,
+      "x": 41.110990703241356,
       "y": 1186.5208534817448,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3169811489",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 353,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -81.25018765307016,
+      "x": -42.75018765307016,
       "y": 1561.1773629755144,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1587379851",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 354,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -86.6938546485029,
+      "x": -48.19385464850291,
       "y": 1188.8289682878076,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3968716431",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 355,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -205.08171185427517,
+      "x": -166.58171185427517,
       "y": 1382.5757770518621,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1062930714",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 356,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 0.23212449684729108,
+      "x": 38.73212449684729,
       "y": 1563.1789977026747,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "130962716",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 357,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -163.21399458932518,
+      "x": -124.71399458932518,
       "y": 1300.2225470386384,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1062930714",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 358,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -151.86151308371842,
+      "x": -113.36151308371842,
       "y": 1463.878239168831,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3269188177",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 359,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": -99.25263974380954,
+      "skillName": "美化节点",
+      "x": -60.75263974380954,
       "y": 1380.5701243627664,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 360,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 4.135217461962554,
+      "skillName": "美化节点",
+      "x": 42.635217461962554,
       "y": 1278.7402348887208,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 361,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 49.91139671380466,
-      "y": 1664.4872816974075,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "skillName": "美化节点",
+      "x": 89.99807611585499,
+      "y": 1681.940755119961,
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 362,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 50.089982714876356,
+      "skillName": "美化节点",
+      "x": 88.58998271487636,
       "y": 1803.4156629541485,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 363,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 0.5797018209751741,
+      "skillName": "美化节点",
+      "x": 39.079701820975174,
       "y": 1470.6120389715707,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 364,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 140.6921230636488,
+      "skillName": "美化节点",
+      "x": 179.1921230636488,
       "y": 1807.1966797520463,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 365,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 734.1975661602619,
+      "skillName": "美化节点",
+      "x": 772.6975661602619,
       "y": 1746.0935337579085,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 366,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 845.9855410255035,
+      "x": 884.4855410255035,
       "y": 1595.5363833897609,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "340193677",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 367,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 760.0726396974304,
+      "skillName": "美化节点",
+      "x": 798.5726396974304,
       "y": 1655.4862951451587,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 368,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 709.501255160877,
+      "skillName": "美化节点",
+      "x": 748.001255160877,
       "y": 1381.9531155641225,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 369,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 728.009783527959,
+      "skillName": "美化节点",
+      "x": 766.509783527959,
       "y": 1263.6508898022612,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 370,
       "skillKey": null,
-      "skillName": "未指定",
-      "x": 625.1354972808995,
+      "skillName": "美化节点",
+      "x": 663.6354972808995,
       "y": 1208.35383978152,
-      "branchSkill": null,
-      "branchId": null,
-      "iconId": "5",
-      "borderImage": null,
-      "isPassive": false
+      "iconId": null,
+      "borderImage": "images/icons/5.png",
+      "nodeType": "decor",
+      "scale": 0.5,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 371,
       "skillKey": "sorcerer_firewall",
-      "skillName": "火墙",
-      "x": 154.8877041283998,
+      "skillName": "主动技能",
+      "x": 193.3877041283998,
       "y": 1690.7947894771678,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": null,
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 372,
       "skillKey": "sorcerer_meteor",
       "skillName": "陨石术",
-      "x": 594.8801384479605,
+      "x": 633.3801384479605,
       "y": 1624.6575677331612,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": null,
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 373,
       "skillKey": "sorcerer_ball_lightning",
-      "skillName": "球状闪电",
-      "x": 35.285720521784185,
+      "skillName": "主动技能",
+      "x": 73.78572052178419,
       "y": 1378.1573115987057,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1062930714",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 374,
       "skillKey": "sorcerer_blizzard",
-      "skillName": "暴风雪",
-      "x": 590.8397638002448,
+      "skillName": "主动技能",
+      "x": 629.3397638002448,
       "y": 1333.4090533639728,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "244480294",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 375,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 839.3273968045726,
+      "x": 877.8273968045726,
       "y": 1836.7968620419615,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "343690160",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 376,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 740.110467488335,
+      "x": 778.610467488335,
       "y": 1875.0968032122273,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3396081931",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 377,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 221.62765731591372,
+      "x": 260.1276573159137,
       "y": 1807.8811291238972,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1264068485",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 378,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 629.457227448883,
+      "x": 667.957227448883,
       "y": 1883.7064939157153,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "744033029",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 379,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 536.1531994607186,
+      "x": 574.6531994607186,
       "y": 1831.6234932019406,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3897441388",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 380,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 57.86822935057057,
+      "x": 96.36822935057057,
       "y": 1902.9371746051938,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "193225823",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 381,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 845.5863380422106,
+      "x": 884.0863380422106,
       "y": 1726.1032448082697,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "343690160",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 382,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -24.888563039933615,
+      "x": 13.611436960066385,
       "y": 1913.021749102415,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3884463898",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 383,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -49.022008007464876,
+      "x": -10.522008007464876,
       "y": 1838.2938627278027,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3884463898",
       "borderImage": "images/icons/2916187532.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 384,
       "skillKey": null,
       "skillName": "未指定",
-      "x": 222.8118014952995,
+      "x": 261.3118014952995,
       "y": 1892.6537407056658,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1157853967",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 385,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -40.951428280048276,
+      "x": -2.451428280048276,
       "y": 1747.629870740625,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "3675187692",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 386,
       "skillKey": null,
       "skillName": "未指定",
-      "x": -40.44669592072381,
+      "x": -1.946695920723812,
       "y": 1663.02260120959,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "7099689",
       "borderImage": "images/icons/3.png",
-      "isPassive": true
+      "nodeType": "passive",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     },
     {
       "id": 387,
       "skillKey": "sorcerer_frost_nova",
-      "skillName": "寒霜新星",
-      "x": 299.8240430281397,
+      "skillName": "主动技能",
+      "x": 338.3240430281397,
       "y": 223.91346344494923,
-      "branchSkill": null,
-      "branchId": null,
       "iconId": "1742578310",
       "borderImage": "images/icons/2.png",
-      "isPassive": false
+      "nodeType": "active",
+      "scale": 1,
+      "mod_data": null,
+      "ownerSkillKey": null,
+      "branchId": null
     }
   ],
   "edges": [
     {
       "fromNodeId": 117,
-      "toNodeId": 119
+      "toNodeId": 119,
+      "direction": null
     },
     {
       "fromNodeId": 115,
-      "toNodeId": 119
+      "toNodeId": 119,
+      "direction": null
     },
     {
       "fromNodeId": 116,
-      "toNodeId": 119
+      "toNodeId": 119,
+      "direction": null
     },
     {
       "fromNodeId": 114,
-      "toNodeId": 112
+      "toNodeId": 112,
+      "direction": null
     },
     {
       "fromNodeId": 113,
-      "toNodeId": 112
+      "toNodeId": 112,
+      "direction": null
     },
     {
       "fromNodeId": 120,
-      "toNodeId": 118
+      "toNodeId": 118,
+      "direction": null
     },
     {
       "fromNodeId": 121,
-      "toNodeId": 118
+      "toNodeId": 118,
+      "direction": null
     },
     {
       "fromNodeId": 119,
-      "toNodeId": 100
+      "toNodeId": 100,
+      "direction": null
     },
     {
       "fromNodeId": 118,
-      "toNodeId": 100
+      "toNodeId": 100,
+      "direction": null
     },
     {
       "fromNodeId": 112,
-      "toNodeId": 100
+      "toNodeId": 100,
+      "direction": null
     },
     {
       "fromNodeId": 111,
-      "toNodeId": 109
+      "toNodeId": 109,
+      "direction": null
     },
     {
       "fromNodeId": 110,
-      "toNodeId": 109
+      "toNodeId": 109,
+      "direction": null
     },
     {
       "fromNodeId": 108,
-      "toNodeId": 134
+      "toNodeId": 134,
+      "direction": null
     },
     {
       "fromNodeId": 107,
-      "toNodeId": 134
+      "toNodeId": 134,
+      "direction": null
     },
     {
       "fromNodeId": 106,
-      "toNodeId": 134
+      "toNodeId": 134,
+      "direction": null
     },
     {
       "fromNodeId": 134,
-      "toNodeId": 101
+      "toNodeId": 101,
+      "direction": null
     },
     {
       "fromNodeId": 109,
-      "toNodeId": 101
+      "toNodeId": 101,
+      "direction": null
     },
     {
       "fromNodeId": 132,
-      "toNodeId": 104
+      "toNodeId": 104,
+      "direction": null
     },
     {
       "fromNodeId": 132,
-      "toNodeId": 105
+      "toNodeId": 105,
+      "direction": null
     },
     {
       "fromNodeId": 132,
-      "toNodeId": 101
+      "toNodeId": 101,
+      "direction": null
     },
     {
       "fromNodeId": 131,
-      "toNodeId": 125
+      "toNodeId": 125,
+      "direction": null
     },
     {
       "fromNodeId": 129,
-      "toNodeId": 125
+      "toNodeId": 125,
+      "direction": null
     },
     {
       "fromNodeId": 130,
-      "toNodeId": 125
+      "toNodeId": 125,
+      "direction": null
     },
     {
       "fromNodeId": 128,
-      "toNodeId": 122
+      "toNodeId": 122,
+      "direction": null
     },
     {
       "fromNodeId": 127,
-      "toNodeId": 122
+      "toNodeId": 122,
+      "direction": null
     },
     {
       "fromNodeId": 124,
-      "toNodeId": 123
+      "toNodeId": 123,
+      "direction": null
     },
     {
       "fromNodeId": 126,
-      "toNodeId": 123
+      "toNodeId": 123,
+      "direction": null
     },
     {
       "fromNodeId": 125,
-      "toNodeId": 103
+      "toNodeId": 103,
+      "direction": null
     },
     {
       "fromNodeId": 122,
-      "toNodeId": 103
+      "toNodeId": 103,
+      "direction": null
     },
     {
       "fromNodeId": 123,
-      "toNodeId": 103
+      "toNodeId": 103,
+      "direction": null
     },
     {
       "fromNodeId": 102,
-      "toNodeId": 133
+      "toNodeId": 133,
+      "direction": null
     },
     {
       "fromNodeId": 135,
-      "toNodeId": 133
+      "toNodeId": 133,
+      "direction": null
     },
     {
       "fromNodeId": 139,
-      "toNodeId": 138
+      "toNodeId": 138,
+      "direction": null
     },
     {
       "fromNodeId": 136,
-      "toNodeId": 138
+      "toNodeId": 138,
+      "direction": null
     },
     {
       "fromNodeId": 137,
-      "toNodeId": 138
+      "toNodeId": 138,
+      "direction": null
     },
     {
       "fromNodeId": 140,
-      "toNodeId": 142
+      "toNodeId": 142,
+      "direction": null
     },
     {
       "fromNodeId": 141,
-      "toNodeId": 142
+      "toNodeId": 142,
+      "direction": null
     },
     {
       "fromNodeId": 138,
-      "toNodeId": 143
+      "toNodeId": 143,
+      "direction": null
     },
     {
       "fromNodeId": 133,
-      "toNodeId": 143
+      "toNodeId": 143,
+      "direction": null
     },
     {
       "fromNodeId": 142,
-      "toNodeId": 143
+      "toNodeId": 143,
+      "direction": null
     },
     {
       "fromNodeId": 103,
-      "toNodeId": 144
+      "toNodeId": 144,
+      "direction": null
     },
     {
       "fromNodeId": 100,
-      "toNodeId": 144
+      "toNodeId": 144,
+      "direction": null
     },
     {
       "fromNodeId": 101,
-      "toNodeId": 144
+      "toNodeId": 144,
+      "direction": null
     },
     {
       "fromNodeId": 143,
-      "toNodeId": 144
+      "toNodeId": 144,
+      "direction": null
     },
     {
       "fromNodeId": 144,
-      "toNodeId": 188
+      "toNodeId": 188,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 192
+      "toNodeId": 192,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 193
+      "toNodeId": 193,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 190
+      "toNodeId": 190,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 191
+      "toNodeId": 191,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 189
+      "toNodeId": 189,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 194
+      "toNodeId": 194,
+      "direction": null
     },
     {
       "fromNodeId": 177,
-      "toNodeId": 169
+      "toNodeId": 169,
+      "direction": null
     },
     {
       "fromNodeId": 177,
-      "toNodeId": 168
+      "toNodeId": 168,
+      "direction": null
     },
     {
       "fromNodeId": 176,
-      "toNodeId": 171
+      "toNodeId": 171,
+      "direction": null
     },
     {
       "fromNodeId": 176,
-      "toNodeId": 172
+      "toNodeId": 172,
+      "direction": null
     },
     {
       "fromNodeId": 170,
-      "toNodeId": 176
+      "toNodeId": 176,
+      "direction": null
     },
     {
       "fromNodeId": 176,
-      "toNodeId": 193
+      "toNodeId": 193,
+      "direction": null
     },
     {
       "fromNodeId": 177,
-      "toNodeId": 193
+      "toNodeId": 193,
+      "direction": null
     },
     {
       "fromNodeId": 193,
-      "toNodeId": 175
+      "toNodeId": 175,
+      "direction": null
     },
     {
       "fromNodeId": 174,
-      "toNodeId": 175
+      "toNodeId": 175,
+      "direction": null
     },
     {
       "fromNodeId": 175,
-      "toNodeId": 173
+      "toNodeId": 173,
+      "direction": null
     },
     {
       "fromNodeId": 183,
-      "toNodeId": 182
+      "toNodeId": 182,
+      "direction": null
     },
     {
       "fromNodeId": 184,
-      "toNodeId": 182
+      "toNodeId": 182,
+      "direction": null
     },
     {
       "fromNodeId": 185,
-      "toNodeId": 182
+      "toNodeId": 182,
+      "direction": null
     },
     {
       "fromNodeId": 186,
-      "toNodeId": 181
+      "toNodeId": 181,
+      "direction": null
     },
     {
       "fromNodeId": 187,
-      "toNodeId": 181
+      "toNodeId": 181,
+      "direction": null
     },
     {
       "fromNodeId": 180,
-      "toNodeId": 179
+      "toNodeId": 179,
+      "direction": null
     },
     {
       "fromNodeId": 178,
-      "toNodeId": 179
+      "toNodeId": 179,
+      "direction": null
     },
     {
       "fromNodeId": 182,
-      "toNodeId": 192
+      "toNodeId": 192,
+      "direction": null
     },
     {
       "fromNodeId": 181,
-      "toNodeId": 192
+      "toNodeId": 192,
+      "direction": null
     },
     {
       "fromNodeId": 179,
-      "toNodeId": 192
+      "toNodeId": 192,
+      "direction": null
     },
     {
       "fromNodeId": 150,
-      "toNodeId": 154
+      "toNodeId": 154,
+      "direction": null
     },
     {
       "fromNodeId": 148,
-      "toNodeId": 154
+      "toNodeId": 154,
+      "direction": null
     },
     {
       "fromNodeId": 149,
-      "toNodeId": 154
+      "toNodeId": 154,
+      "direction": null
     },
     {
       "fromNodeId": 154,
-      "toNodeId": 191
+      "toNodeId": 191,
+      "direction": null
     },
     {
       "fromNodeId": 157,
-      "toNodeId": 191
+      "toNodeId": 191,
+      "direction": null
     },
     {
       "fromNodeId": 153,
-      "toNodeId": 191
+      "toNodeId": 191,
+      "direction": null
     },
     {
       "fromNodeId": 152,
-      "toNodeId": 153
+      "toNodeId": 153,
+      "direction": null
     },
     {
       "fromNodeId": 151,
-      "toNodeId": 153
+      "toNodeId": 153,
+      "direction": null
     },
     {
       "fromNodeId": 155,
-      "toNodeId": 157
+      "toNodeId": 157,
+      "direction": null
     },
     {
       "fromNodeId": 156,
-      "toNodeId": 157
+      "toNodeId": 157,
+      "direction": null
     },
     {
       "fromNodeId": 158,
-      "toNodeId": 161
+      "toNodeId": 161,
+      "direction": null
     },
     {
       "fromNodeId": 159,
-      "toNodeId": 161
+      "toNodeId": 161,
+      "direction": null
     },
     {
       "fromNodeId": 164,
-      "toNodeId": 160
+      "toNodeId": 160,
+      "direction": null
     },
     {
       "fromNodeId": 163,
-      "toNodeId": 164
+      "toNodeId": 164,
+      "direction": null
     },
     {
       "fromNodeId": 162,
-      "toNodeId": 164
+      "toNodeId": 164,
+      "direction": null
     },
     {
       "fromNodeId": 164,
-      "toNodeId": 190
+      "toNodeId": 190,
+      "direction": null
     },
     {
       "fromNodeId": 161,
-      "toNodeId": 190
+      "toNodeId": 190,
+      "direction": null
     },
     {
       "fromNodeId": 165,
-      "toNodeId": 190
+      "toNodeId": 190,
+      "direction": null
     },
     {
       "fromNodeId": 167,
-      "toNodeId": 165
+      "toNodeId": 165,
+      "direction": null
     },
     {
       "fromNodeId": 166,
-      "toNodeId": 165
+      "toNodeId": 165,
+      "direction": null
     },
     {
       "fromNodeId": 147,
-      "toNodeId": 189
+      "toNodeId": 189,
+      "direction": null
     },
     {
       "fromNodeId": 145,
-      "toNodeId": 189
+      "toNodeId": 189,
+      "direction": null
     },
     {
       "fromNodeId": 146,
-      "toNodeId": 189
+      "toNodeId": 189,
+      "direction": null
     },
     {
       "fromNodeId": 195,
-      "toNodeId": 147
+      "toNodeId": 147,
+      "direction": null
     },
     {
       "fromNodeId": 196,
-      "toNodeId": 147
+      "toNodeId": 147,
+      "direction": null
     },
     {
       "fromNodeId": 197,
-      "toNodeId": 146
+      "toNodeId": 146,
+      "direction": null
     },
     {
       "fromNodeId": 198,
-      "toNodeId": 146
+      "toNodeId": 146,
+      "direction": null
     },
     {
       "fromNodeId": 199,
-      "toNodeId": 146
+      "toNodeId": 146,
+      "direction": null
     },
     {
       "fromNodeId": 200,
-      "toNodeId": 145
+      "toNodeId": 145,
+      "direction": null
     },
     {
       "fromNodeId": 145,
-      "toNodeId": 201
+      "toNodeId": 201,
+      "direction": null
     },
     {
       "fromNodeId": 208,
-      "toNodeId": 202
+      "toNodeId": 202,
+      "direction": null
     },
     {
       "fromNodeId": 208,
-      "toNodeId": 206
+      "toNodeId": 206,
+      "direction": null
     },
     {
       "fromNodeId": 208,
-      "toNodeId": 194
+      "toNodeId": 194,
+      "direction": null
     },
     {
       "fromNodeId": 204,
-      "toNodeId": 194
+      "toNodeId": 194,
+      "direction": null
     },
     {
       "fromNodeId": 209,
-      "toNodeId": 194
+      "toNodeId": 194,
+      "direction": null
     },
     {
       "fromNodeId": 203,
-      "toNodeId": 204
+      "toNodeId": 204,
+      "direction": null
     },
     {
       "fromNodeId": 207,
-      "toNodeId": 204
+      "toNodeId": 204,
+      "direction": null
     },
     {
       "fromNodeId": 216,
-      "toNodeId": 209
+      "toNodeId": 209,
+      "direction": null
     },
     {
       "fromNodeId": 215,
-      "toNodeId": 209
+      "toNodeId": 209,
+      "direction": null
     },
     {
       "fromNodeId": 217,
-      "toNodeId": 209
+      "toNodeId": 209,
+      "direction": null
     },
     {
       "fromNodeId": 188,
-      "toNodeId": 205
+      "toNodeId": 205,
+      "direction": null
     },
     {
       "fromNodeId": 225,
-      "toNodeId": 228
+      "toNodeId": 228,
+      "direction": null
     },
     {
       "fromNodeId": 226,
-      "toNodeId": 228
+      "toNodeId": 228,
+      "direction": null
     },
     {
       "fromNodeId": 227,
-      "toNodeId": 229
+      "toNodeId": 229,
+      "direction": null
     },
     {
       "fromNodeId": 231,
-      "toNodeId": 229
+      "toNodeId": 229,
+      "direction": null
     },
     {
       "fromNodeId": 234,
-      "toNodeId": 229
+      "toNodeId": 229,
+      "direction": null
     },
     {
       "fromNodeId": 232,
-      "toNodeId": 224
+      "toNodeId": 224,
+      "direction": null
     },
     {
       "fromNodeId": 230,
-      "toNodeId": 224
+      "toNodeId": 224,
+      "direction": null
     },
     {
       "fromNodeId": 221,
-      "toNodeId": 238
+      "toNodeId": 238,
+      "direction": null
     },
     {
       "fromNodeId": 223,
-      "toNodeId": 238
+      "toNodeId": 238,
+      "direction": null
     },
     {
       "fromNodeId": 233,
-      "toNodeId": 235
+      "toNodeId": 235,
+      "direction": null
     },
     {
       "fromNodeId": 244,
-      "toNodeId": 235
+      "toNodeId": 235,
+      "direction": null
     },
     {
       "fromNodeId": 236,
-      "toNodeId": 235
+      "toNodeId": 235,
+      "direction": null
     },
     {
       "fromNodeId": 241,
-      "toNodeId": 237
+      "toNodeId": 237,
+      "direction": null
     },
     {
       "fromNodeId": 242,
-      "toNodeId": 237
+      "toNodeId": 237,
+      "direction": null
     },
     {
       "fromNodeId": 238,
-      "toNodeId": 218
+      "toNodeId": 218,
+      "direction": null
     },
     {
       "fromNodeId": 235,
-      "toNodeId": 218
+      "toNodeId": 218,
+      "direction": null
     },
     {
       "fromNodeId": 237,
-      "toNodeId": 218
+      "toNodeId": 218,
+      "direction": null
     },
     {
       "fromNodeId": 259,
-      "toNodeId": 250
+      "toNodeId": 250,
+      "direction": null
     },
     {
       "fromNodeId": 261,
-      "toNodeId": 250
+      "toNodeId": 250,
+      "direction": null
     },
     {
       "fromNodeId": 256,
-      "toNodeId": 252
+      "toNodeId": 252,
+      "direction": null
     },
     {
       "fromNodeId": 253,
-      "toNodeId": 252
+      "toNodeId": 252,
+      "direction": null
     },
     {
       "fromNodeId": 254,
-      "toNodeId": 252
+      "toNodeId": 252,
+      "direction": null
     },
     {
       "fromNodeId": 248,
-      "toNodeId": 251
+      "toNodeId": 251,
+      "direction": null
     },
     {
       "fromNodeId": 249,
-      "toNodeId": 251
+      "toNodeId": 251,
+      "direction": null
     },
     {
       "fromNodeId": 251,
-      "toNodeId": 222
+      "toNodeId": 222,
+      "direction": null
     },
     {
       "fromNodeId": 252,
-      "toNodeId": 222
+      "toNodeId": 222,
+      "direction": null
     },
     {
       "fromNodeId": 250,
-      "toNodeId": 222
+      "toNodeId": 222,
+      "direction": null
     },
     {
       "fromNodeId": 246,
-      "toNodeId": 286
+      "toNodeId": 286,
+      "direction": null
     },
     {
       "fromNodeId": 247,
-      "toNodeId": 286
+      "toNodeId": 286,
+      "direction": null
     },
     {
       "fromNodeId": 243,
-      "toNodeId": 239
+      "toNodeId": 239,
+      "direction": null
     },
     {
       "fromNodeId": 245,
-      "toNodeId": 239
+      "toNodeId": 239,
+      "direction": null
     },
     {
       "fromNodeId": 287,
-      "toNodeId": 239
+      "toNodeId": 239,
+      "direction": null
     },
     {
       "fromNodeId": 285,
-      "toNodeId": 240
+      "toNodeId": 240,
+      "direction": null
     },
     {
       "fromNodeId": 288,
-      "toNodeId": 240
+      "toNodeId": 240,
+      "direction": null
     },
     {
       "fromNodeId": 240,
-      "toNodeId": 219
+      "toNodeId": 219,
+      "direction": null
     },
     {
       "fromNodeId": 286,
-      "toNodeId": 219
+      "toNodeId": 219,
+      "direction": null
     },
     {
       "fromNodeId": 239,
-      "toNodeId": 219
+      "toNodeId": 219,
+      "direction": null
     },
     {
       "fromNodeId": 219,
-      "toNodeId": 205
+      "toNodeId": 205,
+      "direction": null
     },
     {
       "fromNodeId": 218,
-      "toNodeId": 205
+      "toNodeId": 205,
+      "direction": null
     },
     {
       "fromNodeId": 222,
-      "toNodeId": 205
+      "toNodeId": 205,
+      "direction": null
     },
     {
       "fromNodeId": 299,
-      "toNodeId": 301
+      "toNodeId": 301,
+      "direction": null
     },
     {
       "fromNodeId": 302,
-      "toNodeId": 301
+      "toNodeId": 301,
+      "direction": null
     },
     {
       "fromNodeId": 300,
-      "toNodeId": 301
+      "toNodeId": 301,
+      "direction": null
     },
     {
       "fromNodeId": 297,
-      "toNodeId": 298
+      "toNodeId": 298,
+      "direction": null
     },
     {
       "fromNodeId": 296,
-      "toNodeId": 298
+      "toNodeId": 298,
+      "direction": null
     },
     {
       "fromNodeId": 303,
-      "toNodeId": 304
+      "toNodeId": 304,
+      "direction": null
     },
     {
       "fromNodeId": 305,
-      "toNodeId": 304
+      "toNodeId": 304,
+      "direction": null
     },
     {
       "fromNodeId": 301,
-      "toNodeId": 295
+      "toNodeId": 295,
+      "direction": null
     },
     {
       "fromNodeId": 304,
-      "toNodeId": 295
+      "toNodeId": 295,
+      "direction": null
     },
     {
       "fromNodeId": 298,
-      "toNodeId": 295
+      "toNodeId": 295,
+      "direction": null
     },
     {
       "fromNodeId": 262,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 270,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 294,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 295,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 264,
-      "toNodeId": 267
+      "toNodeId": 267,
+      "direction": null
     },
     {
       "fromNodeId": 263,
-      "toNodeId": 264
+      "toNodeId": 264,
+      "direction": null
     },
     {
       "fromNodeId": 266,
-      "toNodeId": 255
+      "toNodeId": 255,
+      "direction": null
     },
     {
       "fromNodeId": 271,
-      "toNodeId": 255
+      "toNodeId": 255,
+      "direction": null
     },
     {
       "fromNodeId": 260,
-      "toNodeId": 255
+      "toNodeId": 255,
+      "direction": null
     },
     {
       "fromNodeId": 255,
-      "toNodeId": 262
+      "toNodeId": 262,
+      "direction": null
     },
     {
       "fromNodeId": 264,
-      "toNodeId": 262
+      "toNodeId": 262,
+      "direction": null
     },
     {
       "fromNodeId": 268,
-      "toNodeId": 265
+      "toNodeId": 265,
+      "direction": null
     },
     {
       "fromNodeId": 257,
-      "toNodeId": 265
+      "toNodeId": 265,
+      "direction": null
     },
     {
       "fromNodeId": 265,
-      "toNodeId": 262
+      "toNodeId": 262,
+      "direction": null
     },
     {
       "fromNodeId": 275,
-      "toNodeId": 273
+      "toNodeId": 273,
+      "direction": null
     },
     {
       "fromNodeId": 273,
-      "toNodeId": 276
+      "toNodeId": 276,
+      "direction": null
     },
     {
       "fromNodeId": 278,
-      "toNodeId": 279
+      "toNodeId": 279,
+      "direction": null
     },
     {
       "fromNodeId": 274,
-      "toNodeId": 279
+      "toNodeId": 279,
+      "direction": null
     },
     {
       "fromNodeId": 283,
-      "toNodeId": 279
+      "toNodeId": 279,
+      "direction": null
     },
     {
       "fromNodeId": 277,
-      "toNodeId": 280
+      "toNodeId": 280,
+      "direction": null
     },
     {
       "fromNodeId": 281,
-      "toNodeId": 280
+      "toNodeId": 280,
+      "direction": null
     },
     {
       "fromNodeId": 289,
-      "toNodeId": 291
+      "toNodeId": 291,
+      "direction": null
     },
     {
       "fromNodeId": 290,
-      "toNodeId": 291
+      "toNodeId": 291,
+      "direction": null
     },
     {
       "fromNodeId": 293,
-      "toNodeId": 291
+      "toNodeId": 291,
+      "direction": null
     },
     {
       "fromNodeId": 282,
-      "toNodeId": 294
+      "toNodeId": 294,
+      "direction": null
     },
     {
       "fromNodeId": 292,
-      "toNodeId": 294
+      "toNodeId": 294,
+      "direction": null
     },
     {
       "fromNodeId": 291,
-      "toNodeId": 294
+      "toNodeId": 294,
+      "direction": null
     },
     {
       "fromNodeId": 279,
-      "toNodeId": 270
+      "toNodeId": 270,
+      "direction": null
     },
     {
       "fromNodeId": 273,
-      "toNodeId": 270
+      "toNodeId": 270,
+      "direction": null
     },
     {
       "fromNodeId": 280,
-      "toNodeId": 270
+      "toNodeId": 270,
+      "direction": null
     },
     {
       "fromNodeId": 306,
-      "toNodeId": 292
+      "toNodeId": 292,
+      "direction": null
     },
     {
       "fromNodeId": 272,
-      "toNodeId": 292
+      "toNodeId": 292,
+      "direction": null
     },
     {
       "fromNodeId": 269,
-      "toNodeId": 282
+      "toNodeId": 282,
+      "direction": null
     },
     {
       "fromNodeId": 284,
-      "toNodeId": 282
+      "toNodeId": 282,
+      "direction": null
     },
     {
       "fromNodeId": 307,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 255,
-      "toNodeId": 308
+      "toNodeId": 308,
+      "direction": null
     },
     {
       "fromNodeId": 307,
-      "toNodeId": 309
+      "toNodeId": 309,
+      "direction": null
     },
     {
       "fromNodeId": 342,
-      "toNodeId": 338
+      "toNodeId": 338,
+      "direction": null
     },
     {
       "fromNodeId": 342,
-      "toNodeId": 336
+      "toNodeId": 336,
+      "direction": null
     },
     {
       "fromNodeId": 325,
-      "toNodeId": 342
+      "toNodeId": 342,
+      "direction": null
     },
     {
       "fromNodeId": 332,
-      "toNodeId": 325
+      "toNodeId": 325,
+      "direction": null
     },
     {
       "fromNodeId": 328,
-      "toNodeId": 325
+      "toNodeId": 325,
+      "direction": null
     },
     {
       "fromNodeId": 339,
-      "toNodeId": 338
+      "toNodeId": 338,
+      "direction": null
     },
     {
       "fromNodeId": 337,
-      "toNodeId": 338
+      "toNodeId": 338,
+      "direction": null
     },
     {
       "fromNodeId": 341,
-      "toNodeId": 338
+      "toNodeId": 338,
+      "direction": null
     },
     {
       "fromNodeId": 335,
-      "toNodeId": 336
+      "toNodeId": 336,
+      "direction": null
     },
     {
       "fromNodeId": 340,
-      "toNodeId": 336
+      "toNodeId": 336,
+      "direction": null
     },
     {
       "fromNodeId": 321,
-      "toNodeId": 322
+      "toNodeId": 322,
+      "direction": null
     },
     {
       "fromNodeId": 320,
-      "toNodeId": 322
+      "toNodeId": 322,
+      "direction": null
     },
     {
       "fromNodeId": 329,
-      "toNodeId": 322
+      "toNodeId": 322,
+      "direction": null
     },
     {
       "fromNodeId": 334,
-      "toNodeId": 329
+      "toNodeId": 329,
+      "direction": null
     },
     {
       "fromNodeId": 331,
-      "toNodeId": 329
+      "toNodeId": 329,
+      "direction": null
     },
     {
       "fromNodeId": 324,
-      "toNodeId": 321
+      "toNodeId": 321,
+      "direction": null
     },
     {
       "fromNodeId": 330,
-      "toNodeId": 321
+      "toNodeId": 321,
+      "direction": null
     },
     {
       "fromNodeId": 327,
-      "toNodeId": 321
+      "toNodeId": 321,
+      "direction": null
     },
     {
       "fromNodeId": 326,
-      "toNodeId": 320
+      "toNodeId": 320,
+      "direction": null
     },
     {
       "fromNodeId": 323,
-      "toNodeId": 320
+      "toNodeId": 320,
+      "direction": null
     },
     {
       "fromNodeId": 315,
-      "toNodeId": 333
+      "toNodeId": 333,
+      "direction": null
     },
     {
       "fromNodeId": 333,
-      "toNodeId": 314
+      "toNodeId": 314,
+      "direction": null
     },
     {
       "fromNodeId": 313,
-      "toNodeId": 333
+      "toNodeId": 333,
+      "direction": null
     },
     {
       "fromNodeId": 311,
-      "toNodeId": 314
+      "toNodeId": 314,
+      "direction": null
     },
     {
       "fromNodeId": 312,
-      "toNodeId": 314
+      "toNodeId": 314,
+      "direction": null
     },
     {
       "fromNodeId": 310,
-      "toNodeId": 314
+      "toNodeId": 314,
+      "direction": null
     },
     {
       "fromNodeId": 316,
-      "toNodeId": 315
+      "toNodeId": 315,
+      "direction": null
     },
     {
       "fromNodeId": 317,
-      "toNodeId": 315
+      "toNodeId": 315,
+      "direction": null
     },
     {
       "fromNodeId": 318,
-      "toNodeId": 313
+      "toNodeId": 313,
+      "direction": null
     },
     {
       "fromNodeId": 319,
-      "toNodeId": 313
+      "toNodeId": 313,
+      "direction": null
     },
     {
       "fromNodeId": 322,
-      "toNodeId": 309
+      "toNodeId": 309,
+      "direction": null
     },
     {
       "fromNodeId": 342,
-      "toNodeId": 309
+      "toNodeId": 309,
+      "direction": null
     },
     {
       "fromNodeId": 333,
-      "toNodeId": 309
+      "toNodeId": 309,
+      "direction": null
     },
     {
       "fromNodeId": 354,
-      "toNodeId": 360
+      "toNodeId": 360,
+      "direction": null
     },
     {
       "fromNodeId": 352,
-      "toNodeId": 360
+      "toNodeId": 360,
+      "direction": null
     },
     {
       "fromNodeId": 357,
-      "toNodeId": 359
+      "toNodeId": 359,
+      "direction": null
     },
     {
       "fromNodeId": 355,
-      "toNodeId": 359
+      "toNodeId": 359,
+      "direction": null
     },
     {
       "fromNodeId": 358,
-      "toNodeId": 359
+      "toNodeId": 359,
+      "direction": null
     },
     {
       "fromNodeId": 356,
-      "toNodeId": 363
+      "toNodeId": 363,
+      "direction": null
     },
     {
       "fromNodeId": 353,
-      "toNodeId": 363
+      "toNodeId": 363,
+      "direction": null
     },
     {
       "fromNodeId": 359,
-      "toNodeId": 373
+      "toNodeId": 373,
+      "direction": null
     },
     {
       "fromNodeId": 363,
-      "toNodeId": 373
+      "toNodeId": 373,
+      "direction": null
     },
     {
       "fromNodeId": 360,
-      "toNodeId": 373
+      "toNodeId": 373,
+      "direction": null
     },
     {
       "fromNodeId": 373,
-      "toNodeId": 307
+      "toNodeId": 307,
+      "direction": null
     },
     {
       "fromNodeId": 374,
-      "toNodeId": 307
+      "toNodeId": 307,
+      "direction": null
     },
     {
       "fromNodeId": 372,
-      "toNodeId": 307
+      "toNodeId": 307,
+      "direction": null
     },
     {
       "fromNodeId": 371,
-      "toNodeId": 307
+      "toNodeId": 307,
+      "direction": null
     },
     {
       "fromNodeId": 361,
-      "toNodeId": 371
+      "toNodeId": 371,
+      "direction": null
     },
     {
       "fromNodeId": 362,
-      "toNodeId": 371
+      "toNodeId": 371,
+      "direction": null
     },
     {
       "fromNodeId": 364,
-      "toNodeId": 371
+      "toNodeId": 371,
+      "direction": null
     },
     {
       "fromNodeId": 372,
-      "toNodeId": 343
+      "toNodeId": 343,
+      "direction": null
     },
     {
       "fromNodeId": 372,
-      "toNodeId": 365
+      "toNodeId": 365,
+      "direction": null
     },
     {
       "fromNodeId": 372,
-      "toNodeId": 367
+      "toNodeId": 367,
+      "direction": null
     },
     {
       "fromNodeId": 374,
-      "toNodeId": 368
+      "toNodeId": 368,
+      "direction": null
     },
     {
       "fromNodeId": 374,
-      "toNodeId": 369
+      "toNodeId": 369,
+      "direction": null
     },
     {
       "fromNodeId": 374,
-      "toNodeId": 370
+      "toNodeId": 370,
+      "direction": null
     },
     {
       "fromNodeId": 346,
-      "toNodeId": 370
+      "toNodeId": 370,
+      "direction": null
     },
     {
       "fromNodeId": 370,
-      "toNodeId": 345
+      "toNodeId": 345,
+      "direction": null
     },
     {
       "fromNodeId": 347,
-      "toNodeId": 369
+      "toNodeId": 369,
+      "direction": null
     },
     {
       "fromNodeId": 349,
-      "toNodeId": 369
+      "toNodeId": 369,
+      "direction": null
     },
     {
       "fromNodeId": 348,
-      "toNodeId": 369
+      "toNodeId": 369,
+      "direction": null
     },
     {
       "fromNodeId": 351,
-      "toNodeId": 368
+      "toNodeId": 368,
+      "direction": null
     },
     {
       "fromNodeId": 350,
-      "toNodeId": 368
+      "toNodeId": 368,
+      "direction": null
     },
     {
       "fromNodeId": 366,
-      "toNodeId": 367
+      "toNodeId": 367,
+      "direction": null
     },
     {
       "fromNodeId": 344,
-      "toNodeId": 367
+      "toNodeId": 367,
+      "direction": null
     },
     {
       "fromNodeId": 385,
-      "toNodeId": 361
+      "toNodeId": 361,
+      "direction": null
     },
     {
       "fromNodeId": 386,
-      "toNodeId": 361
+      "toNodeId": 361,
+      "direction": null
     },
     {
       "fromNodeId": 383,
-      "toNodeId": 362
+      "toNodeId": 362,
+      "direction": null
     },
     {
       "fromNodeId": 382,
-      "toNodeId": 362
+      "toNodeId": 362,
+      "direction": null
     },
     {
       "fromNodeId": 380,
-      "toNodeId": 362
+      "toNodeId": 362,
+      "direction": null
     },
     {
       "fromNodeId": 377,
-      "toNodeId": 364
+      "toNodeId": 364,
+      "direction": null
     },
     {
       "fromNodeId": 384,
-      "toNodeId": 364
+      "toNodeId": 364,
+      "direction": null
     },
     {
       "fromNodeId": 378,
-      "toNodeId": 343
+      "toNodeId": 343,
+      "direction": null
     },
     {
       "fromNodeId": 379,
-      "toNodeId": 343
+      "toNodeId": 343,
+      "direction": null
     },
     {
       "fromNodeId": 375,
-      "toNodeId": 365
+      "toNodeId": 365,
+      "direction": null
     },
     {
       "fromNodeId": 381,
-      "toNodeId": 365
+      "toNodeId": 365,
+      "direction": null
     },
     {
       "fromNodeId": 376,
-      "toNodeId": 365
+      "toNodeId": 365,
+      "direction": null
     },
     {
       "fromNodeId": 205,
-      "toNodeId": 387
+      "toNodeId": 387,
+      "direction": null
     },
     {
       "fromNodeId": 205,
-      "toNodeId": 258
+      "toNodeId": 258,
+      "direction": null
     },
     {
       "fromNodeId": 228,
-      "toNodeId": 387
+      "toNodeId": 387,
+      "direction": null
     },
     {
       "fromNodeId": 229,
-      "toNodeId": 387
+      "toNodeId": 387,
+      "direction": null
     },
     {
       "fromNodeId": 387,
-      "toNodeId": 224
+      "toNodeId": 224,
+      "direction": null
     }
   ]
 }

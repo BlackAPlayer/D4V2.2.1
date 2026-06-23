@@ -1,19 +1,12 @@
 # -*- coding: utf-8 -*-
 # 模块: business/skill_tree
 
-import tkinter as tk
-from tkinter import ttk, messagebox
 import json
 import os
-import gc
-import sys
 import re
-import math
-import copy
-from PIL import Image, ImageTk
 import logging
-
 from config import resource_path
+
 
 class SkillTreeSystem:
     def __init__(self, profession, data_path='skill.json'):
@@ -28,19 +21,15 @@ class SkillTreeSystem:
         }
         self.available_points = 84
         self.listeners = []
-        self._branch_cache = {}
         self._load_data()
-        self._parse_all_branches()
 
     def _load_data(self):
         full_path = resource_path(self.data_path)
-        print(f"[DEBUG] 加载技能数据: {full_path}")
         try:
             with open(full_path, 'r', encoding='utf-8') as f:
                 raw = json.load(f)
         except Exception as e:
             logging.warning("加载技能数据失败: %s", e)
-            print(f"[DEBUG] 加载失败: {e}")
             return
 
         if isinstance(raw, list):
@@ -52,8 +41,6 @@ class SkillTreeSystem:
                 skills_list = raw.get('skills', [])
         else:
             skills_list = []
-
-        print(f"[DEBUG] 原始技能数据条数: {len(skills_list)}")
 
         profession_map = {
             '巫师': 'Sorcerer',
@@ -67,9 +54,6 @@ class SkillTreeSystem:
         }
         target_char = profession_map.get(self.profession, self.profession)
 
-        count = 0
-        loaded_icons = []
-
         for skill in skills_list:
             char = skill.get('char', '')
             if char and char != target_char:
@@ -78,7 +62,6 @@ class SkillTreeSystem:
             if skill_id is None:
                 continue
 
-            # 加载主动技能
             self.skill_data[skill_id] = {
                 'id': skill_id,
                 'key': skill.get('key', ''),
@@ -98,55 +81,6 @@ class SkillTreeSystem:
                 'val4': skill.get('val4', []),
                 'level_scaling': skill.get('level_scaling', {})
             }
-            count += 1
-            if skill.get('icon'):
-                loaded_icons.append(skill.get('icon'))
-
-            # 加载 mods 中的被动技能（使用唯一键）
-            mods = skill.get('mods', [])
-            for mod in mods:
-                raw_mod_id = mod.get('id') or mod.get('modId')
-                if raw_mod_id is None:
-                    continue
-                mod_icon = mod.get('icon')
-                unique_key = f"{skill_id}_{raw_mod_id}"
-                if unique_key in self.skill_data:
-                    continue
-                parent_key = skill.get('key', '')
-                mod_key = f"{parent_key}_mod_{raw_mod_id}"
-                desc_lines = mod.get('desc', [])
-                desc_text = ' '.join(desc_lines)
-                desc_text = re.sub(r'\{c_[^}]+\}|{/c}', '', desc_text)
-
-                self.skill_data[unique_key] = {
-                    'id': unique_key,
-                    'key': mod_key,
-                    'name': mod.get('name', f'被动技能 ({raw_mod_id})'),
-                    'active': False,
-                    'type': 'passive',
-                    'tags': skill.get('tags', []),
-                    'damage_type': skill.get('damageType', '物理伤害'),
-                    'base_max_level': 1,
-                    'desc_template': desc_text,
-                    'enchant_desc': '',
-                    'mods': [],
-                    'icon': mod_icon,
-                    'val1': [],
-                    'val2': [],
-                    'val3': [],
-                    'val4': [],
-                    'level_scaling': {},
-                    '_parent_skill_id': skill_id,
-                    '_mod_data': mod,
-                    '_mod_id': raw_mod_id,
-                    '_mod_icon': mod_icon,
-                }
-                count += 1
-                if mod_icon:
-                    loaded_icons.append(mod_icon)
-
-        print(f"[DEBUG] 加载完成: 职业 {self.profession} -> {target_char}, 共 {count} 个技能（含被动）")
-        print(f"[DEBUG] 加载的图标列表 (前30个): {loaded_icons[:30]}")
 
     def _extract_desc_template(self, skill):
         desc_parts = skill.get('desc', [])
@@ -155,58 +89,6 @@ class SkillTreeSystem:
             full = re.sub(r'\{c_[^}]+\}|{/c}', '', full)
             return full
         return ""
-
-    def _parse_all_branches(self):
-        for key in self.skill_data:
-            self._branch_cache[key] = self._parse_branches(self.skill_data[key])
-
-    def _parse_branches(self, skill):
-        mods = skill.get('mods', [])
-        morphs = []
-        passives = []
-        for mod in mods:
-            name = mod.get('name', '')
-            if any(kw in name for kw in ['强化', '变体', '形态', '替换', '变为']):
-                morphs.append(mod)
-            else:
-                passives.append(mod)
-        branch_groups = []
-        branches = {}
-        if morphs:
-            selected = morphs[:3]
-            branch_groups.append({
-                'type': 'choice_3',
-                'branches': [str(m.get('modId', m.get('id', ''))) for m in selected],
-                'max_select': 1
-            })
-            for m in selected:
-                bid = str(m.get('modId', m.get('id', '')))
-                branches[bid] = {
-                    'id': bid,
-                    'name': m.get('name', ''),
-                    'desc': '\n'.join(m.get('desc', [''])),
-                }
-        if passives:
-            selected = passives[:4]
-            branch_groups.append({
-                'type': 'choice_2',
-                'branches': [str(m.get('modId', m.get('id', ''))) for m in selected],
-                'max_select': 2
-            })
-            for m in selected:
-                bid = str(m.get('modId', m.get('id', '')))
-                branches[bid] = {
-                    'id': bid,
-                    'name': m.get('name', ''),
-                    'desc': '\n'.join(m.get('desc', [''])),
-                }
-        return branch_groups, branches
-
-    def get_branch_groups(self, skill_key):
-        return self._branch_cache.get(skill_key, ([], {}))[0]
-
-    def get_branches(self, skill_key):
-        return self._branch_cache.get(skill_key, ([], {}))[1]
 
     def get_base_level(self, skill_key):
         return self.skill_levels.get(skill_key, 0)
@@ -229,14 +111,9 @@ class SkillTreeSystem:
         return base + extra
 
     def _find_skill(self, skill_key):
-        """
-        通过 id、key、icon、_mod_id 任意字段查找技能
-        """
         str_key = str(skill_key)
-        # 直接匹配 skill_data 的键
         if skill_key in self.skill_data:
             return self.skill_data[skill_key]
-        # 遍历所有技能进行匹配
         for sid, skill in self.skill_data.items():
             if str(skill.get('key')) == str_key:
                 return skill
@@ -244,14 +121,7 @@ class SkillTreeSystem:
                 return skill
             if str(skill.get('id')) == str_key:
                 return skill
-            # 匹配被动技能的 _mod_id（原始 mod_id）
-            if str(skill.get('_mod_id')) == str_key:
-                return skill
-            # 检查 _mod_data 中的 id 和 modId
-            mod_data = skill.get('_mod_data', {})
-            if str(mod_data.get('id')) == str_key:
-                return skill
-            if str(mod_data.get('modId')) == str_key:
+            if skill.get('name') == str_key:
                 return skill
         return None
 
@@ -287,32 +157,18 @@ class SkillTreeSystem:
     def can_activate_branch(self, skill_key, branch_id):
         if self.get_base_level(skill_key) == 0:
             return False
-        branches = self.get_branches(skill_key)
-        if branch_id not in branches:
-            return False
+        # 检查该分支是否已经激活
         if self.branch_levels.get(skill_key, {}).get(branch_id, 0) >= 1:
             return False
         if self.available_points <= 0:
             return False
-        groups = self.get_branch_groups(skill_key)
-        for group in groups:
-            if branch_id in group['branches']:
-                selected = [bid for bid in group['branches'] if self.branch_levels.get(skill_key, {}).get(bid, 0) > 0]
-                if len(selected) >= group['max_select']:
-                    return False
-                break
+        # 注意：这里不检查分组互斥，因为分支分组由编辑器/布局决定，且每个分支独立
+        # 如果需要互斥，请由主程序额外实现，但根据文档，每个被动节点独立激活
         return True
 
     def activate_branch(self, skill_key, branch_id):
         if not self.can_activate_branch(skill_key, branch_id):
             return False
-        groups = self.get_branch_groups(skill_key)
-        for group in groups:
-            if branch_id in group['branches'] and group['type'] in ('choice_2', 'choice_3'):
-                for bid in group['branches']:
-                    if bid != branch_id:
-                        self.branch_levels.setdefault(skill_key, {}).pop(bid, None)
-                break
         self.branch_levels.setdefault(skill_key, {})[branch_id] = 1
         self.available_points -= 1
         self._notify_change()
@@ -332,8 +188,31 @@ class SkillTreeSystem:
         except:
             return 0.0
 
-    # ========== 修改的方法 ==========
     def get_skill_display_info(self, skill_key):
+        """
+        获取技能显示信息。
+        如果 skill_key 是包含 'mod_data' 的字典，则使用 mod_data。
+        否则从 skill_data 中查找。
+        """
+        if isinstance(skill_key, dict) and 'mod_data' in skill_key:
+            mod_data = skill_key['mod_data']
+            mod_name = mod_data.get('name', '未命名分支')
+            mod_desc = ' '.join(mod_data.get('desc', ['']))
+            mod_desc = re.sub(r'\{c_[^}]+\}|{/c}', '', mod_desc)
+            return {
+                'name': mod_name,
+                'icon': mod_data.get('icon'),
+                'base_level': 0,
+                'total_level': 0,
+                'extra_level': 0,
+                'max_level': 1,
+                'tags': [],
+                'damage_type': '',
+                'description': mod_desc,
+                'active_branches': {},
+                'mod_data': mod_data,
+            }
+
         skill = self._find_skill(skill_key)
         if not skill:
             return {
@@ -342,18 +221,17 @@ class SkillTreeSystem:
                 'base_level': 0,
                 'total_level': 0,
                 'extra_level': 0,
+                'max_level': 0,
                 'tags': [],
                 'damage_type': '',
                 'description': '未找到技能数据',
                 'active_branches': {},
-                'all_branches': {},
-                'branch_groups': [],
             }
         base_level = self.get_base_level(skill_key)
         total_level = self.get_total_level(skill_key)
         extra_level = total_level - base_level
+        max_level = skill.get('base_max_level', 15)
 
-        # 计算各 val 占位符
         vals = {}
         for i in range(1, 10):
             key = f'val{i}'
@@ -367,7 +245,6 @@ class SkillTreeSystem:
         if 'val1' in vals and '{damage}' in skill.get('desc_template', ''):
             vals['damage'] = vals['val1']
 
-        # 基础描述（替换占位符）
         base_desc = skill.get('desc_template', '')
         for k, v in vals.items():
             if isinstance(v, (int, float)):
@@ -378,45 +255,39 @@ class SkillTreeSystem:
             else:
                 base_desc = base_desc.replace(f'{{{k}}}', str(v))
 
-        # 组装最终描述的各段落
-        desc_parts = [base_desc]  # 第一部分：基础描述
+        desc_parts = [base_desc]
 
-        # 附魔描述
         enchant = skill.get('enchant_desc', '')
         if enchant:
             desc_parts.append(f"附魔：{enchant}")
 
-        # 所有分支（按 mods 原始顺序）
-        mods = skill.get('mods', [])
-        if mods:
-            branch_lines = []
-            for mod in mods:
-                mod_id = mod.get('id') or mod.get('modId')
-                if mod_id is None:
-                    continue
-                mod_id_str = str(mod_id)
-                # 检查是否激活（branch_levels 的键是字符串）
-                is_active = mod_id_str in self.branch_levels.get(skill_key, {}) and self.branch_levels[skill_key][mod_id_str] > 0
-                name = mod.get('name', '')
-                desc_lines = mod.get('desc', [])
-                mod_desc = ' '.join(desc_lines)
-                # 移除颜色标记
-                mod_desc = re.sub(r'\{c_[^}]+\}|{/c}', '', mod_desc)
-                if name and mod_desc:
-                    line = f"{'✅' if is_active else '○'} {name}: {mod_desc}"
-                elif name:
-                    line = f"{'✅' if is_active else '○'} {name}"
-                else:
-                    line = f"{'✅' if is_active else '○'} {mod_desc or '分支'}"
-                branch_lines.append(line)
-            if branch_lines:
-                desc_parts.append("--- 分支 ---")
-                desc_parts.append("\n".join(branch_lines))
+        if skill.get('active', False):
+            active_branches = self.branch_levels.get(skill_key, {})
+            if active_branches:
+                branch_lines = []
+                mods = skill.get('mods', [])
+                for mod in mods:
+                    mod_id = mod.get('id') or mod.get('modId')
+                    if mod_id is None:
+                        continue
+                    mod_id_str = str(mod_id)
+                    if mod_id_str in active_branches and active_branches[mod_id_str] > 0:
+                        name = mod.get('name', '')
+                        desc_lines = mod.get('desc', [])
+                        mod_desc = ' '.join(desc_lines)
+                        mod_desc = re.sub(r'\{c_[^}]+\}|{/c}', '', mod_desc)
+                        if name and mod_desc:
+                            branch_lines.append(f"{name}: {mod_desc}")
+                        elif name:
+                            branch_lines.append(name)
+                        else:
+                            branch_lines.append(mod_desc or '分支')
+                if branch_lines:
+                    desc_parts.append("激活分支效果：")
+                    desc_parts.append("\n".join(branch_lines))
 
-        # 最终描述（段落间用 \n\n 分隔）
         final_desc = "\n\n".join(desc_parts)
 
-        # 标签处理（保留原逻辑）
         tags = skill.get('tags', [])
         if skill_key in self.external_bonuses['specific']:
             tags_change = self.external_bonuses['specific'][skill_key].get('tags_change', {})
@@ -430,14 +301,12 @@ class SkillTreeSystem:
             'base_level': base_level,
             'total_level': total_level,
             'extra_level': extra_level,
+            'max_level': max_level,
             'tags': tags,
             'damage_type': skill.get('damage_type', ''),
             'description': final_desc,
             'active_branches': {bid: lvl for bid, lvl in self.branch_levels.get(skill_key, {}).items() if lvl > 0},
-            'all_branches': self.get_branches(skill_key),
-            'branch_groups': self.get_branch_groups(skill_key),
         }
-    # ========== 修改结束 ==========
 
     def update_external_bonuses(self, bonus_data):
         if 'global' in bonus_data:

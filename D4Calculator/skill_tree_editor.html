@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技能树编辑器 - 方形图标 + 边框图片 + 美化/方向 + 撤销重做</title>
+    <title>技能树编辑器 - 全功能版</title>
     <style>
         * { user-select: none; box-sizing: border-box; }
         body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: #1e1e2f; color: #eee; }
@@ -46,7 +46,7 @@
         .skill-dialog {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: #2a2e3a; border-radius: 16px; padding: 16px;
-            width: 420px; max-height: 600px; overflow-y: auto;
+            width: 450px; max-height: 650px; overflow-y: auto;
             z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         .skill-dialog h3 { margin: 0 0 10px 0; }
@@ -56,15 +56,6 @@
         .skill-item:hover { background: #3a6f5c; }
         .dialog-buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
         .dialog-buttons button { padding: 4px 12px; }
-        .icon-section {
-            margin-top: 12px;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-        }
-        .icon-section label { font-size: 13px; display: block; margin-bottom: 4px; }
-        .icon-section .icon-input-row { display: flex; gap: 6px; }
-        .icon-section .icon-input-row input { flex: 1; }
-        .icon-section .icon-input-row button { padding: 4px 12px; }
         .type-section {
             margin-top: 12px;
             border-top: 1px solid #444;
@@ -94,6 +85,81 @@
             color: #888;
             margin-top: 4px;
         }
+        .search-section {
+            margin-top: 12px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        .search-section label {
+            font-size: 13px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .search-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .search-row input {
+            flex: 1;
+        }
+        .search-results {
+            max-height: 150px;
+            overflow-y: auto;
+            background: #1a1e2a;
+            border-radius: 8px;
+            margin-top: 6px;
+        }
+        .search-result-item {
+            padding: 4px 8px;
+            cursor: pointer;
+            border-bottom: 1px solid #333;
+            font-size: 12px;
+        }
+        .search-result-item:hover {
+            background: #2a3a4a;
+        }
+        .search-result-item .mod-name {
+            color: #88ccff;
+            font-weight: bold;
+        }
+        .search-result-item .mod-desc {
+            color: #aaa;
+            font-size: 11px;
+        }
+        .scale-section {
+            margin-top: 12px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        .scale-section label {
+            font-size: 13px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .scale-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .scale-row input[type="range"] {
+            flex: 1;
+        }
+        .scale-row .scale-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: #88ccff;
+        }
+        .icon-section {
+            margin-top: 12px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        .icon-section label { font-size: 13px; display: block; margin-bottom: 4px; }
+        .icon-section .icon-input-row { display: flex; gap: 6px; }
+        .icon-section .icon-input-row input { flex: 1; }
+        .icon-section .icon-input-row button { padding: 4px 12px; }
         .border-section {
             margin-top: 12px;
             border-top: 1px solid #444;
@@ -172,6 +238,12 @@
         .batch-decor-btn:hover {
             background: #8a7a5a !important;
         }
+        .batch-set-type-btn {
+            background: #3a5a6a !important;
+        }
+        .batch-set-type-btn:hover {
+            background: #5a7a8a !important;
+        }
     </style>
 </head>
 <body>
@@ -213,6 +285,7 @@
         <button id="btn-batch-passive" class="batch-passive-btn">📥 批量被动</button>
         <button id="btn-batch-active" class="batch-active-btn">📤 批量主动</button>
         <button id="btn-batch-decor" class="batch-decor-btn">⭐ 批量美化</button>
+        <button id="btn-batch-set-type" class="batch-set-type-btn">🔧 批量设置类型</button>
     </span>
     <div class="separator"></div>
     <button id="btn-infer-directions">➡️ 推断连线方向</button>
@@ -235,12 +308,14 @@
 <div class="info-panel">
     💡 拖拽空白平移；滚轮缩放；连线模式点击两个节点连线；<br>
     🖱️ **Ctrl+左键** 多选节点；单击选中单个节点（取消其他选中）。<br>
-    双击节点编辑：绑定技能/分支，或上传边框图片。<br>
-    📥 **节点类型**：主动（正常大小）、被动（缩小65%）、美化（仅排版，不参与逻辑）<br>
-    🌄 **背景图片**：默认加载 <code>images/skill_bg.png</code>，可手动导入其他图片（路径记录到布局文件）<br>
-    📌 背景图范围受"背景边距"控制（默认250），与主程序一致<br>
+    双击节点编辑：选择类型，搜索名称（支持中文）或手动输入ID。<br>
+    📥 **节点类型**：主动（可搜索技能名）、形态变化（搜索分支）、普通被动（搜索分支）、美化（仅排版，无星标）<br>
+    🌄 **背景图片**：默认加载 <code>images/skill_bg.png</code>，可手动导入<br>
+    📌 背景图范围受"背景边距"控制（默认250）<br>
     🔗 连线只记录起点和终点，方向由主动→被动推断。<br>
-    ⏪ **撤销/重做**：Ctrl+Z / Ctrl+Y
+    ⏪ **撤销/重做**：Ctrl+Z / Ctrl+Y<br>
+    🎨 **批量外观**：选中多个节点后，统一调整图标、边框、缩放。<br>
+    📦 **分支归属**：选择分支时自动记录所属主动技能和分支ID，导出时写入JSON。
 </div>
 
 <script>
@@ -260,10 +335,10 @@
         let nextId = 100;
         let skillsMap = new Map();
         let allSkillsList = [];
+        let allMods = [];
         let iconCache = new Map();
         let borderImageCache = new Map();
 
-        // 背景图片
         let bgImage = null;
         let bgImagePath = null;
 
@@ -283,26 +358,20 @@
         let isUndoRedo = false;
 
         function captureState() {
-            // 深拷贝 nodes 和 edges
-            const state = {
+            return {
                 nodes: JSON.parse(JSON.stringify(nodes)),
                 edges: JSON.parse(JSON.stringify(edges)),
                 nextId: nextId
             };
-            return state;
         }
 
         function pushHistory() {
             if (isUndoRedo) return;
-            // 移除当前索引之后的历史（如果有）
             if (historyIndex < history.length - 1) {
                 history = history.slice(0, historyIndex + 1);
             }
-            const state = captureState();
-            history.push(state);
-            if (history.length > MAX_HISTORY) {
-                history.shift();
-            }
+            history.push(captureState());
+            if (history.length > MAX_HISTORY) history.shift();
             historyIndex = history.length - 1;
             updateUndoRedoButtons();
         }
@@ -336,31 +405,14 @@
             edges = JSON.parse(JSON.stringify(state.edges));
             nextId = state.nextId;
             selectedNodes = [];
-            // 重新加载节点中的图片（图标和边框）可能需要重新加载，但这里简单起见，只恢复数据，图片会通过 lazy load 重新加载
-            // 由于我们存储的是路径，需要在显示时重新加载。我们可以在这里触发重新加载，但为了简单，直接标记需要重新加载，在 redraw 中处理
-            // 这里我们重新加载图标和边框图片（异步）
             for (let node of nodes) {
                 if (node.iconId) {
-                    loadIconById(node.iconId, (img) => {
-                        node.iconImg = img;
-                        redraw();
-                    });
-                } else if (node.skillKey && !node.branchSkill) {
-                    loadSkillIcon(node.skillKey, (img) => {
-                        node.iconImg = img;
-                        redraw();
-                    });
+                    loadIconById(node.iconId, (img) => { node.iconImg = img; redraw(); });
                 }
                 if (node.borderImage) {
-                    loadBorderImage(node.borderImage, (img) => {
-                        node.borderImg = img;
-                        redraw();
-                    });
+                    loadBorderImage(node.borderImage, (img) => { node.borderImg = img; redraw(); });
                 }
             }
-            // 选中状态清零
-            selectedNodes = [];
-            // 更新计数
             document.getElementById('selection-count').textContent = '已选: 0';
         }
 
@@ -369,19 +421,11 @@
             redoBtn.disabled = historyIndex >= history.length - 1;
         }
 
-        // 在修改数据后调用 pushHistory
-        function withHistory(fn) {
-            fn();
-            pushHistory();
-            redraw();
-        }
-
         // ---------- 样式 ----------
         let lineColor = "#8a9bb5";
         let lineWidth = 4;
         let lineDash = false;
         let useTexture = true;
-
         let lineTextureImg = null;
         let textureLoaded = false;
 
@@ -461,7 +505,6 @@
             img.src = `images/icons/${iconId}.png`;
         }
 
-        // ---------- 边框图片加载与缓存 ----------
         function loadBorderImage(path, callback) {
             if (borderImageCache.has(path)) {
                 callback(borderImageCache.get(path));
@@ -479,7 +522,7 @@
             img.src = path;
         }
 
-        // ---------- 背景图片 ----------
+        // ---------- 背景 ----------
         function loadDefaultBackground() {
             const img = new Image();
             img.onload = () => {
@@ -515,7 +558,7 @@
                         statusEl.innerText = `背景已导入: ${relativePath}`;
                         redraw();
                         setTimeout(() => statusEl.innerText = '就绪', 3000);
-                        pushHistory(); // 记录背景变化
+                        pushHistory();
                     };
                     img.onerror = () => {
                         statusEl.innerText = '❌ 背景图片加载失败';
@@ -537,151 +580,598 @@
             pushHistory();
         }
 
-        // ---------- 分支解析（用于编辑器识别分组） ----------
-        function parseBranchesWithGroups(skill) {
-            const mods = skill.mods || [];
-            const morphs = mods.filter(m => m.border);
-            const passives = mods.filter(m => !m.border);
-            const groups = [];
-            if (morphs.length) {
-                groups.push({
-                    type: 'morph',
-                    name: '形态变化',
-                    items: morphs,
-                    groupId: 'morph'
-                });
-            }
-            for (let i = 0; i < passives.length; i += 2) {
-                const pair = passives.slice(i, i+2);
-                if (pair.length) {
-                    groups.push({
-                        type: 'passive_pair',
-                        name: `被动组 ${Math.floor(i/2)+1}`,
-                        items: pair,
-                        groupId: `passive_${Math.floor(i/2)}`
+        // ---------- 构建所有技能列表 ----------
+        function buildAllSkills() {
+            allSkillsList = [];
+            for (let [key, skill] of skillsMap) {
+                if (skill.active) {
+                    allSkillsList.push({
+                        key: key,
+                        name: skill.name,
+                        icon: skill.icon,
+                        mods: skill.mods || [],
+                        active: true
                     });
                 }
             }
-            return groups;
+            allSkillsList.sort((a, b) => a.name.localeCompare(b.name));
         }
 
-        // ---------- 分支选择对话框（带分组显示） ----------
-        function showBranchSelectionDialog(node, skill) {
-            const groups = parseBranchesWithGroups(skill);
-            if (groups.length === 0) {
-                // 无分支，直接完成
-                return;
+        function buildAllMods() {
+            allMods = [];
+            for (let [skillKey, skill] of skillsMap) {
+                if (!skill.mods) continue;
+                for (let mod of skill.mods) {
+                    const modId = mod.modId || mod.id;
+                    if (!modId) continue;
+                    allMods.push({
+                        skillKey: skillKey,
+                        skillName: skill.name,
+                        mod: mod,
+                        type: mod.border ? 'morph' : 'passive',
+                        id: modId,
+                        name: mod.name || '',
+                        desc: (mod.desc || ['']).join(' ').slice(0, 80),
+                        icon: mod.icon,
+                        border: mod.border,
+                    });
+                }
             }
+            allMods.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        // ---------- 节点编辑器 ----------
+        function showNodeEditor(node) {
             return new Promise((resolve) => {
                 const dialog = document.createElement('div');
                 dialog.className = 'skill-dialog';
+                const currentType = node.nodeType || 'decor';
+                const currentIconId = node.iconId || '';
+                const currentScale = node.scale || 1.0;
+                const currentBorderImage = node.borderImage || '';
+                const currentModData = node.mod_data || null;
+
                 dialog.innerHTML = `
-                    <h3>选择分支绑定到节点</h3>
-                    <p style="font-size:12px; color:#aaa;">技能: ${skill.name}</p>
-                    <div id="branch-list" style="max-height: 300px; overflow-y: auto;"></div>
+                    <h3>编辑节点 #${node.id}</h3>
+                    <p style="font-size:12px; color:#aaa;">当前名称: ${node.skillName || '未指定'}</p>
+                    
+                    <div class="type-section">
+                        <label>📌 节点类型：</label>
+                        <div class="type-options">
+                            <label><input type="radio" name="nodeType" value="active" ${currentType === 'active' ? 'checked' : ''}> 主动技能</label>
+                            <label><input type="radio" name="nodeType" value="morph" ${currentType === 'morph' ? 'checked' : ''}> 形态变化技能</label>
+                            <label><input type="radio" name="nodeType" value="passive" ${currentType === 'passive' ? 'checked' : ''}> 普通被动技能</label>
+                            <label><input type="radio" name="nodeType" value="decor" ${currentType === 'decor' ? 'checked' : ''}> ⭐ 美化节点</label>
+                        </div>
+                        <div class="type-hint" id="type-hint">
+                            ${currentType === 'active' ? '🟢 主动技能，可搜索名称或输入ID' : 
+                              currentType === 'morph' ? '🟣 形态变化，搜索并选择分支' :
+                              currentType === 'passive' ? '🔵 普通被动，搜索并选择分支' :
+                              '⭐ 仅排版，可调节缩放'}
+                        </div>
+                    </div>
+
+                    <div class="search-section" id="search-section" style="display:block;">
+                        <label>🔍 搜索名称（支持中文）：</label>
+                        <div class="search-row">
+                            <input type="text" id="search-input" placeholder="输入名称关键词...">
+                        </div>
+                        <div class="search-results" id="search-results"></div>
+                        <div style="margin-top:6px; font-size:11px; color:#888;" id="selected-info">
+                            ${node.skillName ? `已选: <strong>${node.skillName}</strong>` : '未选择'}
+                        </div>
+                    </div>
+
+                    <div class="icon-section">
+                        <label>🔑 图标ID（输入数字或上传图片）：</label>
+                        <div class="icon-input-row">
+                            <input type="text" id="icon-id-input" placeholder="例如 3884463898" value="${currentIconId || ''}">
+                            <button id="set-icon-btn">设置</button>
+                            <button id="clear-icon-btn" style="background:#5a2a2a;">清除</button>
+                        </div>
+                    </div>
+
+                    <div class="border-section">
+                        <label>🖼️ 边框图片：</label>
+                        <div class="border-row">
+                            <label class="file-upload-btn">
+                                📁 上传图片
+                                <input type="file" id="border-file-input" accept="image/*">
+                            </label>
+                            <span class="path-display" id="border-path-display">${currentBorderImage || '未选择'}</span>
+                            <button id="clear-border-btn" style="background:#5a2a2a; border:none; color:white; padding:4px 12px; border-radius:20px; cursor:pointer; font-size:12px;">✕ 清除</button>
+                        </div>
+                        <div style="margin-top:6px; display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:11px; color:#888;">预览：</span>
+                            <img id="border-preview-img" class="border-preview-img" src="${currentBorderImage || ''}" style="${currentBorderImage ? '' : 'display:none;'}">
+                            <span id="border-status" class="border-info">${currentBorderImage ? '✅ ' + currentBorderImage : '未设置边框图片'}</span>
+                        </div>
+                    </div>
+
+                    <div class="scale-section">
+                        <label>🔍 节点缩放比例：</label>
+                        <div class="scale-row">
+                            <input type="range" id="scale-slider" min="0.3" max="2.0" step="0.05" value="${currentScale}">
+                            <span class="scale-value" id="scale-display">${currentScale.toFixed(2)}x</span>
+                        </div>
+                    </div>
+
                     <div class="dialog-buttons">
-                        <button id="branch-cancel">跳过（不绑定分支）</button>
+                        <button id="dialog-ok">确认</button>
+                        <button id="dialog-cancel">取消</button>
                     </div>
                 `;
                 document.body.appendChild(dialog);
-                const branchListDiv = dialog.querySelector('#branch-list');
-                const cancelBtn = dialog.querySelector('#branch-cancel');
 
-                for (let group of groups) {
-                    const groupDiv = document.createElement('div');
-                    groupDiv.style.marginBottom = '8px';
-                    const groupLabel = document.createElement('div');
-                    groupLabel.style.fontSize = '13px';
-                    groupLabel.style.color = '#88ccff';
-                    groupLabel.style.fontWeight = 'bold';
-                    groupLabel.textContent = group.name + ' (最多选1个)';
-                    groupDiv.appendChild(groupLabel);
-                    for (let mod of group.items) {
-                        const itemDiv = document.createElement('div');
-                        itemDiv.className = 'skill-item';
-                        itemDiv.innerHTML = `<strong>${mod.name}</strong> <span style="font-size:11px; color:#88CCFF;">[${mod.border ? '形态' : '被动'}]</span><br><span style="font-size:11px; color:#aaa;">${(mod.desc||['']).join(' ').slice(0,50)}...</span>`;
-                        itemDiv.onclick = () => {
-                            document.body.removeChild(dialog);
-                            resolve({
-                                groupId: group.groupId,
-                                branchId: String(mod.modId || mod.id || ''),
-                                name: mod.name,
-                                desc: (mod.desc||['']).join('\n')
-                            });
-                        };
-                        groupDiv.appendChild(itemDiv);
-                    }
-                    branchListDiv.appendChild(groupDiv);
+                // ---- 获取DOM引用 ----
+                const typeRadios = dialog.querySelectorAll('input[name="nodeType"]');
+                const typeHint = dialog.querySelector('#type-hint');
+                const searchSection = dialog.querySelector('#search-section');
+                const searchInput = dialog.querySelector('#search-input');
+                const searchResults = dialog.querySelector('#search-results');
+                const selectedInfo = dialog.querySelector('#selected-info');
+                const iconInput = dialog.querySelector('#icon-id-input');
+                const setIconBtn = dialog.querySelector('#set-icon-btn');
+                const clearIconBtn = dialog.querySelector('#clear-icon-btn');
+                const scaleSlider = dialog.querySelector('#scale-slider');
+                const scaleDisplay = dialog.querySelector('#scale-display');
+                const fileInput = dialog.querySelector('#border-file-input');
+                const previewImg = dialog.querySelector('#border-preview-img');
+                const borderStatus = dialog.querySelector('#border-status');
+                const pathDisplay = dialog.querySelector('#border-path-display');
+                const clearBorderBtn = dialog.querySelector('#clear-border-btn');
+
+                let tempBorderPath = currentBorderImage;
+                let selectedModData = currentModData || null;
+                let selectedOwnerSkillKey = node.ownerSkillKey || null;
+                let selectedBranchId = node.branchId || null;
+                let selectedSkillKey = node.skillKey || null;
+                let selectedSkillName = node.skillName || null;
+
+                // ---- 类型切换 ----
+                function updateUI() {
+                    const selected = document.querySelector('input[name="nodeType"]:checked');
+                    if (!selected) return;
+                    const val = selected.value;
+                    const hints = {
+                        active: '🟢 主动技能，可搜索名称或输入ID',
+                        morph: '🟣 形态变化，搜索并选择分支',
+                        passive: '🔵 普通被动，搜索并选择分支',
+                        decor: '⭐ 仅排版，可调节缩放'
+                    };
+                    typeHint.textContent = hints[val] || '';
+                    // 搜索区域始终显示
+                    searchSection.style.display = 'block';
+                    // 根据类型调整搜索结果的过滤
+                    filterModsAndSkills();
                 }
-                cancelBtn.onclick = () => {
+
+                typeRadios.forEach(radio => {
+                    radio.addEventListener('change', updateUI);
+                });
+                updateUI();
+
+                // ---- 搜索过滤（包含主动技能和分支） ----
+                function filterModsAndSkills() {
+                    const keyword = searchInput.value.trim().toLowerCase();
+                    const type = document.querySelector('input[name="nodeType"]:checked').value;
+                    let results = [];
+
+                    if (type === 'active') {
+                        let skills = allSkillsList;
+                        if (keyword) {
+                            skills = skills.filter(s => s.name.toLowerCase().includes(keyword) || s.key.toLowerCase().includes(keyword));
+                        }
+                        results = skills.map(s => ({
+                            type: 'active',
+                            key: s.key,
+                            name: s.name,
+                            icon: s.icon,
+                            desc: '主动技能'
+                        }));
+                    } else if (type === 'morph' || type === 'passive') {
+                        let mods = allMods;
+                        if (type === 'morph') {
+                            mods = mods.filter(m => m.type === 'morph');
+                        } else {
+                            mods = mods.filter(m => m.type === 'passive');
+                        }
+                        if (keyword) {
+                            mods = mods.filter(m => m.name.toLowerCase().includes(keyword) || m.desc.toLowerCase().includes(keyword));
+                        }
+                        results = mods.map(m => ({
+                            type: 'mod',
+                            skillKey: m.skillKey,
+                            mod: m.mod,
+                            name: m.name,
+                            icon: m.icon,
+                            desc: m.desc,
+                            branchId: m.id
+                        }));
+                    }
+
+                    searchResults.innerHTML = '';
+                    if (results.length === 0) {
+                        searchResults.innerHTML = '<div style="padding:6px; color:#888;">无匹配结果</div>';
+                        return;
+                    }
+                    for (let item of results) {
+                        const div = document.createElement('div');
+                        div.className = 'search-result-item';
+                        if (item.type === 'active') {
+                            div.innerHTML = `<span class="mod-name">${item.name}</span> <span style="color:#888;font-size:11px;">[主动]</span>`;
+                        } else {
+                            div.innerHTML = `<span class="mod-name">${item.name}</span> <span style="color:#888;font-size:11px;">[${item.mod.border ? '形态' : '被动'}]</span><br><span class="mod-desc">${item.desc}</span>`;
+                        }
+                        div.onclick = () => {
+                            if (item.type === 'active') {
+                                selectedSkillKey = item.key;
+                                selectedSkillName = item.name;
+                                selectedInfo.innerHTML = `已选: <strong>${item.name}</strong>`;
+                                if (item.icon) {
+                                    iconInput.value = item.icon;
+                                    loadIconById(item.icon, (img) => { /* 缓存 */ });
+                                }
+                                selectedModData = null;
+                                selectedOwnerSkillKey = null;
+                                selectedBranchId = null;
+                            } else {
+                                selectedModData = item.mod;
+                                selectedOwnerSkillKey = item.skillKey;
+                                const modId = item.mod.modId || item.mod.id;
+                                selectedBranchId = String(modId);
+                                selectedInfo.innerHTML = `已选: <strong>${item.name}</strong> (${item.skillKey})`;
+                                if (item.mod.icon) {
+                                    iconInput.value = item.mod.icon;
+                                    loadIconById(item.mod.icon, (img) => { /* 缓存 */ });
+                                }
+                                if (item.mod.border) {
+                                    const borderPath = `images/icons/${item.mod.border}.png`;
+                                    tempBorderPath = borderPath;
+                                    pathDisplay.textContent = borderPath;
+                                    previewImg.src = borderPath;
+                                    previewImg.style.display = 'block';
+                                    borderStatus.textContent = `✅ ${borderPath}`;
+                                    borderStatus.style.color = '#4ecdc4';
+                                    loadBorderImage(borderPath, (img) => { /* 缓存 */ });
+                                }
+                                selectedSkillKey = null;
+                                selectedSkillName = null;
+                            }
+                        };
+                        searchResults.appendChild(div);
+                    }
+                }
+
+                searchInput.addEventListener('input', filterModsAndSkills);
+                // 初始过滤
+                filterModsAndSkills();
+
+                // ---- 缩放 ----
+                scaleSlider.addEventListener('input', () => {
+                    const val = parseFloat(scaleSlider.value);
+                    scaleDisplay.textContent = val.toFixed(2) + 'x';
+                });
+
+                // ---- 图标 ----
+                setIconBtn.addEventListener('click', () => {
+                    const id = iconInput.value.trim();
+                    if (id && /^\d+$/.test(id)) {
+                        loadIconById(id, (img) => {
+                            if (img) {
+                                node.iconId = id;
+                                node.iconImg = img;
+                                redraw();
+                                statusEl.innerText = `已设置图标 ID: ${id}`;
+                                setTimeout(() => statusEl.innerText = '就绪', 1500);
+                            } else {
+                                alert('图标加载失败，请检查ID是否正确');
+                            }
+                        });
+                    } else {
+                        alert('请输入有效的数字ID');
+                    }
+                });
+
+                clearIconBtn.addEventListener('click', () => {
+                    iconInput.value = '';
+                    node.iconId = null;
+                    node.iconImg = null;
+                    redraw();
+                    statusEl.innerText = '已清除图标';
+                    setTimeout(() => statusEl.innerText = '就绪', 1500);
+                });
+
+                // ---- 边框 ----
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const relativePath = `images/icons/${file.name}`;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            previewImg.src = ev.target.result;
+                            previewImg.style.display = 'block';
+                            tempBorderPath = relativePath;
+                            pathDisplay.textContent = relativePath;
+                            borderStatus.textContent = `✅ ${relativePath}`;
+                            borderStatus.style.color = '#4ecdc4';
+                            statusEl.innerText = `已设置边框图片: ${relativePath}`;
+                            setTimeout(() => statusEl.innerText = '就绪', 2000);
+                        };
+                        img.src = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                clearBorderBtn.addEventListener('click', () => {
+                    tempBorderPath = null;
+                    previewImg.style.display = 'none';
+                    previewImg.src = '';
+                    pathDisplay.textContent = '未选择';
+                    borderStatus.textContent = '未设置边框图片';
+                    borderStatus.style.color = '#888';
+                });
+
+                // ---- 确认 ----
+                dialog.querySelector('#dialog-ok').onclick = () => {
+                    const selectedType = document.querySelector('input[name="nodeType"]:checked').value;
+                    node.nodeType = selectedType;
+                    node.scale = parseFloat(scaleSlider.value);
+                    // 图标
+                    const iconId = iconInput.value.trim();
+                    if (iconId && /^\d+$/.test(iconId)) {
+                        node.iconId = iconId;
+                        loadIconById(iconId, (img) => { node.iconImg = img; redraw(); });
+                    } else {
+                        if (selectedSkillKey && !node.iconId) {
+                            const skill = skillsMap.get(selectedSkillKey);
+                            if (skill && skill.icon) {
+                                node.iconId = skill.icon;
+                                loadIconById(skill.icon, (img) => { node.iconImg = img; redraw(); });
+                            }
+                        } else if (selectedModData && !node.iconId) {
+                            if (selectedModData.icon) {
+                                node.iconId = selectedModData.icon;
+                                loadIconById(selectedModData.icon, (img) => { node.iconImg = img; redraw(); });
+                            }
+                        } else {
+                            node.iconId = null;
+                            node.iconImg = null;
+                        }
+                    }
+                    // 边框
+                    if (tempBorderPath) {
+                        node.borderImage = tempBorderPath;
+                        loadBorderImage(tempBorderPath, (img) => { node.borderImg = img; redraw(); });
+                    } else {
+                        if (selectedModData && selectedModData.border && !node.borderImage) {
+                            const borderPath = `images/icons/${selectedModData.border}.png`;
+                            node.borderImage = borderPath;
+                            loadBorderImage(borderPath, (img) => { node.borderImg = img; redraw(); });
+                        } else {
+                            node.borderImage = null;
+                            node.borderImg = null;
+                        }
+                    }
+
+                    if (selectedType === 'active') {
+                        if (selectedSkillKey) {
+                            node.skillKey = selectedSkillKey;
+                            node.skillName = selectedSkillName || '主动技能';
+                            node.mod_data = null;
+                            node.ownerSkillKey = null;
+                            node.branchId = null;
+                        } else {
+                            node.skillKey = null;
+                            node.skillName = '主动技能（未绑定）';
+                            node.mod_data = null;
+                            node.ownerSkillKey = null;
+                            node.branchId = null;
+                        }
+                    } else if (selectedType === 'morph' || selectedType === 'passive') {
+                        if (selectedModData) {
+                            node.mod_data = JSON.parse(JSON.stringify(selectedModData));
+                            node.skillName = selectedModData.name || '分支';
+                            node.ownerSkillKey = selectedOwnerSkillKey;
+                            node.branchId = selectedBranchId;
+                            node.skillKey = null;
+                        } else {
+                            node.mod_data = null;
+                            node.skillName = '未选择分支';
+                            node.ownerSkillKey = null;
+                            node.branchId = null;
+                            node.skillKey = null;
+                        }
+                    } else { // decor
+                        node.mod_data = null;
+                        node.skillName = '美化节点';
+                        node.ownerSkillKey = null;
+                        node.branchId = null;
+                        node.skillKey = null;
+                    }
+                    inferEdgeDirections();
+                    pushHistory();
+                    redraw();
+                    document.body.removeChild(dialog);
+                    resolve(node);
+                };
+
+                dialog.querySelector('#dialog-cancel').onclick = () => {
                     document.body.removeChild(dialog);
                     resolve(null);
                 };
+
+                dialog.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        document.body.removeChild(dialog);
+                        resolve(null);
+                    }
+                });
             });
         }
 
-        // ---------- 节点操作 ----------
-        function updateNodeSkill(node, skillKey) {
-            const skill = skillsMap.get(skillKey);
-            if (!skill) return false;
-            node.skillKey = skillKey;
-            node.skillName = skill.name;
-            node.branchSkill = null;
-            node.branchId = null;
-            node.iconId = null;
-            node.branchGroup = null;
-            // 清除旧的图标
-            node.iconImg = null;
-            // 如果有分支，让用户选择
-            const groups = parseBranchesWithGroups(skill);
-            if (groups.length > 0) {
-                showBranchSelectionDialog(node, skill).then(result => {
-                    if (result) {
-                        node.branchId = result.branchId;
-                        node.branchGroup = result.groupId;
-                        node.skillName = skill.name + ' → ' + result.name;
-                        // 图标可能由分支提供，但这里我们保留技能图标，或尝试加载分支图标
-                        // 如果有分支图标，使用分支图标；否则用技能图标
-                        const mod = skill.mods.find(m => (String(m.modId||m.id) === result.branchId));
-                        if (mod && mod.icon) {
-                            loadIconById(mod.icon, (img) => { node.iconImg = img; redraw(); });
+        // ---------- 批量外观 ----------
+        function batchSetAppearance() {
+            if (selectedNodes.length === 0) {
+                alert('请先选中一个或多个节点（Ctrl+左键多选）');
+                return;
+            }
+
+            const dialog = document.createElement('div');
+            dialog.className = 'skill-dialog';
+            dialog.innerHTML = `
+                <h3>批量调整外观</h3>
+                <p style="font-size:12px; color:#aaa;">将为 ${selectedNodes.length} 个节点统一设置以下外观</p>
+
+                <div class="icon-section">
+                    <label>🔑 图标ID（输入数字）：</label>
+                    <div class="icon-input-row">
+                        <input type="text" id="batch-icon-id" placeholder="例如 3884463898">
+                        <button id="batch-set-icon">设置图标</button>
+                        <button id="batch-clear-icon" style="background:#5a2a2a;">清除图标</button>
+                    </div>
+                </div>
+
+                <div class="border-section">
+                    <label>🖼️ 边框图片：</label>
+                    <div class="border-row">
+                        <label class="file-upload-btn">
+                            📁 上传图片
+                            <input type="file" id="batch-border-file" accept="image/*">
+                        </label>
+                        <span class="path-display" id="batch-border-path">未选择</span>
+                        <button id="batch-clear-border" style="background:#5a2a2a; border:none; color:white; padding:4px 12px; border-radius:20px; cursor:pointer; font-size:12px;">✕ 清除</button>
+                    </div>
+                    <div style="margin-top:6px; display:flex; align-items:center; gap:12px;">
+                        <span style="font-size:11px; color:#888;">预览：</span>
+                        <img id="batch-border-preview" class="border-preview-img" style="display:none;">
+                        <span id="batch-border-status" class="border-info">未设置边框图片</span>
+                    </div>
+                </div>
+
+                <div class="scale-section">
+                    <label>🔍 节点缩放比例：</label>
+                    <div class="scale-row">
+                        <input type="range" id="batch-scale-slider" min="0.3" max="2.0" step="0.05" value="1.0">
+                        <span class="scale-value" id="batch-scale-display">1.00x</span>
+                    </div>
+                </div>
+
+                <div class="dialog-buttons">
+                    <button id="batch-apply">应用</button>
+                    <button id="batch-cancel">取消</button>
+                </div>
+            `;
+            document.body.appendChild(dialog);
+
+            const iconInput = dialog.querySelector('#batch-icon-id');
+            const setIconBtn = dialog.querySelector('#batch-set-icon');
+            const clearIconBtn = dialog.querySelector('#batch-clear-icon');
+            const fileInput = dialog.querySelector('#batch-border-file');
+            const previewImg = dialog.querySelector('#batch-border-preview');
+            const borderStatus = dialog.querySelector('#batch-border-status');
+            const pathDisplay = dialog.querySelector('#batch-border-path');
+            const clearBorderBtn = dialog.querySelector('#batch-clear-border');
+            const scaleSlider = dialog.querySelector('#batch-scale-slider');
+            const scaleDisplay = dialog.querySelector('#batch-scale-display');
+
+            let tempBorderPath = null;
+
+            scaleSlider.addEventListener('input', () => {
+                const val = parseFloat(scaleSlider.value);
+                scaleDisplay.textContent = val.toFixed(2) + 'x';
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const relativePath = `images/icons/${file.name}`;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        previewImg.src = ev.target.result;
+                        previewImg.style.display = 'block';
+                        tempBorderPath = relativePath;
+                        pathDisplay.textContent = relativePath;
+                        borderStatus.textContent = `✅ ${relativePath}`;
+                        borderStatus.style.color = '#4ecdc4';
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            clearBorderBtn.addEventListener('click', () => {
+                tempBorderPath = null;
+                previewImg.style.display = 'none';
+                previewImg.src = '';
+                pathDisplay.textContent = '未选择';
+                borderStatus.textContent = '未设置边框图片';
+                borderStatus.style.color = '#888';
+            });
+
+            setIconBtn.addEventListener('click', () => {
+                const id = iconInput.value.trim();
+                if (id && /^\d+$/.test(id)) {
+                    loadIconById(id, (img) => {
+                        if (img) {
+                            statusEl.innerText = `图标 ID ${id} 有效`;
+                            setTimeout(() => statusEl.innerText = '就绪', 1500);
                         } else {
-                            loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
+                            alert('图标加载失败，请检查ID是否正确');
                         }
-                        pushHistory();
-                        redraw();
+                    });
+                } else {
+                    alert('请输入有效的数字ID');
+                }
+            });
+
+            clearIconBtn.addEventListener('click', () => {
+                iconInput.value = '';
+                statusEl.innerText = '图标已清空';
+                setTimeout(() => statusEl.innerText = '就绪', 1500);
+            });
+
+            dialog.querySelector('#batch-apply').onclick = () => {
+                const iconId = iconInput.value.trim();
+                const scale = parseFloat(scaleSlider.value);
+                const borderPath = tempBorderPath;
+
+                for (let node of selectedNodes) {
+                    if (iconId && /^\d+$/.test(iconId)) {
+                        node.iconId = iconId;
+                        loadIconById(iconId, (img) => { node.iconImg = img; redraw(); });
                     } else {
-                        // 用户取消，仍绑定技能但无分支
-                        loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
-                        pushHistory();
-                        redraw();
+                        node.iconId = null;
+                        node.iconImg = null;
                     }
-                });
-            } else {
-                // 无分支，直接加载图标
-                loadSkillIcon(skillKey, (img) => { node.iconImg = img; redraw(); });
+                    node.scale = scale;
+                    if (borderPath) {
+                        node.borderImage = borderPath;
+                        loadBorderImage(borderPath, (img) => { node.borderImg = img; redraw(); });
+                    } else {
+                        node.borderImage = null;
+                        node.borderImg = null;
+                    }
+                }
+
+                inferEdgeDirections();
                 pushHistory();
                 redraw();
-            }
-            return true;
+                document.body.removeChild(dialog);
+                statusEl.innerText = `已批量应用外观到 ${selectedNodes.length} 个节点`;
+                setTimeout(() => statusEl.innerText = '就绪', 2000);
+            };
+
+            dialog.querySelector('#batch-cancel').onclick = () => {
+                document.body.removeChild(dialog);
+            };
         }
 
-        function setNodeIcon(node, iconId) {
-            node.iconId = iconId;
-            if (iconId) {
-                loadIconById(iconId, (img) => {
-                    node.iconImg = img;
-                    redraw();
-                });
-            } else {
-                node.iconImg = null;
-                redraw();
-            }
-            statusEl.innerText = `已设置图标 ID: ${iconId}`;
-            setTimeout(() => statusEl.innerText = '就绪', 2000);
-            pushHistory();
-        }
-
+        // ---------- 节点操作 ----------
         function addUniversalToken(worldX, worldY) {
             const node = {
                 id: nextId++,
@@ -691,12 +1181,13 @@
                 y: worldY,
                 iconImg: null,
                 iconId: null,
-                branchSkill: null,
-                branchId: null,
                 borderImage: null,
                 borderImg: null,
                 nodeType: 'decor',
-                branchGroup: null,
+                scale: 1.0,
+                mod_data: null,
+                ownerSkillKey: null,
+                branchId: null,
             };
             nodes.push(node);
             pushHistory();
@@ -707,8 +1198,7 @@
 
         function addTokenAtCenter() {
             const centerWorld = inverseTransform(canvas.width/2, canvas.height/2);
-            const offset = nodes.length * 15;
-            addUniversalToken(centerWorld.x + offset, centerWorld.y + offset);
+            addUniversalToken(centerWorld.x, centerWorld.y);
         }
 
         function deleteNodeById(nodeId) {
@@ -737,31 +1227,15 @@
             });
         }
 
-        function batchSetType(type) {
-            if (selectedNodes.length === 0) {
-                alert('请先选中一个或多个节点（Ctrl+左键多选）');
-                return;
-            }
-            for (let node of selectedNodes) {
-                node.nodeType = type;
-            }
-            inferEdgeDirections();
-            pushHistory();
-            redraw();
-            const typeNames = { active: '主动', passive: '被动', decor: '美化' };
-            statusEl.innerText = `已设为 ${typeNames[type]} ${selectedNodes.length} 个节点，方向已推断`;
-            setTimeout(() => statusEl.innerText = '就绪', 1500);
-        }
-
-        // ---------- 连线方向推断 ----------
+        // ---------- 连线方向 ----------
         function inferEdgeDirections() {
             for (let edge of edges) {
                 const fromNode = nodes.find(n => n.id === edge.fromNodeId);
                 const toNode = nodes.find(n => n.id === edge.toNodeId);
                 if (!fromNode || !toNode) continue;
-                if (fromNode.nodeType === 'active' && toNode.nodeType === 'passive') {
+                if (fromNode.nodeType === 'active' && (toNode.nodeType === 'morph' || toNode.nodeType === 'passive')) {
                     edge.direction = 'down';
-                } else if (fromNode.nodeType === 'passive' && toNode.nodeType === 'active') {
+                } else if ((fromNode.nodeType === 'morph' || fromNode.nodeType === 'passive') && toNode.nodeType === 'active') {
                     edge.fromNodeId = toNode.id;
                     edge.toNodeId = fromNode.id;
                     edge.direction = 'down';
@@ -773,480 +1247,13 @@
             redraw();
         }
 
-        // ---------- 技能选择对话框 ----------
-        async function showSkillDialog(node) {
-            const dialog = document.createElement('div');
-            dialog.className = 'skill-dialog';
-            const currentType = node.nodeType || 'decor';
-            dialog.innerHTML = `
-                <h3>编辑节点 #${node.id}</h3>
-                <p style="font-size:12px; color:#aaa;">${node.skillName}</p>
-                <div style="margin-bottom: 6px;">
-                    <input type="text" id="skill-search" placeholder="搜索技能名称或key...">
-                </div>
-                <div id="skill-list" style="max-height: 130px; overflow-y: auto;"></div>
-
-                <div class="icon-section">
-                    <label>图标ID（数字，不绑定技能）：</label>
-                    <div class="icon-input-row">
-                        <input type="text" id="icon-id-input" placeholder="例如 3884463898" value="${node.iconId || ''}">
-                        <button id="set-icon-btn">设置</button>
-                        <button id="clear-icon-btn" style="background:#5a2a2a;">清除</button>
-                    </div>
-                </div>
-
-                <div class="type-section">
-                    <label>📌 节点类型（决定大小和逻辑）：</label>
-                    <div class="type-options">
-                        <label><input type="radio" name="nodeType" value="active" ${currentType === 'active' ? 'checked' : ''}> 主动技能</label>
-                        <label><input type="radio" name="nodeType" value="passive" ${currentType === 'passive' ? 'checked' : ''}> 被动技能</label>
-                        <label><input type="radio" name="nodeType" value="decor" ${currentType === 'decor' ? 'checked' : ''}> ⭐ 美化节点（仅排版）</label>
-                    </div>
-                    <div class="type-hint">
-                        ${currentType === 'active' ? '🟢 正常大小，可加点，可连线指向被动' : currentType === 'passive' ? '🟡 缩小65%，可激活分支，需主动解锁' : '⭐ 仅用于排版，不参与任何逻辑'}
-                    </div>
-                </div>
-
-                <div class="border-section">
-                    <label>🖼️ 边框图片（上传后自动生成路径 images/icons/文件名）：</label>
-                    <div class="border-row">
-                        <label class="file-upload-btn">
-                            📁 上传图片
-                            <input type="file" id="border-file-input" accept="image/*">
-                        </label>
-                        <span class="path-display" id="border-path-display">${node.borderImage || '未选择'}</span>
-                        <button id="clear-border-btn" style="background:#5a2a2a; border:none; color:white; padding:4px 12px; border-radius:20px; cursor:pointer; font-size:12px;">✕ 清除</button>
-                    </div>
-                    <div style="margin-top:6px; display:flex; align-items:center; gap:12px;">
-                        <span style="font-size:11px; color:#888;">预览：</span>
-                        <img id="border-preview-img" class="border-preview-img" src="${node.borderImage || ''}" style="${node.borderImage ? '' : 'display:none;'}">
-                        <span id="border-status" class="border-info">${node.borderImage ? '✅ ' + node.borderImage : '未设置边框图片'}</span>
-                    </div>
-                    <div style="margin-top:4px; font-size:10px; color:#666;">
-                        💡 边框尺寸自动适配图标大小（边框 = 图标 × 1.6 倍）
-                    </div>
-                </div>
-
-                <div class="dialog-buttons">
-                    <button id="dialog-ok">确认</button>
-                    <button id="dialog-cancel">取消</button>
-                </div>
-            `;
-            document.body.appendChild(dialog);
-
-            const typeRadios = dialog.querySelectorAll('input[name="nodeType"]');
-            const typeHint = dialog.querySelector('.type-hint');
-            function updateTypeHint() {
-                const selected = dialog.querySelector('input[name="nodeType"]:checked');
-                if (selected) {
-                    const val = selected.value;
-                    const hints = {
-                        active: '🟢 正常大小，可加点，可连线指向被动',
-                        passive: '🟡 缩小65%，可激活分支，需主动解锁',
-                        decor: '⭐ 仅用于排版，不参与任何逻辑'
-                    };
-                    typeHint.textContent = hints[val] || '';
-                }
-            }
-            typeRadios.forEach(radio => {
-                radio.addEventListener('change', updateTypeHint);
-            });
-            updateTypeHint();
-
-            const searchInput = dialog.querySelector('#skill-search');
-            const skillListDiv = dialog.querySelector('#skill-list');
-            let currentSkills = allSkillsList.length ? [...allSkillsList] : [];
-
-            const fileInput = dialog.querySelector('#border-file-input');
-            const previewImg = dialog.querySelector('#border-preview-img');
-            const borderStatus = dialog.querySelector('#border-status');
-            const pathDisplay = dialog.querySelector('#border-path-display');
-            let tempBorderPath = node.borderImage || null;
-
-            fileInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const relativePath = `images/icons/${file.name}`;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        previewImg.src = ev.target.result;
-                        previewImg.style.display = 'block';
-                        tempBorderPath = relativePath;
-                        setNodeBorderImage(node, relativePath);
-                        pathDisplay.textContent = relativePath;
-                        borderStatus.textContent = `✅ ${relativePath}`;
-                        borderStatus.style.color = '#4ecdc4';
-                        statusEl.innerText = `已设置边框图片: ${relativePath}`;
-                        setTimeout(() => statusEl.innerText = '就绪', 2000);
-                    };
-                    img.src = ev.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-
-            dialog.querySelector('#clear-border-btn').onclick = () => {
-                tempBorderPath = null;
-                previewImg.style.display = 'none';
-                previewImg.src = '';
-                pathDisplay.textContent = '未选择';
-                borderStatus.textContent = '未设置边框图片';
-                borderStatus.style.color = '#888';
-                setNodeBorderImage(node, null);
-                redraw();
-            };
-
-            function renderSkillList(skills) {
-                skillListDiv.innerHTML = '';
-                if (!skills.length) {
-                    skillListDiv.innerHTML = '<div style="padding:8px; color:#888;">暂无技能，请先加载 skill.json</div>';
-                    return;
-                }
-                for (let sk of skills) {
-                    const div = document.createElement('div');
-                    div.className = 'skill-item';
-                    const isActive = sk.active !== undefined ? (sk.active ? '🟢主动' : '🟡被动') : '';
-                    div.innerHTML = `<strong>${sk.name}</strong> <span style="font-size:10px; color:#888;">${isActive}</span><br><span style="font-size: 11px;">${sk.key}</span>`;
-                    div.onclick = async () => {
-                        // 更新技能
-                        if (updateNodeSkill(node, sk.key)) {
-                            // 分支选择已在 updateNodeSkill 中异步处理，我们只需等待
-                            // 但 updateNodeSkill 是异步的，我们直接关闭对话框
-                            document.body.removeChild(dialog);
-                            // 触发重绘和记录历史由 updateNodeSkill 内部处理
-                        } else {
-                            alert('技能数据异常');
-                        }
-                    };
-                    skillListDiv.appendChild(div);
-                }
-            }
-
-            function filterSkills() {
-                const keyword = searchInput.value.toLowerCase();
-                const filtered = currentSkills.filter(sk =>
-                    sk.name.toLowerCase().includes(keyword) ||
-                    sk.key.toLowerCase().includes(keyword)
-                );
-                renderSkillList(filtered);
-            }
-
-            searchInput.addEventListener('input', filterSkills);
-            renderSkillList(currentSkills);
-
-            dialog.querySelector('#set-icon-btn').onclick = () => {
-                const input = dialog.querySelector('#icon-id-input');
-                const id = input.value.trim();
-                if (id && /^\d+$/.test(id)) {
-                    setNodeIcon(node, id);
-                    if (tempBorderPath) setNodeBorderImage(node, tempBorderPath);
-                    document.body.removeChild(dialog);
-                    pushHistory();
-                    redraw();
-                } else {
-                    alert('请输入有效的数字ID');
-                }
-            };
-
-            dialog.querySelector('#clear-icon-btn').onclick = () => {
-                dialog.querySelector('#icon-id-input').value = '';
-                node.iconId = null;
-                node.iconImg = null;
-                if (node.skillKey && !node.branchSkill) {
-                    loadSkillIcon(node.skillKey, (img) => {
-                        node.iconImg = img;
-                        redraw();
-                    });
-                }
-                redraw();
-                statusEl.innerText = '已清除图标';
-                setTimeout(() => statusEl.innerText = '就绪', 1500);
-                pushHistory();
-            };
-
-            dialog.querySelector('#dialog-ok').onclick = () => {
-                const selectedRadio = dialog.querySelector('input[name="nodeType"]:checked');
-                if (selectedRadio) {
-                    node.nodeType = selectedRadio.value;
-                }
-                if (tempBorderPath) setNodeBorderImage(node, tempBorderPath);
-                if (node.nodeType === 'decor') {
-                    node.skillKey = null;
-                    node.skillName = '美化节点';
-                    node.iconImg = null;
-                    node.iconId = null;
-                    node.branchSkill = null;
-                    node.branchId = null;
-                    node.branchGroup = null;
-                }
-                inferEdgeDirections();
-                redraw();
-                const typeNames = { active: '主动', passive: '被动', decor: '美化' };
-                statusEl.innerText = `节点 #${node.id} 已更新为 ${typeNames[node.nodeType]}${node.borderImage ? ' (带边框)' : ''}`;
-                setTimeout(() => statusEl.innerText = '就绪', 1500);
-                document.body.removeChild(dialog);
-                pushHistory();
-            };
-
-            dialog.querySelector('#dialog-cancel').onclick = () => {
-                redraw();
-                document.body.removeChild(dialog);
-            };
-
-            dialog.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    document.body.removeChild(dialog);
-                }
-            });
-        }
-
-        // ---------- 绘制 ----------
-        function drawArrow(ctx, fromX, fromY, toX, toY, color) {
-            const headLen = 12;
-            const angle = Math.atan2(toY - fromY, toX - fromX);
-            const tipX = toX - 4;
-            const tipY = toY - 4;
-            ctx.save();
-            ctx.translate(tipX, tipY);
-            ctx.rotate(angle);
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(-headLen, -headLen/2);
-            ctx.lineTo(-headLen, headLen/2);
-            ctx.closePath();
-            ctx.fillStyle = color || lineColor;
-            ctx.fill();
-            ctx.restore();
-        }
-
-        function drawLine(ctx, p1, p2, direction) {
-            const dx = p2.x - p1.x, dy = p2.y - p1.y;
-            const length = Math.hypot(dx, dy);
-            if (length < 1) return;
-
-            if (useTexture && lineTextureImg && textureLoaded) {
-                const img = lineTextureImg;
-                const targetHeight = lineWidth * 2.5;
-                const scale = targetHeight / img.height;
-                const tileWidth = img.width * scale;
-                ctx.save();
-                ctx.translate(p1.x, p1.y);
-                ctx.rotate(Math.atan2(dy, dx));
-                const count = Math.ceil(length / tileWidth);
-                for (let i = 0; i < count; i++) {
-                    const x = i * tileWidth;
-                    const drawW = Math.min(tileWidth, length - x);
-                    ctx.drawImage(img, 0, 0, img.width, img.height, x, -targetHeight/2, drawW, targetHeight);
-                }
-                ctx.restore();
-            } else {
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = lineWidth;
-                if (lineDash) ctx.setLineDash([10, 8]);
-                else ctx.setLineDash([]);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                ctx.restore();
-            }
-
-            if (direction === 'down') {
-                drawArrow(ctx, p1.x, p1.y, p2.x, p2.y, '#FFD700');
-            }
-        }
-
-        function render() {
-            if (!ctx) return;
-            const w = canvas.width, h = canvas.height;
-            ctx.clearRect(0, 0, w, h);
-            ctx.save();
-
-            // ---- 背景 ----
-            if (bgImage) {
-                if (nodes.length > 0) {
-                    const xs = nodes.map(n => n.x);
-                    const ys = nodes.map(n => n.y);
-                    const minX = Math.min(...xs);
-                    const maxX = Math.max(...xs);
-                    const minY = Math.min(...ys);
-                    const maxY = Math.max(...ys);
-                    const marginInput = document.getElementById('bg-margin');
-                    const margin = parseInt(marginInput.value) || 250;
-                    const centerX = (minX + maxX) / 2;
-                    const centerY = (minY + maxY) / 2;
-                    const bgWidth = maxX - minX + 2 * margin;
-                    const bgHeight = maxY - minY + 2 * margin;
-                    if (bgWidth > 0 && bgHeight > 0) {
-                        const left = centerX - bgWidth / 2;
-                        const top = centerY - bgHeight / 2;
-                        const p1 = transformPoint(left, top);
-                        const p2 = transformPoint(left + bgWidth, top + bgHeight);
-                        const screenWidth = p2.x - p1.x;
-                        const screenHeight = p2.y - p1.y;
-                        if (screenWidth > 0 && screenHeight > 0) {
-                            ctx.drawImage(bgImage, p1.x, p1.y, screenWidth, screenHeight);
-                        }
-                    }
-                } else {
-                    const imgAspect = bgImage.width / bgImage.height;
-                    const canvasAspect = w / h;
-                    let drawW, drawH, offsetX, offsetY;
-                    if (imgAspect > canvasAspect) {
-                        drawW = w;
-                        drawH = w / imgAspect;
-                        offsetX = 0;
-                        offsetY = (h - drawH) / 2;
-                    } else {
-                        drawH = h;
-                        drawW = h * imgAspect;
-                        offsetX = (w - drawW) / 2;
-                        offsetY = 0;
-                    }
-                    ctx.drawImage(bgImage, offsetX, offsetY, drawW, drawH);
-                }
-            }
-
-            // ---- 连线 ----
-            for (let edge of edges) {
-                const fromNode = nodes.find(n => n.id === edge.fromNodeId);
-                const toNode = nodes.find(n => n.id === edge.toNodeId);
-                if (!fromNode || !toNode) continue;
-                const p1 = transformPoint(fromNode.x, fromNode.y);
-                const p2 = transformPoint(toNode.x, toNode.y);
-                drawLine(ctx, p1, p2, edge.direction);
-            }
-
-            // ---- 节点 ----
-            for (let node of nodes) {
-                const pos = transformPoint(node.x, node.y);
-                const isSelected = selectedNodes.includes(node);
-                const isBranch = node.branchSkill && node.branchId;
-                const hasIcon = !isBranch && node.iconImg && node.iconImg.complete;
-                const passiveScale = (node.nodeType === 'passive') ? 0.65 : 1.0;
-                const isDecor = (node.nodeType === 'decor');
-
-                const iconSize = 50 * view.zoom * passiveScale;
-                const borderSize = iconSize * 1.6;
-
-                // 边框图片
-                if (node.borderImg && node.borderImg.complete && node.borderImg.width > 0) {
-                    ctx.drawImage(node.borderImg, pos.x - borderSize/2, pos.y - borderSize/2, borderSize, borderSize);
-                }
-
-                // 选中高亮
-                if (isSelected) {
-                    ctx.beginPath();
-                    const ringSize = (node.borderImg ? 40 : 36) * view.zoom * passiveScale;
-                    ctx.arc(pos.x, pos.y, ringSize, 0, 2 * Math.PI);
-                    ctx.strokeStyle = '#ffffff';
-                    ctx.lineWidth = 2.5;
-                    ctx.setLineDash([5, 5]);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-                }
-
-                // 分支标记
-                if (isBranch) {
-                    ctx.beginPath();
-                    ctx.arc(pos.x, pos.y, 30 * view.zoom * passiveScale, 0, 2 * Math.PI);
-                    ctx.strokeStyle = '#66CCFF';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                }
-
-                // 图标/文字
-                if (isDecor) {
-                    ctx.font = `${Math.max(24, 30 * view.zoom)}px 'Segoe UI'`;
-                    ctx.fillStyle = '#FFD700';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText('⭐', pos.x, pos.y);
-                } else if (hasIcon) {
-                    const img = node.iconImg;
-                    const aspect = img.width / img.height;
-                    let drawW = iconSize;
-                    let drawH = iconSize;
-                    if (aspect > 1) {
-                        drawH = iconSize / aspect;
-                    } else {
-                        drawW = iconSize * aspect;
-                    }
-                    const xOff = (iconSize - drawW) / 2;
-                    const yOff = (iconSize - drawH) / 2;
-                    ctx.drawImage(img,
-                        pos.x - iconSize/2 + xOff,
-                        pos.y - iconSize/2 + yOff,
-                        drawW, drawH
-                    );
-                } else if (isBranch) {
-                    ctx.font = `${Math.max(20, 26 * view.zoom * passiveScale)}px 'Segoe UI'`;
-                    ctx.fillStyle = '#88CCFF';
-                    const branchName = node.skillName ? node.skillName.split('→')[1]?.trim() : 'BR';
-                    const short = branchName.slice(0, 2);
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(short, pos.x, pos.y);
-                } else {
-                    ctx.font = `${Math.max(24, 30 * view.zoom * passiveScale)}px 'Segoe UI'`;
-                    ctx.fillStyle = '#fff';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(node.skillKey ? '⚡' : '?', pos.x, pos.y);
-                }
-
-                // 节点名称
-                if (view.zoom >= 0.5 && !isDecor) {
-                    ctx.font = `${Math.max(10, 12 * view.zoom * passiveScale)}px 'Segoe UI'`;
-                    ctx.fillStyle = '#ddd';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'bottom';
-                    let displayName = node.skillName;
-                    if (displayName.length > 15) displayName = displayName.slice(0, 12) + '...';
-                    const nameY = node.borderImg ? pos.y - 42 * view.zoom * passiveScale - 6 : pos.y - 34 * view.zoom * passiveScale - 4;
-                    ctx.fillText(displayName, pos.x, nameY);
-                }
-
-                if (isDecor && view.zoom >= 0.6) {
-                    ctx.font = `${Math.max(8, 10 * view.zoom)}px 'Segoe UI'`;
-                    ctx.fillStyle = '#888';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'top';
-                    ctx.fillText('装饰', pos.x, pos.y + 28 * view.zoom);
-                }
-            }
-
-            // 连线模式高亮
-            if (currentMode === 'link' && linkSelectedNode) {
-                const pos = transformPoint(linkSelectedNode.x, linkSelectedNode.y);
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, 36 * view.zoom, 0, 2 * Math.PI);
-                ctx.strokeStyle = '#ffaa66';
-                ctx.lineWidth = 3;
-                ctx.setLineDash([6, 8]);
-                ctx.stroke();
-                ctx.setLineDash([]);
-            }
-            ctx.restore();
-        }
-
-        function redraw() {
-            if (!canvas) return;
-            canvas.width = container.clientWidth;
-            canvas.height = container.clientHeight;
-            render();
-            document.getElementById('selection-count').textContent = `已选: ${selectedNodes.length}`;
-        }
-
         // ---------- 交互 ----------
         function getCanvasCoords(e) {
             const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
+            return {
+                x: (e.clientX - rect.left) * (canvas.width / rect.width),
+                y: (e.clientY - rect.top) * (canvas.height / rect.height)
+            };
         }
 
         function onMouseDown(e) {
@@ -1256,7 +1263,7 @@
 
             let hitNode = null;
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' || node.nodeType === 'morph' ? 0.65 : 1.0) * (node.scale || 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
                     hitNode = node;
                     break;
@@ -1338,16 +1345,16 @@
             }
             if (isDragging) {
                 const { x: screenX, y: screenY } = getCanvasCoords(e);
-                const dx = screenX - dragStart.x, dy = screenY - dragStart.y;
-                view.x += dx; view.y += dy;
-                dragStart.x = screenX; dragStart.y = screenY;
+                view.x += screenX - dragStart.x;
+                view.y += screenY - dragStart.y;
+                dragStart.x = screenX;
+                dragStart.y = screenY;
                 redraw();
             }
         }
 
         function onMouseUp() {
             if (dragNode) {
-                // 节点移动结束，记录历史
                 pushHistory();
             }
             dragNode = null;
@@ -1359,8 +1366,7 @@
             e.preventDefault();
             const delta = e.deltaY > 0 ? 0.9 : 1.1;
             let newZoom = view.zoom * delta;
-            if (newZoom > 3) newZoom = 3;
-            if (newZoom < 0.2) newZoom = 0.2;
+            newZoom = Math.min(3, Math.max(0.2, newZoom));
             const rect = canvas.getBoundingClientRect();
             const mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
             const mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
@@ -1376,9 +1382,9 @@
             const { x: screenX, y: screenY } = getCanvasCoords(e);
             const world = inverseTransform(screenX, screenY);
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' || node.nodeType === 'morph' ? 0.65 : 1.0) * (node.scale || 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
-                    showSkillDialog(node);
+                    showNodeEditor(node).then(() => {});
                     break;
                 }
             }
@@ -1389,7 +1395,7 @@
             const { x: screenX, y: screenY } = getCanvasCoords(e);
             const world = inverseTransform(screenX, screenY);
             for (let node of nodes) {
-                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' ? 0.65 : 1.0);
+                const radius = (node.borderImg ? 40 : 32) * (node.nodeType === 'passive' || node.nodeType === 'morph' ? 0.65 : 1.0) * (node.scale || 1.0);
                 if (Math.hypot(world.x - node.x, world.y - node.y) < radius) {
                     if (confirm(`删除节点 "${node.skillName}" 及其所有连线？`)) {
                         deleteNodeById(node.id);
@@ -1400,16 +1406,8 @@
         }
 
         function onKeyDown(e) {
-            if (e.ctrlKey && e.key === 'z') {
-                e.preventDefault();
-                undo();
-                return;
-            }
-            if (e.ctrlKey && e.key === 'y') {
-                e.preventDefault();
-                redo();
-                return;
-            }
+            if (e.ctrlKey && e.key === 'z') { e.preventDefault(); undo(); return; }
+            if (e.ctrlKey && e.key === 'y') { e.preventDefault(); redo(); return; }
             if (e.key === 'Delete' || e.key === 'Backspace') {
                 if (selectedNodes.length > 0) {
                     const ids = selectedNodes.map(n => n.id);
@@ -1430,15 +1428,11 @@
                 }
                 e.preventDefault();
             }
-            if (e.key === 'Control' || e.key === 'Meta') {
-                ctrlPressed = true;
-            }
+            if (e.key === 'Control' || e.key === 'Meta') ctrlPressed = true;
         }
 
         function onKeyUp(e) {
-            if (e.key === 'Control' || e.key === 'Meta') {
-                ctrlPressed = false;
-            }
+            if (e.key === 'Control' || e.key === 'Meta') ctrlPressed = false;
         }
 
         // ---------- 批量操作 ----------
@@ -1489,6 +1483,240 @@
             }
         }
 
+        // ---------- 绘制 ----------
+        function drawArrow(ctx, fromX, fromY, toX, toY, color) {
+            const headLen = 12;
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+            const tipX = toX - 4;
+            const tipY = toY - 4;
+            ctx.save();
+            ctx.translate(tipX, tipY);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-headLen, -headLen/2);
+            ctx.lineTo(-headLen, headLen/2);
+            ctx.closePath();
+            ctx.fillStyle = color || lineColor;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawLine(ctx, p1, p2, direction) {
+            const dx = p2.x - p1.x, dy = p2.y - p1.y;
+            const length = Math.hypot(dx, dy);
+            if (length < 1) return;
+
+            if (useTexture && lineTextureImg && textureLoaded) {
+                const img = lineTextureImg;
+                const targetHeight = lineWidth * 2.5;
+                const scale = targetHeight / img.height;
+                const tileWidth = img.width * scale;
+                ctx.save();
+                ctx.translate(p1.x, p1.y);
+                ctx.rotate(Math.atan2(dy, dx));
+                const count = Math.ceil(length / tileWidth);
+                for (let i = 0; i < count; i++) {
+                    const x = i * tileWidth;
+                    const drawW = Math.min(tileWidth, length - x);
+                    ctx.drawImage(img, 0, 0, img.width, img.height, x, -targetHeight/2, drawW, targetHeight);
+                }
+                ctx.restore();
+            } else {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = lineWidth;
+                if (lineDash) ctx.setLineDash([10, 8]);
+                else ctx.setLineDash([]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.restore();
+            }
+
+            if (direction === 'down') {
+                drawArrow(ctx, p1.x, p1.y, p2.x, p2.y, '#FFD700');
+            }
+        }
+
+        function render() {
+            if (!ctx) return;
+            const w = canvas.width, h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+            ctx.save();
+
+            // 背景
+            if (bgImage) {
+                if (nodes.length > 0) {
+                    const xs = nodes.map(n => n.x);
+                    const ys = nodes.map(n => n.y);
+                    const minX = Math.min(...xs);
+                    const maxX = Math.max(...xs);
+                    const minY = Math.min(...ys);
+                    const maxY = Math.max(...ys);
+                    const marginInput = document.getElementById('bg-margin');
+                    const margin = parseInt(marginInput.value) || 250;
+                    const centerX = (minX + maxX) / 2;
+                    const centerY = (minY + maxY) / 2;
+                    const bgWidth = maxX - minX + 2 * margin;
+                    const bgHeight = maxY - minY + 2 * margin;
+                    if (bgWidth > 0 && bgHeight > 0) {
+                        const left = centerX - bgWidth / 2;
+                        const top = centerY - bgHeight / 2;
+                        const p1 = transformPoint(left, top);
+                        const p2 = transformPoint(left + bgWidth, top + bgHeight);
+                        const screenWidth = p2.x - p1.x;
+                        const screenHeight = p2.y - p1.y;
+                        if (screenWidth > 0 && screenHeight > 0) {
+                            ctx.drawImage(bgImage, p1.x, p1.y, screenWidth, screenHeight);
+                        }
+                    }
+                } else {
+                    const imgAspect = bgImage.width / bgImage.height;
+                    const canvasAspect = w / h;
+                    let drawW, drawH, offsetX, offsetY;
+                    if (imgAspect > canvasAspect) {
+                        drawW = w;
+                        drawH = w / imgAspect;
+                        offsetX = 0;
+                        offsetY = (h - drawH) / 2;
+                    } else {
+                        drawH = h;
+                        drawW = h * imgAspect;
+                        offsetX = (w - drawW) / 2;
+                        offsetY = 0;
+                    }
+                    ctx.drawImage(bgImage, offsetX, offsetY, drawW, drawH);
+                }
+            }
+
+            // 连线
+            for (let edge of edges) {
+                const fromNode = nodes.find(n => n.id === edge.fromNodeId);
+                const toNode = nodes.find(n => n.id === edge.toNodeId);
+                if (!fromNode || !toNode) continue;
+                const p1 = transformPoint(fromNode.x, fromNode.y);
+                const p2 = transformPoint(toNode.x, toNode.y);
+                drawLine(ctx, p1, p2, edge.direction);
+            }
+
+            // 节点 - 不绘制外圈
+            for (let node of nodes) {
+                const pos = transformPoint(node.x, node.y);
+                const isSelected = selectedNodes.includes(node);
+                const hasIcon = node.iconImg && node.iconImg.complete;
+                const isDecor = (node.nodeType === 'decor');
+                const isMorph = (node.nodeType === 'morph');
+                const isPassive = (node.nodeType === 'passive');
+                const passiveScale = (isMorph || isPassive) ? 0.65 : 1.0;
+                const scale = node.scale || 1.0;
+
+                const iconSize = 50 * view.zoom * passiveScale * scale;
+                const borderSize = iconSize * 1.6;
+
+                // 边框图片
+                if (node.borderImg && node.borderImg.complete && node.borderImg.width > 0) {
+                    ctx.drawImage(node.borderImg, pos.x - borderSize/2, pos.y - borderSize/2, borderSize, borderSize);
+                }
+
+                // 选中高亮
+                if (isSelected) {
+                    ctx.beginPath();
+                    const ringSize = (node.borderImg ? 40 : 36) * view.zoom * passiveScale * scale;
+                    ctx.arc(pos.x, pos.y, ringSize, 0, 2 * Math.PI);
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 2.5;
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // 图标 - 美化节点不显示星标
+                if (isDecor) {
+                    if (hasIcon) {
+                        const img = node.iconImg;
+                        const aspect = img.width / img.height;
+                        let drawW = iconSize;
+                        let drawH = iconSize;
+                        if (aspect > 1) drawH = iconSize / aspect;
+                        else drawW = iconSize * aspect;
+                        const xOff = (iconSize - drawW) / 2;
+                        const yOff = (iconSize - drawH) / 2;
+                        ctx.drawImage(img,
+                            pos.x - iconSize/2 + xOff,
+                            pos.y - iconSize/2 + yOff,
+                            drawW, drawH
+                        );
+                    }
+                    // 不绘制星标
+                } else if (hasIcon) {
+                    const img = node.iconImg;
+                    const aspect = img.width / img.height;
+                    let drawW = iconSize;
+                    let drawH = iconSize;
+                    if (aspect > 1) drawH = iconSize / aspect;
+                    else drawW = iconSize * aspect;
+                    const xOff = (iconSize - drawW) / 2;
+                    const yOff = (iconSize - drawH) / 2;
+                    ctx.drawImage(img,
+                        pos.x - iconSize/2 + xOff,
+                        pos.y - iconSize/2 + yOff,
+                        drawW, drawH
+                    );
+                } else {
+                    ctx.font = `${Math.max(24, 30 * view.zoom * passiveScale * scale)}px 'Segoe UI'`;
+                    ctx.fillStyle = '#fff';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.skillKey ? '⚡' : '?', pos.x, pos.y);
+                }
+
+                // 节点名称（美化节点不显示名称）
+                if (view.zoom >= 0.5 && !isDecor) {
+                    ctx.font = `${Math.max(10, 12 * view.zoom * passiveScale * scale)}px 'Segoe UI'`;
+                    ctx.fillStyle = '#ddd';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    let displayName = node.skillName;
+                    if (displayName.length > 15) displayName = displayName.slice(0, 12) + '...';
+                    const nameY = node.borderImg ? pos.y - 42 * view.zoom * passiveScale * scale - 6 : pos.y - 34 * view.zoom * passiveScale * scale - 4;
+                    ctx.fillText(displayName, pos.x, nameY);
+                }
+
+                // 美化节点小字
+                if (isDecor && view.zoom >= 0.6) {
+                    ctx.font = `${Math.max(8, 10 * view.zoom * scale)}px 'Segoe UI'`;
+                    ctx.fillStyle = '#888';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText('装饰', pos.x, pos.y + 28 * view.zoom * scale);
+                }
+            }
+
+            // 连线模式高亮
+            if (currentMode === 'link' && linkSelectedNode) {
+                const pos = transformPoint(linkSelectedNode.x, linkSelectedNode.y);
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 36 * view.zoom, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#ffaa66';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([6, 8]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+            ctx.restore();
+        }
+
+        function redraw() {
+            if (!canvas) return;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            render();
+            document.getElementById('selection-count').textContent = `已选: ${selectedNodes.length}`;
+        }
+
         // ---------- 保存/加载 ----------
         function saveLayout() {
             if (nodes.length === 0) {
@@ -1508,13 +1736,8 @@
             const backgroundMargin = parseInt(marginInput.value) || 250;
 
             const layout = {
-                version: '3.1',
-                bounds: {
-                    minX: minX,
-                    maxX: maxX,
-                    minY: minY,
-                    maxY: maxY
-                },
+                version: '3.9',
+                bounds: { minX, maxX, minY, maxY },
                 offsetX: centerX,
                 offsetY: centerY,
                 backgroundMargin: backgroundMargin,
@@ -1525,12 +1748,13 @@
                     skillName: n.skillName,
                     x: n.x - centerX,
                     y: n.y - centerY,
-                    branchSkill: n.branchSkill || null,
-                    branchId: n.branchId || null,
                     iconId: n.iconId || null,
                     borderImage: n.borderImage || null,
                     nodeType: n.nodeType || 'decor',
-                    branchGroup: n.branchGroup || null,   // 保存分组
+                    scale: n.scale || 1.0,
+                    mod_data: n.mod_data || null,
+                    ownerSkillKey: n.ownerSkillKey || null,
+                    branchId: n.branchId || null,
                 })),
                 edges: edges.map(e => ({
                     fromNodeId: e.fromNodeId,
@@ -1549,11 +1773,7 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            const decorCount = nodes.filter(n => n.nodeType === 'decor').length;
-            const activeCount = nodes.filter(n => n.nodeType === 'active').length;
-            const passiveCount = nodes.filter(n => n.nodeType === 'passive').length;
-            const dirCount = edges.filter(e => e.direction).length;
-            statusEl.innerText = `已保存 ${nodes.length} 个节点（主动${activeCount}，被动${passiveCount}，美化${decorCount}），${edges.length} 条连线（${dirCount} 有方向）${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
+            statusEl.innerText = `已保存 ${nodes.length} 个节点`;
         }
 
         function loadLayoutFromFile(file) {
@@ -1569,41 +1789,22 @@
                             y: n.y + layout.offsetY
                         }));
                     }
-                    nodes = loadedNodes.map(n => {
-                        const node = {
-                            id: n.id,
-                            skillKey: n.skillKey,
-                            skillName: n.skillName || (n.skillKey ? (skillsMap.get(n.skillKey)?.name || '未指定') : '未指定'),
-                            x: n.x,
-                            y: n.y,
-                            iconImg: null,
-                            iconId: n.iconId || null,
-                            branchSkill: n.branchSkill || null,
-                            branchId: n.branchId || null,
-                            borderImage: n.borderImage || null,
-                            borderImg: null,
-                            nodeType: n.nodeType || 'decor',
-                            branchGroup: n.branchGroup || null,   // 恢复分组
-                        };
-                        if (node.borderImage) {
-                            loadBorderImage(node.borderImage, (img) => {
-                                node.borderImg = img;
-                                redraw();
-                            });
-                        }
-                        if (node.iconId) {
-                            loadIconById(node.iconId, (img) => {
-                                node.iconImg = img;
-                                redraw();
-                            });
-                        } else if (node.skillKey && !node.branchSkill) {
-                            loadSkillIcon(node.skillKey, (img) => {
-                                node.iconImg = img;
-                                redraw();
-                            });
-                        }
-                        return node;
-                    });
+                    nodes = loadedNodes.map(n => ({
+                        id: n.id,
+                        skillKey: n.skillKey,
+                        skillName: n.skillName || '未指定',
+                        x: n.x,
+                        y: n.y,
+                        iconImg: null,
+                        iconId: n.iconId || null,
+                        borderImage: n.borderImage || null,
+                        borderImg: null,
+                        nodeType: n.nodeType || 'decor',
+                        scale: n.scale || 1.0,
+                        mod_data: n.mod_data || null,
+                        ownerSkillKey: n.ownerSkillKey || null,
+                        branchId: n.branchId || null,
+                    }));
                     edges = (layout.edges || []).map(e => ({
                         fromNodeId: e.fromNodeId,
                         toNodeId: e.toNodeId,
@@ -1615,21 +1816,26 @@
                         img.onload = () => {
                             bgImage = img;
                             bgImagePath = layout.backgroundImagePath;
-                            statusEl.innerText = `背景已加载: ${bgImagePath}`;
                             redraw();
-                            setTimeout(() => statusEl.innerText = '就绪', 2000);
                         };
                         img.onerror = () => {
                             bgImage = null;
                             bgImagePath = null;
-                            statusEl.innerText = `⚠️ 背景图片不存在: ${layout.backgroundImagePath}，使用默认背景`;
                             loadDefaultBackground();
                             redraw();
-                            setTimeout(() => statusEl.innerText = '就绪', 2000);
                         };
                         img.src = layout.backgroundImagePath;
                     } else {
                         loadDefaultBackground();
+                    }
+
+                    for (let node of nodes) {
+                        if (node.iconId) {
+                            loadIconById(node.iconId, (img) => { node.iconImg = img; redraw(); });
+                        }
+                        if (node.borderImage) {
+                            loadBorderImage(node.borderImage, (img) => { node.borderImg = img; redraw(); });
+                        }
                     }
 
                     let maxId = 100;
@@ -1637,16 +1843,11 @@
                     nextId = maxId;
                     selectedNodes = [];
                     inferEdgeDirections();
-                    // 清空历史并重置
                     history = [];
                     historyIndex = -1;
-                    pushHistory(); // 初始状态
+                    pushHistory();
                     redraw();
-                    const decorCount = nodes.filter(n => n.nodeType === 'decor').length;
-                    const activeCount = nodes.filter(n => n.nodeType === 'active').length;
-                    const passiveCount = nodes.filter(n => n.nodeType === 'passive').length;
-                    const dirCount = edges.filter(e => e.direction).length;
-                    statusEl.innerText = `已加载 ${nodes.length} 个节点（主动${activeCount}，被动${passiveCount}，美化${decorCount}），${edges.length} 条连线（${dirCount} 有方向）${bgImagePath ? '，背景: ' + bgImagePath : ''}`;
+                    statusEl.innerText = `已加载 ${nodes.length} 个节点`;
                 } catch(err) { alert('加载失败: '+err.message); }
             };
             reader.readAsText(file);
@@ -1689,7 +1890,9 @@
                             }
                         }
                     }
-                    statusEl.innerText = `已加载 ${skillsMap.size} 个技能`;
+                    buildAllSkills();
+                    buildAllMods();
+                    statusEl.innerText = `已加载 ${skillsMap.size} 个技能，${allMods.length} 个分支`;
                 } catch(err) { alert('skill.json 解析失败'); }
             };
             reader.readAsText(file);
@@ -1757,22 +1960,19 @@
                 input.onchange = (e) => loadLayoutFromFile(e.target.files[0]);
                 input.click();
             };
-
             document.getElementById('btn-import-bg').addEventListener('click', importBackground);
             document.getElementById('btn-clear-bg').addEventListener('click', clearBackground);
-
-            document.getElementById('btn-batch-passive').addEventListener('click', () => batchSetType('passive'));
-            document.getElementById('btn-batch-active').addEventListener('click', () => batchSetType('active'));
-            document.getElementById('btn-batch-decor').addEventListener('click', () => batchSetType('decor'));
+            document.getElementById('btn-batch-passive').addEventListener('click', () => batchSetAppearance());
+            document.getElementById('btn-batch-active').addEventListener('click', () => batchSetAppearance());
+            document.getElementById('btn-batch-decor').addEventListener('click', () => batchSetAppearance());
+            document.getElementById('btn-batch-set-type').addEventListener('click', batchSetAppearance);
             document.getElementById('btn-infer-directions').addEventListener('click', () => {
                 inferEdgeDirections();
                 statusEl.innerText = '连线方向已推断';
                 setTimeout(() => statusEl.innerText = '就绪', 1500);
             });
-
             document.getElementById('btn-undo').addEventListener('click', undo);
             document.getElementById('btn-redo').addEventListener('click', redo);
-
             document.getElementById('line-color').addEventListener('input', (e) => { lineColor = e.target.value; redraw(); });
             document.getElementById('line-width').addEventListener('input', (e) => { lineWidth = parseInt(e.target.value); redraw(); });
             document.getElementById('toggle-dash').addEventListener('click', () => {
@@ -1785,13 +1985,10 @@
                 document.getElementById('toggle-texture').innerText = useTexture ? '✔️ 开启' : '◻️ 关闭';
                 redraw();
             });
-
             document.getElementById('btn-batch-border').addEventListener('click', batchSetBorder);
             document.getElementById('btn-clear-batch-border').addEventListener('click', batchClearBorder);
-
             document.getElementById('btn-pan').classList.add('active');
             statusEl.innerText = '就绪';
-            // 初始化历史
             pushHistory();
         }
 
