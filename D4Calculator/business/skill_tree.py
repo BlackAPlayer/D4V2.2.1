@@ -90,30 +90,28 @@ class SkillTreeSystem:
             return full
         return ""
 
-    def get_base_level(self, skill_key):
-        return self.skill_levels.get(skill_key, 0)
-
-    def get_total_level(self, skill_key):
-        base = self.get_base_level(skill_key)
-        extra = 0
-        extra += self.external_bonuses['global'].get('all_skills', 0)
-        skill = self._find_skill(skill_key)
-        if not skill:
-            return base
-        for tag in skill.get('tags', []):
-            if '火焰' in tag or 'Fire' in tag:
-                extra += self.external_bonuses['global'].get('fire_skills', 0)
-            elif '冰霜' in tag or 'Frost' in tag:
-                extra += self.external_bonuses['global'].get('frost_skills', 0)
-            elif '闪电' in tag or 'Shock' in tag:
-                extra += self.external_bonuses['global'].get('shock_skills', 0)
-        extra += self.external_bonuses['specific'].get(skill_key, {}).get('level', 0)
-        return base + extra
+    def _safe_convert(self, skill_key):
+        if skill_key is None:
+            return None
+        if isinstance(skill_key, int):
+            return skill_key
+        if isinstance(skill_key, str):
+            try:
+                return int(skill_key)
+            except ValueError:
+                pass
+            skill = self._find_skill(skill_key)
+            if skill:
+                return skill['id']
+        logging.warning(f"无法转换 skill_key: {skill_key} (类型: {type(skill_key)})")
+        return None
 
     def _find_skill(self, skill_key):
+        if skill_key is None:
+            return None
+        if isinstance(skill_key, int):
+            return self.skill_data.get(skill_key)
         str_key = str(skill_key)
-        if skill_key in self.skill_data:
-            return self.skill_data[skill_key]
         for sid, skill in self.skill_data.items():
             if str(skill.get('key')) == str_key:
                 return skill
@@ -125,59 +123,113 @@ class SkillTreeSystem:
                 return skill
         return None
 
+    def get_base_level(self, skill_key):
+        sk = self._safe_convert(skill_key)
+        return self.skill_levels.get(sk, 0) if sk is not None else 0
+
+    def get_total_level(self, skill_key):
+        sk = self._safe_convert(skill_key)
+        if sk is None:
+            return 0
+        base = self.get_base_level(sk)
+        extra = self.external_bonuses['global'].get('all_skills', 0)
+        skill = self._find_skill(sk)
+        if skill:
+            for tag in skill.get('tags', []):
+                if '火焰' in tag or 'Fire' in tag:
+                    extra += self.external_bonuses['global'].get('fire_skills', 0)
+                elif '冰霜' in tag or 'Frost' in tag:
+                    extra += self.external_bonuses['global'].get('frost_skills', 0)
+                elif '闪电' in tag or 'Shock' in tag:
+                    extra += self.external_bonuses['global'].get('shock_skills', 0)
+        extra += self.external_bonuses['specific'].get(sk, {}).get('level', 0)
+        return base + extra
+
     def can_add_level(self, skill_key):
-        skill = self._find_skill(skill_key)
+        sk = self._safe_convert(skill_key)
+        if sk is None:
+            return False
+        skill = self._find_skill(sk)
         if not skill:
             return False
         if self.available_points <= 0:
             return False
-        base_max = skill.get('base_max_level', 15)
-        if self.get_base_level(skill_key) >= base_max:
+        if self.get_base_level(sk) >= skill.get('base_max_level', 15):
             return False
         return True
 
     def add_level(self, skill_key):
-        if not self.can_add_level(skill_key):
+        # ----- 安全转换 -----
+        if skill_key is None:
             return False
-        self.skill_levels[skill_key] = self.skill_levels.get(skill_key, 0) + 1
+        if not isinstance(skill_key, int):
+            skill = self._find_skill(skill_key)
+            if skill:
+                skill_key = skill['id']
+            else:
+                try:
+                    skill_key = int(skill_key)
+                except (ValueError, TypeError):
+                    return False
+        # -------------------
+        sk = self._safe_convert(skill_key)
+        if sk is None or not self.can_add_level(sk):
+            return False
+        self.skill_levels[sk] = self.skill_levels.get(sk, 0) + 1
         self.available_points -= 1
         self._notify_change()
         return True
 
     def remove_level(self, skill_key):
-        if self.get_base_level(skill_key) <= 0:
+        # ----- 安全转换 -----
+        if skill_key is None:
             return False
-        self.skill_levels[skill_key] -= 1
+        if not isinstance(skill_key, int):
+            skill = self._find_skill(skill_key)
+            if skill:
+                skill_key = skill['id']
+            else:
+                try:
+                    skill_key = int(skill_key)
+                except (ValueError, TypeError):
+                    return False
+        # -------------------
+        sk = self._safe_convert(skill_key)
+        if sk is None or self.get_base_level(sk) <= 0:
+            return False
+        self.skill_levels[sk] -= 1
         self.available_points += 1
-        if self.skill_levels[skill_key] == 0:
-            self.branch_levels.pop(skill_key, None)
+        if self.skill_levels[sk] == 0:
+            self.branch_levels.pop(sk, None)
         self._notify_change()
         return True
 
     def can_activate_branch(self, skill_key, branch_id):
-        if self.get_base_level(skill_key) == 0:
+        sk = self._safe_convert(skill_key)
+        if sk is None:
             return False
-        # 检查该分支是否已经激活
-        if self.branch_levels.get(skill_key, {}).get(branch_id, 0) >= 1:
+        if self.branch_levels.get(sk, {}).get(branch_id, 0) >= 1:
             return False
         if self.available_points <= 0:
             return False
-        # 注意：这里不检查分组互斥，因为分支分组由编辑器/布局决定，且每个分支独立
-        # 如果需要互斥，请由主程序额外实现，但根据文档，每个被动节点独立激活
         return True
 
     def activate_branch(self, skill_key, branch_id):
-        if not self.can_activate_branch(skill_key, branch_id):
+        sk = self._safe_convert(skill_key)
+        if sk is None or not self.can_activate_branch(sk, branch_id):
             return False
-        self.branch_levels.setdefault(skill_key, {})[branch_id] = 1
+        self.branch_levels.setdefault(sk, {})[branch_id] = 1
         self.available_points -= 1
         self._notify_change()
         return True
 
     def deactivate_branch(self, skill_key, branch_id):
-        if self.branch_levels.get(skill_key, {}).get(branch_id, 0) == 0:
+        sk = self._safe_convert(skill_key)
+        if sk is None:
             return False
-        self.branch_levels.setdefault(skill_key, {}).pop(branch_id, None)
+        if self.branch_levels.get(sk, {}).get(branch_id, 0) == 0:
+            return False
+        self.branch_levels.setdefault(sk, {}).pop(branch_id, None)
         self.available_points += 1
         self._notify_change()
         return True
@@ -189,11 +241,6 @@ class SkillTreeSystem:
             return 0.0
 
     def get_skill_display_info(self, skill_key):
-        """
-        获取技能显示信息。
-        如果 skill_key 是包含 'mod_data' 的字典，则使用 mod_data。
-        否则从 skill_data 中查找。
-        """
         if isinstance(skill_key, dict) and 'mod_data' in skill_key:
             mod_data = skill_key['mod_data']
             mod_name = mod_data.get('name', '未命名分支')
@@ -213,8 +260,8 @@ class SkillTreeSystem:
                 'mod_data': mod_data,
             }
 
-        skill = self._find_skill(skill_key)
-        if not skill:
+        sk = self._safe_convert(skill_key)
+        if sk is None:
             return {
                 'name': f"未知技能 ({skill_key})",
                 'icon': None,
@@ -227,8 +274,24 @@ class SkillTreeSystem:
                 'description': '未找到技能数据',
                 'active_branches': {},
             }
-        base_level = self.get_base_level(skill_key)
-        total_level = self.get_total_level(skill_key)
+
+        skill = self._find_skill(sk)
+        if not skill:
+            return {
+                'name': f"未知技能 ({sk})",
+                'icon': None,
+                'base_level': 0,
+                'total_level': 0,
+                'extra_level': 0,
+                'max_level': 0,
+                'tags': [],
+                'damage_type': '',
+                'description': '未找到技能数据',
+                'active_branches': {},
+            }
+
+        base_level = self.get_base_level(sk)
+        total_level = self.get_total_level(sk)
         extra_level = total_level - base_level
         max_level = skill.get('base_max_level', 15)
 
@@ -242,8 +305,6 @@ class SkillTreeSystem:
                     vals[key] = val_data[idx] if idx >= 0 else 0
                 elif isinstance(val_data, str):
                     vals[key] = self.evaluate_formula(val_data, total_level)
-        if 'val1' in vals and '{damage}' in skill.get('desc_template', ''):
-            vals['damage'] = vals['val1']
 
         base_desc = skill.get('desc_template', '')
         for k, v in vals.items():
@@ -256,13 +317,12 @@ class SkillTreeSystem:
                 base_desc = base_desc.replace(f'{{{k}}}', str(v))
 
         desc_parts = [base_desc]
-
         enchant = skill.get('enchant_desc', '')
         if enchant:
             desc_parts.append(f"附魔：{enchant}")
 
         if skill.get('active', False):
-            active_branches = self.branch_levels.get(skill_key, {})
+            active_branches = self.branch_levels.get(sk, {})
             if active_branches:
                 branch_lines = []
                 mods = skill.get('mods', [])
@@ -289,8 +349,8 @@ class SkillTreeSystem:
         final_desc = "\n\n".join(desc_parts)
 
         tags = skill.get('tags', [])
-        if skill_key in self.external_bonuses['specific']:
-            tags_change = self.external_bonuses['specific'][skill_key].get('tags_change', {})
+        if sk in self.external_bonuses['specific']:
+            tags_change = self.external_bonuses['specific'][sk].get('tags_change', {})
             for old, new in tags_change.items():
                 if old in tags:
                     tags = [new if t == old else t for t in tags]
@@ -305,7 +365,7 @@ class SkillTreeSystem:
             'tags': tags,
             'damage_type': skill.get('damage_type', ''),
             'description': final_desc,
-            'active_branches': {bid: lvl for bid, lvl in self.branch_levels.get(skill_key, {}).items() if lvl > 0},
+            'active_branches': {bid: lvl for bid, lvl in self.branch_levels.get(sk, {}).items() if lvl > 0},
         }
 
     def update_external_bonuses(self, bonus_data):
@@ -314,10 +374,13 @@ class SkillTreeSystem:
                 self.external_bonuses['global'][k] = self.external_bonuses['global'].get(k, 0) + v
         if 'specific' in bonus_data:
             for skill_key, data in bonus_data['specific'].items():
-                if skill_key not in self.external_bonuses['specific']:
-                    self.external_bonuses['specific'][skill_key] = {}
+                sk = self._safe_convert(skill_key)
+                if sk is None:
+                    continue
+                if sk not in self.external_bonuses['specific']:
+                    self.external_bonuses['specific'][sk] = {}
                 for k, v in data.items():
-                    self.external_bonuses['specific'][skill_key][k] = v
+                    self.external_bonuses['specific'][sk][k] = v
         self._notify_change()
 
     def reset_external_bonuses(self):

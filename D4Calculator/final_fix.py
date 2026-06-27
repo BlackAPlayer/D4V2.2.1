@@ -1,4 +1,115 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+一键修复 D4Calculator 技能树问题
+- 修补布局文件（自动填充 ownerSkillKey / branchId）
+- 替换 UI 为最终优化版
+- 清除缓存
+"""
+
+import os
+import json
+import shutil
+import sys
+from collections import defaultdict, deque
+
+# ---------- 配置 ----------
+LAYOUT_FILE = 'skilltree_layout.json'
+UI_FILE = 'ui/skill_tree_ui.py'
+BACKUP_SUFFIX = '.backup'
+
+# ---------- 1. 修补布局 ----------
+def fix_layout():
+    print("📂 正在修补 skilltree_layout.json ...")
+    if not os.path.exists(LAYOUT_FILE):
+        print(f"❌ 未找到 {LAYOUT_FILE}，请确保在项目根目录运行。")
+        return False
+
+    # 备份
+    backup_name = LAYOUT_FILE + BACKUP_SUFFIX
+    shutil.copy2(LAYOUT_FILE, backup_name)
+    print(f"✅ 已备份原文件为 {backup_name}")
+
+    with open(LAYOUT_FILE, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    nodes = data.get('nodes', [])
+    edges = data.get('edges', [])
+
+    id_to_node = {node['id']: node for node in nodes}
+    adjacency = defaultdict(list)
+    for edge in edges:
+        frm, to = edge['fromNodeId'], edge['toNodeId']
+        adjacency[frm].append(to)
+        adjacency[to].append(frm)
+
+    active_ids = {node['id'] for node in nodes if node.get('nodeType') == 'active'}
+    hub_ids = {144, 188, 205, 258, 307, 309}   # 枢纽装饰节点（不归属任何技能）
+
+    assignments = {}
+
+    for active_id in active_ids:
+        active_node = id_to_node.get(active_id)
+        if not active_node:
+            continue
+        skill_key = active_node.get('skillKey')
+        if not skill_key:
+            continue
+        neighbors = [n for n in adjacency.get(active_id, []) if n not in hub_ids and n not in active_ids]
+        branch_counter = 1
+        visited_in_subtree = set()
+
+        for neighbor in neighbors:
+            if neighbor in visited_in_subtree:
+                continue
+            queue = deque([neighbor])
+            visited_in_branch = set()
+            while queue:
+                curr = queue.popleft()
+                if curr in visited_in_branch:
+                    continue
+                if curr in active_ids or curr in hub_ids:
+                    continue
+                visited_in_branch.add(curr)
+                visited_in_subtree.add(curr)
+                for next_node in adjacency.get(curr, []):
+                    if (next_node not in visited_in_branch and 
+                        next_node not in active_ids and 
+                        next_node not in hub_ids):
+                        queue.append(next_node)
+            for node_id in visited_in_branch:
+                assignments[node_id] = (skill_key, str(branch_counter))
+            branch_counter += 1
+
+    for node in nodes:
+        node_id = node['id']
+        if node_id in assignments:
+            node['ownerSkillKey'] = assignments[node_id][0]
+            node['branchId'] = assignments[node_id][1]
+        else:
+            node['ownerSkillKey'] = None
+            node['branchId'] = None
+
+    with open(LAYOUT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    print(f"✅ 已修补 {LAYOUT_FILE}，共处理 {len(nodes)} 个节点。")
+    return True
+
+# ---------- 2. 替换 UI 文件 ----------
+def fix_ui():
+    print("📂 正在替换 ui/skill_tree_ui.py ...")
+    ui_dir = os.path.dirname(UI_FILE)
+    if not os.path.exists(ui_dir):
+        os.makedirs(ui_dir)
+
+    if os.path.exists(UI_FILE):
+        backup_name = UI_FILE + BACKUP_SUFFIX
+        shutil.copy2(UI_FILE, backup_name)
+        print(f"✅ 已备份原文件为 {backup_name}")
+
+    # 最终版代码（包含互斥、金色边框、分支描述附加等）
+    ui_code = '''# -*- coding: utf-8 -*-
 # 模块: ui/skill_tree_ui
 
 import tkinter as tk
@@ -793,3 +904,60 @@ class SkillTreeUI:
                     # 为简化，我们只能重新绘制，但为了性能，这里不做
                     # 但激活/取消会触发 _redraw_all，所以边框会更新
                     # 因此只需在 _on_branch_click 后调用 refresh 即可。
+'''
+
+    with open(UI_FILE, 'w', encoding='utf-8') as f:
+        f.write(ui_code)
+
+    print(f"✅ 已更新 {UI_FILE}")
+    return True
+
+# ---------- 3. 清除缓存 ----------
+def clear_cache():
+    print("🧹 正在清除 __pycache__ ...")
+    removed = 0
+    for root, dirs, files in os.walk('.'):
+        if '__pycache__' in dirs:
+            cache_dir = os.path.join(root, '__pycache__')
+            try:
+                shutil.rmtree(cache_dir)
+                print(f"  已删除 {cache_dir}")
+                removed += 1
+            except Exception as e:
+                print(f"  无法删除 {cache_dir}: {e}")
+    print(f"✅ 已清除 {removed} 个缓存目录")
+    return True
+
+# ---------- 主流程 ----------
+def main():
+    print("="*50)
+    print("  D4Calculator 技能树一键修复")
+    print("="*50)
+    print("即将执行：")
+    print("1. 修补 skilltree_layout.json（自动填充分支归属）")
+    print("2. 替换 ui/skill_tree_ui.py（最终优化版）")
+    print("3. 清除缓存")
+    print("="*50)
+    input("按 Enter 键继续，或 Ctrl+C 取消...")
+
+    success = True
+    if not fix_layout():
+        success = False
+    if not fix_ui():
+        success = False
+    if not clear_cache():
+        success = False
+
+    print("="*50)
+    if success:
+        print("✅ 修复完成！请重启程序（完全关闭后再打开）。")
+        print("测试方法：给主动技能加1点，然后点击其分支节点（如萤火虫）。")
+        print("观察：分支节点出现金色边框，主动技能右下角显示 +1分支。")
+        print("如果仍然异常，请将控制台输出截图发送给开发者。")
+    else:
+        print("❌ 修复过程中出现错误，请检查上方日志。")
+    print("="*50)
+    input("按 Enter 键退出...")
+
+if __name__ == '__main__':
+    main()

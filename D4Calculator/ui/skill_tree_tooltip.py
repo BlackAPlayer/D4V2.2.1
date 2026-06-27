@@ -29,7 +29,7 @@ class SkillTreeTooltip:
         else:
             info = self.skill_system.get_skill_display_info(skill_key)
 
-        if not info or info.get('name', '').startswith('未知技能'):
+        if not info:
             return
 
         tip = tk.Toplevel(self.parent)
@@ -43,11 +43,11 @@ class SkillTreeTooltip:
         frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=8)
 
         # 标题
-        tk.Label(frame, text=info['name'], font=('微软雅黑', 12, 'bold'),
+        tk.Label(frame, text=info.get('name', '未知'), font=('微软雅黑', 12, 'bold'),
                  fg=title_color, bg=bg).pack(anchor='w')
 
         # 等级：显示 基础等级 / 最大等级
-        level_text = f"等级: {info['base_level']} / {info['max_level']}"
+        level_text = f"等级: {info.get('base_level', 0)} / {info.get('max_level', 15)}"
         if info.get('extra_level', 0) > 0:
             level_text += f" (额外 +{info['extra_level']})"
         tk.Label(frame, text=level_text, font=('微软雅黑', 9),
@@ -80,23 +80,6 @@ class SkillTreeTooltip:
         if y + h > screen_h:
             y = event.y_root - h - 15
         tip.geometry(f"+{x}+{y}")
-
-        self.tip_window = tip
-
-    def show_branch_tip(self, event, skill_key: str, branch_id: str):
-        self.hide()
-        branches = self.skill_system.get_branches(skill_key)
-        branch = branches.get(branch_id)
-        if not branch:
-            return
-        tip = tk.Toplevel(self.parent)
-        tip.wm_overrideredirect(True)
-        tip.geometry(f"+{event.x_root+15}+{event.y_root+15}")
-
-        label = tk.Label(tip, text=f"{branch['name']}\n{branch.get('desc', '')}",
-                         font=('微软雅黑', 9), bg='#2a2a2a', fg='#FFFFFF',
-                         wraplength=200, justify='left')
-        label.pack(padx=5, pady=5)
 
         self.tip_window = tip
 
